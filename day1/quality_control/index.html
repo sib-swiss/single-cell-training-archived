@@ -1,0 +1,794 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Quality control - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header-nav__button md-logo" aria-label="Single cell transcriptomics">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Quality control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      
+      <label class="md-nav__link" for="nav-4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../general_introduction/" class="md-nav__link">
+        General introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction_scrnaseq/" class="md-nav__link">
+        Introduction scRNAseq
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Quality control
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Quality control
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-cycle-analysis" class="md-nav__link">
+    Cell cycle analysis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-qc-exploration-using-the-scater-package" class="md-nav__link">
+    Alternative QC exploration using the scater package
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+      
+      <label class="md-nav__link" for="nav-5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+      
+      <label class="md-nav__link" for="nav-6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="nav-6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/differential_gene_expression/" class="md-nav__link">
+        Differential gene expression
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-cycle-analysis" class="md-nav__link">
+    Cell cycle analysis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternative-qc-exploration-using-the-scater-package" class="md-nav__link">
+    Alternative QC exploration using the scater package
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/quality_control.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Quality control</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../assets/pdf/sequencing_technologies.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="cell-cycle-analysis">Cell cycle analysis</h3>
+<p>Cells can be captured in different cycling phases, which can be identified.</p>
+<p>A list of cell cycle markers is described by:</p>
+<blockquote>
+<p>Tirosh I, Izar B, Prakadan SM, Wadsworth MH, Treacy D, Trombetta JJ, et al. Dissecting the multicellular ecosystem of metastatic melanoma by single-cell RNA-seq. Science. 2016;352:189–96.</p>
+</blockquote>
+<p>The dataset is directly available from Seurat:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span>
+</code></pre></div>
+
+<p>Extract the genes specific to the S phase and to the G2/M phase:</p>
+<div class="highlight"><pre><span></span><code><span class="n">s.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">s.genes</span>
+<span class="n">g2m.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">g2m.genes</span>
+</code></pre></div>
+
+<p>The <code>CellCycleScoring()</code> function allows to assign cell cycle phase information
+to each cell, stored in the metadata as the &ldquo;S.Score&rdquo;, &ldquo;G2M.Score&rdquo; and &ldquo;Phase&rdquo; columns</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span> <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<span class="nf">table</span><span class="p">(</span><span class="n">gbm</span><span class="o">$</span><span class="n">Phase</span><span class="p">)</span>
+<span class="c1">#   G1  G2M    S</span>
+<span class="c1"># 2887  711 1493</span>
+</code></pre></div>
+
+<p>Visualize the distribution of cell cycle markers:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">RidgePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;PCNA&quot;</span><span class="p">,</span> <span class="s">&quot;MKI67&quot;</span><span class="p">),</span>
+          <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">,</span>
+          <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We can proceed with downstream analysis without removing cell cycle for example,
+perform clustering, and come back to remove the effect of cell cycle if
+we identify a cluster of cells which is
+mostly composed of G2/M cells for example.</p>
+<h3 id="alternative-qc-exploration-using-the-scater-package">Alternative QC exploration using the <code>scater</code> package</h3>
+<p>Scater includes different types of quality controls:</p>
+<ol>
+<li>QC and filtering of cells</li>
+<li>QC and filtering of features (genes)</li>
+<li>QC of experimental variables</li>
+</ol>
+<p>the scater package as well as other bioconductor packages, rely on
+an object of the class <code>SingleCellExperiment</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+
+<span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">SingleCellExperiment</span><span class="p">(</span>
+  <span class="n">assays</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">cts</span><span class="p">),</span>
+  <span class="n">colData</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
+  <span class="n">rowData</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nf">class</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<span class="nf">class</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>
+<span class="n">gbm_sce</span>
+</code></pre></div>
+
+<p>We can again check percent mitochondrial gene expression as well as dissociation protocol-related
+gene expression.
+Genes associated with the dissociation protocol, i.e. stress genes, can
+sometimes cause clustering of stressed cells apart from the other cells.
+They have been described by:</p>
+<blockquote>
+<p>Van Den Brink SC, Sage F, Vértesy Á, Spanjaard B, Peterson-Maduro J, Baron CS, et al. Single-cell sequencing reveals dissociation-induced gene expression in tissue subpopulations. Nat Methods. 2017;14:935–6.</p>
+</blockquote>
+<p>And are availabe in the file <code>data/dissocation_genes.txt</code>. Load these into a vector, and generate also a vector of ribosomal genes and mitochondrial genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dissoc_genes</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="s">&quot;data/dissocation_genes.txt&quot;</span><span class="p">)</span>
+<span class="n">ribo_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[S|L]&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span> <span class="n">perl</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="n">]</span>
+<span class="n">mito_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span><span class="n">]</span>
+</code></pre></div>
+
+<p><code>scater</code> calls the <code>addPerCellQC</code> function of the scuttle package to compute a number of quality control metrics for each cell and feature (i.e gene)</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scuttle</span><span class="o">::</span><span class="nf">addPerCellQC</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
+                        <span class="n">subsets</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">mito_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">mito_genes</span><span class="p">),</span>
+                                     <span class="n">dissoc_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">dissoc_genes</span><span class="p">),</span>
+                                     <span class="n">ribo_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">ribo_genes</span><span class="p">)))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">colData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;sum&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;detected&quot;</span><span class="p">)</span>
+<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;detected&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_mito_genes_percent&quot;</span><span class="p">)</span>
+<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;detected&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_dissoc_genes_percent&quot;</span><span class="p">)</span>
+<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;subsets_mito_genes_percent&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_ribo_genes_percent&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>On the gene level, we can look at a plot that shows the top (by default 50) most-expressed genes.
+Each row in the plot corresponds to a gene; each bar corresponds to the expression of a gene in a single
+cell; and the circle indicates the median expression of each gene, with which genes are sorted. We expect to
+see the “usual suspects”, i.e., mitochondrial genes, actin, ribosomal protein, MALAT1. If used, few spike-in transcripts
+may also be present here, though if all of the spike-ins are in the top 50, it suggests that too much spike-in
+RNA was added. A large number of pseudo-genes or predicted genes may indicate problems with alignment.</p>
+<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotHighestExprs</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">exprs_values</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Variable-level metrics are computed by the getVarianceExplained() function (after normalization, see below).
+This calculates the percentage of variance of each gene’s expression that is explained by each variable in the
+colData of the SingleCellExperiment object. We can then use this to determine which experimental factors
+are contributing most to the variance in expression. This is useful for diagnosing batch effects or to
+quickly verify that a treatment has an effect.</p>
+<p>First, computing variance explained on the log-counts,
+so that the statistics reflect changes in relative expression.</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">logNormCounts</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>  <span class="c1"># alternative to Seurat&#39;s normalization here using scater</span>
+</code></pre></div>
+
+<p>In the gbm dataset, we only have 1 patient, so we cannot calculate the effect
+of experimental variables like sex or donor id, but in case we would have several variables,
+here is the method with the cell cycle phase as example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vars</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">getVarianceExplained</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
+                             <span class="n">variables</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span>
+                             <span class="c1">#, variables=c(&quot;tissue&quot;, &quot;detected&quot;, &quot;sex&quot;, &quot;age&quot;)</span>
+<span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
+</code></pre></div>
+
+<p>A distribution of percentage variance explained by each gene is shown,
+and can indicate whether one or the other experimental variable has high
+contribution to the variance in the data:</p>
+<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotExplanatoryVariables</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If we think that the cell cycling has an effect on the analysis,
+and if we want to &ldquo;remove&rdquo; this effect so that cycling cells are
+integrated into the rest of the cells and not clustering apart anymore,
+we can regress out the cell cycling phase at the moment of normalizing
+the data using SCTransform.
+This might be slow to compute</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># do not run</span>
+<span class="n">gbm_cc</span> <span class="o">&lt;-</span> <span class="nf">SCTransform</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">vars.to.regress</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;S.Score&quot;</span><span class="p">,</span> <span class="s">&quot;G2M.Score&quot;</span><span class="p">))</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../normalization_scaling/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Normalization and scaling
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../day2/dimensionality_reduction/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Dimensionality reduction
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

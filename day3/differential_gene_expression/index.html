@@ -1,0 +1,899 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.8">
+    
+    
+      
+        <title>Differential gene expression - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header-nav__button md-logo" aria-label="Single cell transcriptomics">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Differential gene expression
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      
+      <label class="md-nav__link" for="nav-4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/general_introduction/" class="md-nav__link">
+        General introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/introduction_scrnaseq/" class="md-nav__link">
+        Introduction scRNAseq
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+      
+      <label class="md-nav__link" for="nav-5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      
+      <label class="md-nav__link" for="nav-6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="nav-6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Differential gene expression
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Differential gene expression
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-all-markers-for-each-cluster" class="md-nav__link">
+    Find all markers for each cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-expression-between-clusters" class="md-nav__link">
+    Differential expression between clusters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-expression-analysis-including-batch-as-covariates" class="md-nav__link">
+    Differential expression analysis including batch as covariates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-set-over-representation-analysis" class="md-nav__link">
+    Gene set over-representation analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#find-all-markers-for-each-cluster" class="md-nav__link">
+    Find all markers for each cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-expression-between-clusters" class="md-nav__link">
+    Differential expression between clusters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#differential-expression-analysis-including-batch-as-covariates" class="md-nav__link">
+    Differential expression analysis including batch as covariates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-set-over-representation-analysis" class="md-nav__link">
+    Gene set over-representation analysis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day3/differential_gene_expression.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Differential gene expression</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../assets/pdf/sequencing_technologies.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="find-all-markers-for-each-cluster">Find all markers for each cluster</h3>
+<p>The function <code>FindAllMarkers</code> performs a Wilcoxon plot to determine the genes differentially expressed between each cluster and the rest of the cells. Other types of tests than the Wilcoxon test are available. Check it out by running <code>?Seurat::FindAllMarkers</code>.</p>
+<p>Now run analysis:</p>
+<div class="highlight"><pre><span></span><code><span class="n">de_genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindAllMarkers</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>  <span class="n">min.pct</span> <span class="o">=</span> <span class="m">0.25</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We are usually only interested in significant marker genes, so let&rsquo;s filter based on an adjusted p-value smaller than 0.05:</p>
+<div class="highlight"><pre><span></span><code><span class="n">de_genes</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">de_genes</span><span class="p">,</span> <span class="n">de_genes</span><span class="o">$</span><span class="n">p_val_adj</span> <span class="o">&lt;</span> <span class="m">0.05</span><span class="p">)</span>
+<span class="nf">View</span><span class="p">(</span><span class="n">de_genes</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> What are significant marker genes in cluster 6? Are the immune genes in there?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can re-load the vector with immune genes with:</p>
+<div class="highlight"><pre><span></span><code><span class="n">immune_genes</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;GZMA&quot;</span><span class="p">,</span> <span class="s">&quot;CD3E&quot;</span><span class="p">,</span> <span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+<details class="done"><summary>Answer</summary><p>Running</p>
+<div class="highlight"><pre><span></span><code><span class="n">de_genes[de_genes</span><span class="o">$</span><span class="n">gene</span> <span class="o">%in%</span> <span class="n">immune_genes</span><span class="p">,</span><span class="n">]</span>
+</code></pre></div>
+
+<p>Returns:
+<div class="highlight"><pre><span></span><code>              p_val avg_log2FC pct.1 pct.2     p_val_adj cluster gene
+GZMA 4.015094e-221   2.441962 0.331 0.005 9.781973e-217       6 GZMA
+CD3E  0.000000e+00   2.113342 0.474 0.006  0.000000e+00       6 CD3E
+CD3D  0.000000e+00   2.507228 0.519 0.006  0.000000e+00       6 CD3D
+</code></pre></div></p>
+<p>So, yes, the immune genes are highly significant markers for cluster 6.</p>
+</details>
+<h3 id="differential-expression-between-clusters">Differential expression between clusters</h3>
+<p>The FindMarkers function allows to test for differential gene expression analysis specifically between 2 clusters, i.e. perform pairwise comparisons, eg between cells of cluster 0 vs cluster 2, or between cells annotated as astrocytes and macrophages.</p>
+<p>First we can set the default cell identity to the cell types defined by <code>SingleR</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Run the differential gene expression analysis (runs for a couple of minutes):</p>
+<div class="highlight"><pre><span></span><code><span class="n">DEG_astro_vs_macro</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                                           <span class="n">ident.1</span> <span class="o">=</span> <span class="s">&quot;Astrocyte&quot;</span><span class="p">,</span>
+                                           <span class="n">ident.2</span> <span class="o">=</span> <span class="s">&quot;Macrophage&quot;</span><span class="p">,</span>
+                                           <span class="n">group.by</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span><span class="p">,</span>
+                                           <span class="n">test.use</span> <span class="o">=</span> <span class="s">&quot;wilcox&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> What is the top 10 differentially expressed genes? What does the sign (i.e. positive or negative) mean in the log fold change values? Check your answer by generating a violin plot of a top differentially expressed gene.</p>
+<details class="done"><summary>Answer</summary><p>You can look at the top 10 differentially expressed genes with:</p>
+<div class="highlight"><pre><span></span><code><span class="n">top_order</span> <span class="o">&lt;-</span> <span class="nf">order</span><span class="p">(</span><span class="n">DEG_astro_vs_macro</span><span class="o">$</span><span class="n">p_val_adj</span><span class="p">)</span>
+<span class="n">DEG_astro_vs_macro[top_order[1</span><span class="o">:</span><span class="m">10</span><span class="n">]</span><span class="p">,</span><span class="n">]</span>
+</code></pre></div>
+
+<p>Returning:</p>
+<div class="highlight"><pre><span></span><code>          p_val avg_log2FC pct.1 pct.2 p_val_adj
+SLC2A5       0  -1.481971 0.080 0.656         0
+TNFRSF1B     0  -1.529484 0.041 0.694         0
+CAMK2N1      0   2.622397 0.907 0.106         0
+C1QA         0  -4.843247 0.088 0.964         0
+C1QC         0  -4.374756 0.075 0.943         0
+C1QB         0  -4.940663 0.099 0.946         0
+LAPTM5       0  -3.685947 0.075 0.987         0
+MARCKSL1     0   2.690161 0.911 0.221         0
+CNN3         0   2.940659 0.818 0.110         0
+CD53         0  -1.861605 0.035 0.804         0
+</code></pre></div>
+
+<p>For an explanation of the log fold change have a look at <code>?Seurat::FindMarkers</code>. At <strong>Value</strong> it says:</p>
+<blockquote>
+<p><code>avg_logFC</code>: log fold-chage of the average expression between the two groups. Positive values indicate that the gene is more highly expressed in the first group</p>
+</blockquote>
+<p>Plotting the top gene <code>SLC2A5</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="s">&quot;SLC2A5&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Returning:</p>
+<p><figure>
+  <img src="../../assets/images/violinplot_SLC2A5.png" width="400"/>
+</figure></p>
+</details>
+<h3 id="differential-expression-analysis-including-batch-as-covariates">Differential expression analysis including batch as covariates</h3>
+<p>The Wilcoxon test implemented in <code>FindMarkers</code> does not allow to test for complex design (eg factorial experiments) or to include batch as a covariate.</p>
+<p>We can use <code>edgeR</code> or <code>limma</code> which are designed for microarray or bulk RNA seq data and provide a design matrix that includes covariates for example.</p>
+<p>We will go back to the pancreas cells sequenced with different technologies, analyze differentially expressed genes between 2 clusters of cells using the technologies as covariates. Similar approaches can be used to analyze differentially expressed genes between conditions, eg sick vs healthy, wild type versus knockout, etc, and including batches in the model if they are present.</p>
+<p>We will load the <code>pancreas.integrated</code> object we have created yesterday:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pancreas.integrated</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;pancreas.integrated.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Since we will start wit differential gene expression, we set the default assay back to &ldquo;RNA&rdquo;. Also, we set the default identity to the cell type:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">Idents</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">pancreas.integrated</span><span class="o">$</span><span class="n">celltype</span>
+</code></pre></div>
+
+<p>Let&rsquo;s have a look at the UMAP (again), coloured by celltype:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Let&rsquo;s say we are specifically interested to test for differential gene expression between two cell types.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here we could also test for e.g. healthy versus diseased within a celltype/cluster.</p>
+</div>
+<p>Now we will run differential expression analysis between cell type <em>delta</em> and <em>gamma</em> using the technology as a covariate by using <code>limma</code>.</p>
+<p>First, we will subset the <code>pancreas.integrated</code> object, only leaving the <em>delta</em> and <em>gamma</em> cells:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pancreas.dg</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="n">idents</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;delta&quot;</span><span class="p">,</span> <span class="s">&quot;gamma&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Get the count matrix and keep only genes that are expressed in at least one cell:</p>
+<div class="highlight"><pre><span></span><code><span class="n">counts</span> <span class="o">&lt;-</span> <span class="nf">GetAssayData</span><span class="p">(</span><span class="n">pancreas.dg</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">&lt;-</span> <span class="n">counts</span><span class="nf">[rowSums</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">!=</span> <span class="m">0</span><span class="p">,</span><span class="n">]</span>
+</code></pre></div>
+
+<p>Generate a <code>DGEList</code> object to use as input for <code>limma</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">DGEList</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span><span class="p">)</span>
+<span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">calcNormFactors</span><span class="p">(</span><span class="n">dge</span><span class="p">)</span>  
+</code></pre></div>
+
+<p>Generate a design matrix:</p>
+<div class="highlight"><pre><span></span><code><span class="n">design</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span> <span class="m">0</span> <span class="o">+</span> <span class="n">celltype</span> <span class="o">+</span> <span class="n">tech</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pancreas.dg</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">design</span><span class="p">)</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;delta&quot;</span><span class="p">,</span> <span class="s">&quot;gamma&quot;</span><span class="p">,</span> <span class="s">&quot;celseq2&quot;</span><span class="p">,</span> <span class="s">&quot;fluidigmc1&quot;</span><span class="p">,</span> <span class="s">&quot;smartseq2&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Specify which contrasts to check:</p>
+<div class="highlight"><pre><span></span><code><span class="n">contrast.mat</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">makeContrasts</span><span class="p">(</span><span class="n">delta</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">,</span>
+                                     <span class="n">levels</span> <span class="o">=</span> <span class="n">design</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now <code>limma</code> can perform the transformation with <code>voom</code>, fit the model, compute the contrasts and compute test statistics with <code>eBayes</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">vm</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">voom</span><span class="p">(</span><span class="n">dge</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">fit</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">lmFit</span><span class="p">(</span><span class="n">vm</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">)</span>
+<span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">contrasts.fit</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">contrast.mat</span><span class="p">)</span>
+<span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">eBayes</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We can use <code>topTable</code> to get the most significantly differentially expressed genes:
+<div class="highlight"><pre><span></span><code><span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>And we can check whether this corresponds to the counts by generating a violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">pancreas.dg</span><span class="p">,</span> <span class="s">&quot;PPY&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
+<span class="nf">VlnPlot</span><span class="p">(</span><span class="n">pancreas.dg</span><span class="p">,</span> <span class="s">&quot;RBP4&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="gene-set-over-representation-analysis">Gene set over-representation analysis</h3>
+<p>If the <code>FindMarkers</code> or <code>FindAllMarkers</code> functions were used,
+we have a table containing only the significant genes,
+but we don&rsquo;t have any information for the non-significant
+genes. Therefore, we can use the over-representation analysis
+which is a threshold-based method.
+Using our list of significant genes, we can test
+if any gene set is over-represented in our data or not using a test
+similar to a Fisher test to compare differences in proportions.</p>
+<p>The <code>clusterProfiler</code> package provides functions for over-representation
+analysis of Gene Ontology gene sets (among other functions) or KEGG gene sets.</p>
+<p>Genes can be labeled using different types of labels, eg
+symbol, ensembl ID, Entrez ID. To list the allowed
+label types use:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
+<span class="n">AnnotationDbi</span><span class="o">::</span><span class="nf">keytypes</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Let&rsquo;s select a set of genes that are upregulated in the astrocytes compared to the macrophages:</p>
+<div class="highlight"><pre><span></span><code><span class="n">AC_up_DEG</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">DEG_astro_vs_macro</span><span class="p">,</span>
+                    <span class="n">DEG_astro_vs_macro</span><span class="o">$</span><span class="n">avg_log2FC</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="o">&amp;</span>
+                    <span class="n">DEG_astro_vs_macro</span><span class="o">$</span><span class="n">p_val_adj</span> <span class="o">&lt;</span> <span class="m">0.05</span><span class="p">)</span>
+<span class="n">AC_up_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">AC_up_DEG</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We can do a gene ontology term enrichment analysis based on this set of genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">AC_MAC_GO</span><span class="o">&lt;-</span><span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enrichGO</span><span class="p">(</span><span class="n">AC_up_genes</span><span class="p">,</span> <span class="c1"># vector of up regulated genes</span>
+                    <span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span> <span class="c1"># orgdb= package that contains gene label types correspondances</span>
+                    <span class="n">keyType</span> <span class="o">=</span> <span class="s">&quot;SYMBOL&quot;</span><span class="p">,</span> <span class="c1"># indicate that genes are labeled using symbols</span>
+                    <span class="n">ont</span> <span class="o">=</span> <span class="s">&quot;BP&quot;</span><span class="p">,</span> <span class="c1"># which of the GO categories to test, here the &quot;Biological Processes&quot;</span>
+                    <span class="n">minGSSize</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># exclude gene sets that contain less than 50 genes</span>
+</code></pre></div>
+
+<p>The results are stored in the <code>@result</code> slot:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">AC_MAC_GO</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We can quite easily generate an enrichment map with the <code>enrichplot</code> package:</p>
+<div class="highlight"><pre><span></span><code><span class="n">enrichplot</span><span class="o">::</span><span class="nf">emapplot</span><span class="p">(</span><span class="n">enrichplot</span><span class="o">::</span><span class="nf">pairwise_termsim</span><span class="p">(</span><span class="n">AC_MAC_GO</span><span class="p">),</span>
+                     <span class="n">showCategory</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In stead of testing for gene ontology terms, we can also test for other gene set collections. For example the hallmark collection from MSigDB:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gmt</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">read.gmt</span><span class="p">(</span><span class="s">&quot;data/h.all.v7.2.symbols.xls&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">gmt</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We can use the function <code>enricher</code> to test for enrichment of any set of genes. But we would have to test it against a &ldquo;universe&rdquo;, i.e. the background genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">AC_MAC_enrich</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enricher</span><span class="p">(</span><span class="n">gene</span> <span class="o">=</span> <span class="n">AC_up_genes</span><span class="p">,</span>
+                                           <span class="n">universe</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span>
+                                           <span class="n">pAdjustMethod</span> <span class="o">=</span> <span class="s">&quot;BH&quot;</span><span class="p">,</span>
+                                           <span class="n">pvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
+                                           <span class="n">qvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
+                                           <span class="n">TERM2GENE</span> <span class="o">=</span> <span class="n">gmt</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The most signifcantly enriched group of genes is <code>HALLMARK_MYC_TARGETS_V1</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">AC_MAC_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
+
+<p>You can get a vector of gene symbols that are in the set of MYC targets like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">myc_target_genes</span> <span class="o">&lt;-</span> <span class="n">gmt</span><span class="o">$</span><span class="n">gene[gmt</span><span class="o">$</span><span class="n">term</span><span class="o">==</span><span class="s">&quot;HALLMARK_MYC_TARGETS_V1&quot;</span><span class="p">)</span><span class="n">]</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> Calculate a module score for each cell for the MYC target genes by using the function <code>AddModuleScore</code>, and generate a violin plot of the <code>gbm</code> dataset to view differences of this score between <code>SingleR</code> annotations.</p>
+<details class="done"><summary>Answer</summary><p>Generating module scores:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">myc_target_genes</span><span class="o">=</span><span class="n">myc_target_genes</span><span class="p">),</span>
+                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;myc_target_genes&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Generate violing plot. Note that the scores generated by <code>AddModuleScore</code> are stored in <code>gbm$my_target_genes1</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;myc_target_genes1&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Returning:</p>
+<p><figure>
+ <img src="../../assets/images/violinplot_MYC.png" width="400"/>
+</figure></p>
+<p>Showing that the score is on average higher in the cells annotated as astrocyte compared to cells annotated as macrophage.</p>
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../day2/cell_annotation/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Cell annotation
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.18f0862e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.994580cf.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
