@@ -423,6 +423,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
+    Save the dataset and clear environment
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -474,6 +481,18 @@
     <li class="md-nav__item">
       <a href="../../day3/differential_gene_expression/" class="md-nav__link">
         Differential gene expression
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/enrichment_analysis/" class="md-nav__link">
+        Erichment analysis
       </a>
     </li>
   
@@ -548,6 +567,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
+    Save the dataset and clear environment
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -577,7 +603,14 @@
 <h2 id="material">Material</h2>
 <p><a class="md-button" href="../assets/pdf/sequencing_technologies.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
 <h2 id="exercises">Exercises</h2>
-<p>Let&rsquo;s go back to our <code>gbm</code> dataset. In the last exercise we saw that probably clustering at a resolution of 0.2 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4C6.5 4 2 7.58 2 12c0 2.12 1.65 3.87 3.76 4H6a4 4 0 004-4 4 4 0 00-4-4h-.24A8.81 8.81 0 0112 5.6c1.77-.02 3.5.47 5 1.4l1.25-1.25A11.492 11.492 0 0012 4m-6 6a2 2 0 012 2c0 1.11-.92 2-2 2a2 2 0 01-2-1.8v-.4A2 2 0 016 10m12.24-2H18a4 4 0 00-4 4 4 4 0 004 4h.24A8.81 8.81 0 0112 18.4c-1.77.02-3.5-.47-5-1.4l-1.24 1.24C7.63 19.41 9.79 20 12 20c5.5 0 10-3.58 10-8 0-2.12-1.65-3.87-3.76-4M18 14a2 2 0 01-2-2c0-1.11.92-2 2-2a2 2 0 012 1.8v.4a2 2 0 01-2 1.8z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
+</blockquote>
+<p>Load the <code>gbm</code> dataset you have created earlier today:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In the last exercise we saw that probably clustering at a resolution of 0.2 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span><span class="p">)</span>
 </code></pre></div>
 
@@ -687,6 +720,16 @@
 <p>Showing that T-cells and NK-cells have a high module score based on our set of immune genes, which makes sense.</p>
 <p>Of course, it was also already clear from the UMAP plots that cluster 6 (the cluster with the high module score for the immune genes) contained the T-cells and NK-cells.</p>
 </details>
+<h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
+<p>Now, save the dataset so you can use it tomorrow:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part2.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Clear your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">gc</span><span class="p">()</span>
+<span class="nf">.rs.restartR</span><span class="p">()</span>
+</code></pre></div>
                 
               
               

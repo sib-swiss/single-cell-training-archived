@@ -480,13 +480,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#gene-set-over-representation-analysis" class="md-nav__link">
-    Gene set over-representation analysis
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -496,6 +489,18 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enrichment_analysis/" class="md-nav__link">
+        Erichment analysis
+      </a>
     </li>
   
 
@@ -583,13 +588,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#gene-set-over-representation-analysis" class="md-nav__link">
-    Gene set over-representation analysis
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -620,11 +618,22 @@
 <p><a class="md-button" href="../assets/pdf/sequencing_technologies.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
 <h2 id="exercises">Exercises</h2>
 <h3 id="find-all-markers-for-each-cluster">Find all markers for each cluster</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4C6.5 4 2 7.58 2 12c0 2.12 1.65 3.87 3.76 4H6a4 4 0 004-4 4 4 0 00-4-4h-.24A8.81 8.81 0 0112 5.6c1.77-.02 3.5.47 5 1.4l1.25-1.25A11.492 11.492 0 0012 4m-6 6a2 2 0 012 2c0 1.11-.92 2-2 2a2 2 0 01-2-1.8v-.4A2 2 0 016 10m12.24-2H18a4 4 0 00-4 4 4 4 0 004 4h.24A8.81 8.81 0 0112 18.4c-1.77.02-3.5-.47-5-1.4l-1.24 1.24C7.63 19.41 9.79 20 12 20c5.5 0 10-3.58 10-8 0-2.12-1.65-3.87-3.76-4M18 14a2 2 0 01-2-2c0-1.11.92-2 2-2a2 2 0 012 1.8v.4a2 2 0 01-2 1.8z"/></svg></span> This part uses the <code>gbm</code> dataset</p>
+</blockquote>
+<p>Load the <code>gbm</code> dataset you have created yesterday:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day2_part2.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
 <p>The function <code>FindAllMarkers</code> performs a Wilcoxon plot to determine the genes differentially expressed between each cluster and the rest of the cells. Other types of tests than the Wilcoxon test are available. Check it out by running <code>?Seurat::FindAllMarkers</code>.</p>
 <p>Now run analysis:</p>
 <div class="highlight"><pre><span></span><code><span class="n">de_genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindAllMarkers</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>  <span class="n">min.pct</span> <span class="o">=</span> <span class="m">0.25</span><span class="p">)</span>
 </code></pre></div>
 
+<div class="admonition note">
+<p class="admonition-title">Time for coffee</p>
+<p>This takes a while. Have a break.</p>
+</div>
 <p>We are usually only interested in significant marker genes, so let&rsquo;s filter based on an adjusted p-value smaller than 0.05:</p>
 <div class="highlight"><pre><span></span><code><span class="n">de_genes</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">de_genes</span><span class="p">,</span> <span class="n">de_genes</span><span class="o">$</span><span class="n">p_val_adj</span> <span class="o">&lt;</span> <span class="m">0.05</span><span class="p">)</span>
 <span class="nf">View</span><span class="p">(</span><span class="n">de_genes</span><span class="p">)</span>
@@ -651,6 +660,9 @@ CD3D  0.000000e+00   2.507228 0.519 0.006  0.000000e+00       6 CD3D
 <p>So, yes, the immune genes are highly significant markers for cluster 6.</p>
 </details>
 <h3 id="differential-expression-between-clusters">Differential expression between clusters</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4C6.5 4 2 7.58 2 12c0 2.12 1.65 3.87 3.76 4H6a4 4 0 004-4 4 4 0 00-4-4h-.24A8.81 8.81 0 0112 5.6c1.77-.02 3.5.47 5 1.4l1.25-1.25A11.492 11.492 0 0012 4m-6 6a2 2 0 012 2c0 1.11-.92 2-2 2a2 2 0 01-2-1.8v-.4A2 2 0 016 10m12.24-2H18a4 4 0 00-4 4 4 4 0 004 4h.24A8.81 8.81 0 0112 18.4c-1.77.02-3.5-.47-5-1.4l-1.24 1.24C7.63 19.41 9.79 20 12 20c5.5 0 10-3.58 10-8 0-2.12-1.65-3.87-3.76-4M18 14a2 2 0 01-2-2c0-1.11.92-2 2-2a2 2 0 012 1.8v.4a2 2 0 01-2 1.8z"/></svg></span> This part uses the <code>gbm</code> dataset</p>
+</blockquote>
 <p>The FindMarkers function allows to test for differential gene expression analysis specifically between 2 clusters, i.e. perform pairwise comparisons, eg between cells of cluster 0 vs cluster 2, or between cells annotated as astrocytes and macrophages.</p>
 <p>First we can set the default cell identity to the cell types defined by <code>SingleR</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">)</span>
@@ -698,6 +710,9 @@ CD53         0  -1.861605 0.035 0.804         0
 </figure></p>
 </details>
 <h3 id="differential-expression-analysis-including-batch-as-covariates">Differential expression analysis including batch as covariates</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M472.29 195.9l-67.06-23c-19.28-6.6-33.54-20.92-38.14-38.31l-16-60.45c-11.58-43.77-76.57-57.13-110-22.62L195 99.24c-13.26 13.71-33.54 20.93-54.2 19.31l-71.9-5.62c-52-4.07-86.93 44.89-59 82.84l38.54 52.42c11.08 15.07 12.82 33.86 4.64 50.24l-28.43 57C4 396.67 47.46 440.29 98.11 429.23l70-15.28c20.11-4.39 41.45 0 57.07 11.73l54.32 40.83c39.32 29.56 101 7.57 104.45-37.22l4.7-61.86c1.35-17.8 12.8-33.87 30.63-43l62-31.74c44.84-22.96 39.55-80.17-8.99-96.79zM160 256a32 32 0 1132-32 32 32 0 01-32 32zm128 96a32 32 0 1132-32 32 32 0 01-32 32zm16-128a16 16 0 1116-16 16 16 0 01-16 16z"/></svg></span> This part uses the <code>pancreas</code> dataset</p>
+</blockquote>
 <p>The Wilcoxon test implemented in <code>FindMarkers</code> does not allow to test for complex design (eg factorial experiments) or to include batch as a covariate.</p>
 <p>We can use <code>edgeR</code> or <code>limma</code> which are designed for microarray or bulk RNA seq data and provide a design matrix that includes covariates for example.</p>
 <p>We will go back to the pancreas cells sequenced with different technologies, analyze differentially expressed genes between 2 clusters of cells using the technologies as covariates. Similar approaches can be used to analyze differentially expressed genes between conditions, eg sick vs healthy, wild type versus knockout, etc, and including batches in the model if they are present.</p>
@@ -758,89 +773,6 @@ CD53         0  -1.861605 0.035 0.804         0
 <div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">pancreas.dg</span><span class="p">,</span> <span class="s">&quot;PPY&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
 <span class="nf">VlnPlot</span><span class="p">(</span><span class="n">pancreas.dg</span><span class="p">,</span> <span class="s">&quot;RBP4&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
 </code></pre></div>
-
-<h3 id="gene-set-over-representation-analysis">Gene set over-representation analysis</h3>
-<p>If the <code>FindMarkers</code> or <code>FindAllMarkers</code> functions were used,
-we have a table containing only the significant genes,
-but we don&rsquo;t have any information for the non-significant
-genes. Therefore, we can use the over-representation analysis
-which is a threshold-based method.
-Using our list of significant genes, we can test
-if any gene set is over-represented in our data or not using a test
-similar to a Fisher test to compare differences in proportions.</p>
-<p>The <code>clusterProfiler</code> package provides functions for over-representation
-analysis of Gene Ontology gene sets (among other functions) or KEGG gene sets.</p>
-<p>Genes can be labeled using different types of labels, eg
-symbol, ensembl ID, Entrez ID. To list the allowed
-label types use:</p>
-<div class="highlight"><pre><span></span><code><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
-<span class="n">AnnotationDbi</span><span class="o">::</span><span class="nf">keytypes</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Let&rsquo;s select a set of genes that are upregulated in the astrocytes compared to the macrophages:</p>
-<div class="highlight"><pre><span></span><code><span class="n">AC_up_DEG</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">DEG_astro_vs_macro</span><span class="p">,</span>
-                    <span class="n">DEG_astro_vs_macro</span><span class="o">$</span><span class="n">avg_log2FC</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="o">&amp;</span>
-                    <span class="n">DEG_astro_vs_macro</span><span class="o">$</span><span class="n">p_val_adj</span> <span class="o">&lt;</span> <span class="m">0.05</span><span class="p">)</span>
-<span class="n">AC_up_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">AC_up_DEG</span><span class="p">)</span>
-</code></pre></div>
-
-<p>We can do a gene ontology term enrichment analysis based on this set of genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">AC_MAC_GO</span><span class="o">&lt;-</span><span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enrichGO</span><span class="p">(</span><span class="n">AC_up_genes</span><span class="p">,</span> <span class="c1"># vector of up regulated genes</span>
-                    <span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span> <span class="c1"># orgdb= package that contains gene label types correspondances</span>
-                    <span class="n">keyType</span> <span class="o">=</span> <span class="s">&quot;SYMBOL&quot;</span><span class="p">,</span> <span class="c1"># indicate that genes are labeled using symbols</span>
-                    <span class="n">ont</span> <span class="o">=</span> <span class="s">&quot;BP&quot;</span><span class="p">,</span> <span class="c1"># which of the GO categories to test, here the &quot;Biological Processes&quot;</span>
-                    <span class="n">minGSSize</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span> <span class="c1"># exclude gene sets that contain less than 50 genes</span>
-</code></pre></div>
-
-<p>The results are stored in the <code>@result</code> slot:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">AC_MAC_GO</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
-</code></pre></div>
-
-<p>We can quite easily generate an enrichment map with the <code>enrichplot</code> package:</p>
-<div class="highlight"><pre><span></span><code><span class="n">enrichplot</span><span class="o">::</span><span class="nf">emapplot</span><span class="p">(</span><span class="n">enrichplot</span><span class="o">::</span><span class="nf">pairwise_termsim</span><span class="p">(</span><span class="n">AC_MAC_GO</span><span class="p">),</span>
-                     <span class="n">showCategory</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-</code></pre></div>
-
-<p>In stead of testing for gene ontology terms, we can also test for other gene set collections. For example the hallmark collection from MSigDB:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gmt</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">read.gmt</span><span class="p">(</span><span class="s">&quot;data/h.all.v7.2.symbols.xls&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">gmt</span><span class="p">)</span>
-</code></pre></div>
-
-<p>We can use the function <code>enricher</code> to test for enrichment of any set of genes. But we would have to test it against a &ldquo;universe&rdquo;, i.e. the background genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">AC_MAC_enrich</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enricher</span><span class="p">(</span><span class="n">gene</span> <span class="o">=</span> <span class="n">AC_up_genes</span><span class="p">,</span>
-                                           <span class="n">universe</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span>
-                                           <span class="n">pAdjustMethod</span> <span class="o">=</span> <span class="s">&quot;BH&quot;</span><span class="p">,</span>
-                                           <span class="n">pvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
-                                           <span class="n">qvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
-                                           <span class="n">TERM2GENE</span> <span class="o">=</span> <span class="n">gmt</span><span class="p">)</span>
-</code></pre></div>
-
-<p>The most signifcantly enriched group of genes is <code>HALLMARK_MYC_TARGETS_V1</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">AC_MAC_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
-</code></pre></div>
-
-<p>You can get a vector of gene symbols that are in the set of MYC targets like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">myc_target_genes</span> <span class="o">&lt;-</span> <span class="n">gmt</span><span class="o">$</span><span class="n">gene[gmt</span><span class="o">$</span><span class="n">term</span><span class="o">==</span><span class="s">&quot;HALLMARK_MYC_TARGETS_V1&quot;</span><span class="p">)</span><span class="n">]</span>
-</code></pre></div>
-
-<p><strong>Exercise:</strong> Calculate a module score for each cell for the MYC target genes by using the function <code>AddModuleScore</code>, and generate a violin plot of the <code>gbm</code> dataset to view differences of this score between <code>SingleR</code> annotations.</p>
-<details class="done"><summary>Answer</summary><p>Generating module scores:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">myc_target_genes</span><span class="o">=</span><span class="n">myc_target_genes</span><span class="p">),</span>
-                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;myc_target_genes&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Generate violing plot. Note that the scores generated by <code>AddModuleScore</code> are stored in <code>gbm$my_target_genes1</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;myc_target_genes1&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Returning:</p>
-<p><figure>
- <img src="../../assets/images/violinplot_MYC.png" width="400"/>
-</figure></p>
-<p>Showing that the score is on average higher in the cells annotated as astrocyte compared to cells annotated as macrophage.</p>
-</details>
                 
               
               
@@ -874,13 +806,13 @@ label types use:</p>
           </a>
         
         
-          <a href="../trajectory_analysis/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../enrichment_analysis/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Trajectory analysis
+                Erichment analysis
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
