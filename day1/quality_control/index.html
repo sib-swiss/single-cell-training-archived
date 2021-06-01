@@ -614,8 +614,18 @@
                 
                 <h2 id="learning-outcomes">Learning outcomes</h2>
 <p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Assign cell cycle phases to a single cell dataset</li>
+<li>Use the package <code>scater</code> evaluate cell quality based on reads originating from:<ul>
+<li>mitochondrial genes</li>
+<li>ribosomal genes</li>
+<li>dissociation-related genes</li>
+</ul>
+</li>
+<li>Evaluate confounding effects on expression data by analyzing the explained variance</li>
+</ul>
 <h2 id="material">Material</h2>
-<p><a class="md-button" href="../assets/pdf/sequencing_technologies.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<p><a class="md-button" href="../../assets/pdf/quality_control.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
 <h2 id="exercises">Exercises</h2>
 <blockquote>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4C6.5 4 2 7.58 2 12c0 2.12 1.65 3.87 3.76 4H6a4 4 0 004-4 4 4 0 00-4-4h-.24A8.81 8.81 0 0112 5.6c1.77-.02 3.5.47 5 1.4l1.25-1.25A11.492 11.492 0 0012 4m-6 6a2 2 0 012 2c0 1.11-.92 2-2 2a2 2 0 01-2-1.8v-.4A2 2 0 016 10m12.24-2H18a4 4 0 00-4 4 4 4 0 004 4h.24A8.81 8.81 0 0112 18.4c-1.77.02-3.5-.47-5-1.4l-1.24 1.24C7.63 19.41 9.79 20 12 20c5.5 0 10-3.58 10-8 0-2.12-1.65-3.87-3.76-4M18 14a2 2 0 01-2-2c0-1.11.92-2 2-2a2 2 0 012 1.8v.4a2 2 0 01-2 1.8z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
@@ -637,7 +647,9 @@
 
 <p>The <code>CellCycleScoring()</code> function allows to assign cell cycle phase information
 to each cell, stored in the metadata as the &ldquo;S.Score&rdquo;, &ldquo;G2M.Score&rdquo; and &ldquo;Phase&rdquo; columns</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span> <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                                <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span>
+                                <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
 </code></pre></div>
 
 <div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
@@ -686,7 +698,7 @@ They have been described by:</p>
 <p>Van Den Brink SC, Sage F, Vértesy Á, Spanjaard B, Peterson-Maduro J, Baron CS, et al. Single-cell sequencing reveals dissociation-induced gene expression in tissue subpopulations. Nat Methods. 2017;14:935–6.</p>
 </blockquote>
 <p>And are availabe in the file <code>data/dissocation_genes.txt</code>. Load these into a vector, and generate also a vector of ribosomal genes and mitochondrial genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dissoc_genes</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="s">&quot;data/dissocation_genes.txt&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">dissoc_genes</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="s">&quot;data/gbm_dataset/dissocation_genes.txt&quot;</span><span class="p">)</span>
 <span class="n">ribo_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[S|L]&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span> <span class="n">perl</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="n">]</span>
 <span class="n">mito_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span><span class="n">]</span>
 </code></pre></div>
@@ -730,9 +742,7 @@ so that the statistics reflect changes in relative expression.</p>
 of experimental variables like sex or donor id, but in case we would have several variables,
 here is the method with the cell cycle phase as example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">vars</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">getVarianceExplained</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
-                             <span class="n">variables</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span>
-                             <span class="c1">#, variables=c(&quot;tissue&quot;, &quot;detected&quot;, &quot;sex&quot;, &quot;age&quot;)</span>
-<span class="p">)</span>
+                             <span class="n">variables</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
 </code></pre></div>
 
@@ -746,10 +756,10 @@ contribution to the variance in the data:</p>
 and if we want to &ldquo;remove&rdquo; this effect so that cycling cells are
 integrated into the rest of the cells and not clustering apart anymore,
 we can regress out the cell cycling phase at the moment of normalizing
-the data using SCTransform.
+the data using <code>ScaleData</code>.
 This might be slow to compute</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># do not run</span>
-<span class="n">gbm_cc</span> <span class="o">&lt;-</span> <span class="nf">SCTransform</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">vars.to.regress</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;S.Score&quot;</span><span class="p">,</span> <span class="s">&quot;G2M.Score&quot;</span><span class="p">))</span>
+<span class="n">gbm_cc</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">vars.to.regress</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;S.Score&quot;</span><span class="p">,</span> <span class="s">&quot;G2M.Score&quot;</span><span class="p">))</span>
 </code></pre></div>
 
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
