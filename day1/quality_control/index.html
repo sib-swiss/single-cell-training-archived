@@ -723,6 +723,11 @@ perform clustering, and come back to remove the effect of cell cycle if
 we identify a cluster of cells which is
 mostly composed of G2/M cells for example.</p>
 <h3 id="quality-control-with-scater">Quality control with <code>scater</code></h3>
+<p>For the below exercises we will use the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">scater</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">SingleCellExperiment</span><span class="p">)</span>
+</code></pre></div>
+
 <p>Scater includes different types of quality controls:</p>
 <ol>
 <li>QC and filtering of cells</li>
@@ -753,11 +758,6 @@ They have been described by:</p>
 <div class="highlight"><pre><span></span><code><span class="n">dissoc_genes</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="s">&quot;data/gbm_dataset/dissocation_genes.txt&quot;</span><span class="p">)</span>
 <span class="n">ribo_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[S|L]&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span> <span class="n">perl</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span><span class="n">]</span>
 <span class="n">mito_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span><span class="n">]</span>
-</code></pre></div>
-
-<p>For the below exercises we will use the following packages:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">scater</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">SingleCellExperiment</span><span class="p">)</span>
 </code></pre></div>
 
 <p><code>scater</code> calls the <code>addPerCellQC</code> function of the <code>scuttle</code> package to compute a number of quality control metrics for each cell and feature (i.e gene)</p>
