@@ -639,10 +639,15 @@ For the PCA, by default, only the previously determined variable features are us
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Coming back to the cell cycle analysis, we can check the distribution of the different cell cycle phases and eventually regress it out using the SCTransform() function.</p>
+<p>We can colour the PCA plot according to any factor that is present in <code>@meta.data</code>. For example we can take the column <code>Phase</code> (i.e. predicted cell cycle phase):</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Coming back to the cell cycle analysis, we can check the distribution of the different cell cycle phases over the PCA, and eventually regress it out using the <code>ScaleData()</code> function. But here, the PCA doesn&rsquo;t seem to cluster according to the cell cycle phase.</p>
+</div>
+<p>We can generate heatmaps according to the correlations with the different dimensions of our PCA:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 
