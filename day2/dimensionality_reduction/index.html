@@ -625,6 +625,11 @@
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+<p>And load the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">clustree</span><span class="p">)</span>
+</code></pre></div>
+
 <p>Once the data is normalized, scaled and variable features have been identified, we can start to reduce the dimensionality of the data.
 For the PCA, by default, only the previously determined variable features are used as input, but can be defined using features argument if you wish to specify a vector of genes. The PCA will only be run on the variable features, that you can check with <code>VariableFeatures(gbm)</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>

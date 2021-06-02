@@ -357,9 +357,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#alternative-qc-exploration-using-the-scater-package" class="md-nav__link">
-    Alternative QC exploration using the scater package
+  <a href="#quality-control-with-scater" class="md-nav__link">
+    Quality control with scater
   </a>
+  
+    <nav class="md-nav" aria-label="Quality control with scater">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-cell-qc" class="md-nav__link">
+    Per cell QC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#highly-expressed-genes" class="md-nav__link">
+    Highly expressed genes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-explanatory-variables" class="md-nav__link">
+    Find explanatory variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -575,9 +602,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#alternative-qc-exploration-using-the-scater-package" class="md-nav__link">
-    Alternative QC exploration using the scater package
+  <a href="#quality-control-with-scater" class="md-nav__link">
+    Quality control with scater
   </a>
+  
+    <nav class="md-nav" aria-label="Quality control with scater">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-cell-qc" class="md-nav__link">
+    Per cell QC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#highly-expressed-genes" class="md-nav__link">
+    Highly expressed genes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-explanatory-variables" class="md-nav__link">
+    Find explanatory variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -668,7 +722,7 @@ to each cell, stored in the metadata as the &ldquo;S.Score&rdquo;, &ldquo;G2M.Sc
 perform clustering, and come back to remove the effect of cell cycle if
 we identify a cluster of cells which is
 mostly composed of G2/M cells for example.</p>
-<h3 id="alternative-qc-exploration-using-the-scater-package">Alternative QC exploration using the <code>scater</code> package</h3>
+<h3 id="quality-control-with-scater">Quality control with <code>scater</code></h3>
 <p>Scater includes different types of quality controls:</p>
 <ol>
 <li>QC and filtering of cells</li>
@@ -689,10 +743,8 @@ an object of the class <code>SingleCellExperiment</code>:</p>
 <span class="n">gbm_sce</span>
 </code></pre></div>
 
-<p>We can again check percent mitochondrial gene expression as well as dissociation protocol-related
-gene expression.
-Genes associated with the dissociation protocol, i.e. stress genes, can
-sometimes cause clustering of stressed cells apart from the other cells.
+<h4 id="per-cell-qc">Per cell QC</h4>
+<p>We can again check percent mitochondrial gene expression as well as dissociation protocol-related gene expression. Genes associated with the dissociation protocol, i.e. stress genes, can sometimes cause clustering of stressed cells apart from the other cells.
 They have been described by:</p>
 <blockquote>
 <p>Van Den Brink SC, Sage F, Vértesy Á, Spanjaard B, Peterson-Maduro J, Baron CS, et al. Single-cell sequencing reveals dissociation-induced gene expression in tissue subpopulations. Nat Methods. 2017;14:935–6.</p>
@@ -703,7 +755,12 @@ They have been described by:</p>
 <span class="n">mito_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span><span class="nf">[grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span><span class="n">]</span>
 </code></pre></div>
 
-<p><code>scater</code> calls the <code>addPerCellQC</code> function of the scuttle package to compute a number of quality control metrics for each cell and feature (i.e gene)</p>
+<p>For the below exercises we will use the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">scater</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">SingleCellExperiment</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>scater</code> calls the <code>addPerCellQC</code> function of the <code>scuttle</code> package to compute a number of quality control metrics for each cell and feature (i.e gene)</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scuttle</span><span class="o">::</span><span class="nf">addPerCellQC</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
                         <span class="n">subsets</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">mito_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">mito_genes</span><span class="p">),</span>
                                      <span class="n">dissoc_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">dissoc_genes</span><span class="p">),</span>
@@ -719,45 +776,33 @@ They have been described by:</p>
 <span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;subsets_mito_genes_percent&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_ribo_genes_percent&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>On the gene level, we can look at a plot that shows the top (by default 50) most-expressed genes.
-Each row in the plot corresponds to a gene; each bar corresponds to the expression of a gene in a single
-cell; and the circle indicates the median expression of each gene, with which genes are sorted. We expect to
-see the “usual suspects”, i.e., mitochondrial genes, actin, ribosomal protein, MALAT1. If used, few spike-in transcripts
-may also be present here, though if all of the spike-ins are in the top 50, it suggests that too much spike-in
-RNA was added. A large number of pseudo-genes or predicted genes may indicate problems with alignment.</p>
+<h4 id="highly-expressed-genes">Highly expressed genes</h4>
+<p>On the gene level, we can look at a plot that shows the top (by default 50) most-expressed genes. Each row in the plot corresponds to a gene; each bar corresponds to the expression of a gene in a single cell; and the circle indicates the median expression of each gene, with which genes are sorted. We expect to see the “usual suspects”, i.e., mitochondrial genes, actin, ribosomal protein, MALAT1. If used, few spike-in transcripts may also be present here, though if all of the spike-ins are in the top 50, it suggests that too much spike-in RNA was added. A large number of pseudo-genes or predicted genes may indicate problems with alignment.</p>
 <div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotHighestExprs</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">exprs_values</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Variable-level metrics are computed by the getVarianceExplained() function (after normalization, see below).
-This calculates the percentage of variance of each gene’s expression that is explained by each variable in the
-colData of the SingleCellExperiment object. We can then use this to determine which experimental factors
-are contributing most to the variance in expression. This is useful for diagnosing batch effects or to
-quickly verify that a treatment has an effect.</p>
+<h4 id="find-explanatory-variables">Find explanatory variables</h4>
+<p>Variable-level metrics are computed by the <code>getVarianceExplained()</code> function (after normalization, see below). This calculates the percentage of variance of each gene’s expression that is explained by each variable in the <code>colData</code> of the <code>SingleCellExperiment</code> object. We can then use this to determine which experimental factors are contributing most to the variance in expression. This is useful for diagnosing batch effects or to quickly verify that a treatment has an effect.</p>
 <p>First, computing variance explained on the log-counts,
 so that the statistics reflect changes in relative expression.</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">logNormCounts</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>  <span class="c1"># alternative to Seurat&#39;s normalization here using scater</span>
 </code></pre></div>
 
-<p>In the gbm dataset, we only have 1 patient, so we cannot calculate the effect
-of experimental variables like sex or donor id, but in case we would have several variables,
-here is the method with the cell cycle phase as example:</p>
+<p>In the gbm dataset, we only have 1 patient, so we cannot calculate the effect of experimental variables like sex or donor id, but in case we would have several variables, here is the method with the cell cycle phase as example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">vars</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">getVarianceExplained</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
                              <span class="n">variables</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 <span class="nf">head</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
 </code></pre></div>
 
-<p>A distribution of percentage variance explained by each gene is shown,
-and can indicate whether one or the other experimental variable has high
-contribution to the variance in the data:</p>
+<p>A distribution of percentage variance explained by each gene is shown, and can indicate whether one or the other experimental variable has high contribution to the variance in the data:</p>
 <div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotExplanatoryVariables</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
 </code></pre></div>
 
-<p>If we think that the cell cycling has an effect on the analysis,
-and if we want to &ldquo;remove&rdquo; this effect so that cycling cells are
-integrated into the rest of the cells and not clustering apart anymore,
-we can regress out the cell cycling phase at the moment of normalizing
-the data using <code>ScaleData</code>.
-This might be slow to compute</p>
+<p>If we think that the cell cycling has an effect on the analysis, and if we want to regress out this effect so that cycling cells are integrated into the rest of the cells and not clustering apart anymore, we can regress out the cell cycling phase at the moment of scaling the data using <code>ScaleData</code>. This might be slow to compute.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The code below is an example, you don&rsquo;t need to run it.</p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="c1"># do not run</span>
 <span class="n">gbm_cc</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">vars.to.regress</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;S.Score&quot;</span><span class="p">,</span> <span class="s">&quot;G2M.Score&quot;</span><span class="p">))</span>
 </code></pre></div>

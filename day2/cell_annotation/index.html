@@ -610,6 +610,11 @@
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+<p>And load the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">celldex</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">SingleR</span><span class="p">)</span>
+</code></pre></div>
+
 <p>In the last exercise we saw that probably clustering at a resolution of 0.2 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span><span class="p">)</span>
 </code></pre></div>
