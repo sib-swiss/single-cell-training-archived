@@ -726,66 +726,10 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
                  <span class="n">features</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span>
 </code></pre></div>
 
-<p>Here&rsquo;s a function to plot mean versus variance in a count matrix (credits go to Wandrille Duchemin):</p>
-<div class="highlight"><pre><span></span><code><span class="n">plot_mean_variance</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">count_mat</span><span class="p">){</span>
-  <span class="c1"># get log10 of mean per gene</span>
-  <span class="n">log_mean</span> <span class="o">&lt;-</span> <span class="nf">log10</span><span class="p">(</span><span class="nf">rowMeans</span><span class="p">(</span><span class="n">count_mat</span><span class="p">))</span>
-  <span class="c1"># get log10 of variance per gene</span>
-  <span class="n">log_var</span> <span class="o">&lt;-</span> <span class="nf">log10</span><span class="p">(</span><span class="nf">apply</span><span class="p">(</span><span class="n">count_mat</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">var</span><span class="p">))</span>
-  <span class="c1"># get density colors</span>
-  <span class="n">cols</span> <span class="o">&lt;-</span> <span class="nf">densCols</span><span class="p">(</span><span class="n">log_mean</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-
-  <span class="nf">plot</span><span class="p">(</span><span class="n">log_mean</span><span class="p">,</span> <span class="n">log_var</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">cols</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">19</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">,</span>
-        <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;log10(mean)&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;log10(variation)&quot;</span><span class="p">)</span>
-  <span class="c1"># draw the line y=x</span>
-  <span class="nf">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<p><strong>Exercise:</strong> Use the above function to plot the mean variance of:</p>
-<ul>
-<li>raw counts (stored in the slot <code>"counts"</code>)</li>
-<li>normalized data (stored in the slot <code>"data"</code>)</li>
-<li>scaled data (stored in the slot <code>"scale.data"</code>)</li>
-</ul>
-<div class="admonition hint">
-<p class="admonition-title">Retrieving count data</p>
-<p>You can retrieve count data from a specific slot with the function <code>GetAssayData</code>, e.g. for the raw counts this would be:
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
-</code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">The use of <code>Seurat::SCTransform</code></p>
+<p>The functions <code>NormalizeData</code>, <code>VariableFeatures</code> and <code>ScaleData</code> can be replaced by the function <code>SCTransform</code>. The latter uses a more sophisticated way to perform the normalization and scaling, and is <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1874-1">argued to perform better</a>. However, it is slower, and a bit less transparent compared to using the three separate functions. Therefore, we chose not to use <code>SCTransform</code> for the exercises.</p>
 </div>
-<details class="done"><summary>Answer</summary><div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Raw counts</label><div class="tabbed-content">
-<p>Running</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plot_mean_variance</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span>  <span class="s">&quot;counts&quot;</span><span class="p">))</span>
-</code></pre></div>
-
-<p>Returns:</p>
-<p><figure>
-  <img src="../../assets/images/plot_mean_var_counts.png" width="400"/>
-</figure></p>
-</div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Normalized data</label><div class="tabbed-content">
-<p>Running</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plot_mean_variance</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span>  <span class="s">&quot;data&quot;</span><span class="p">))</span>
-</code></pre></div>
-
-<p>Returns:</p>
-<p><figure>
-  <img src="../../assets/images/plot_mean_var_data.png" width="400"/>
-</figure></p>
-</div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Scaled and normalized</label><div class="tabbed-content">
-<p>Running</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plot_mean_variance</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span>  <span class="s">&quot;scale.data&quot;</span><span class="p">))</span>
-</code></pre></div>
-
-<p>As you remember, scaling results in a variance of 1 for each gene, so the <code>log10</code> of the variance would be 0. In addition, the mean is scaled to zero, so a <code>log10</code> of 0 would return <code>-Inf</code> or a very negative number (in case it&rsquo;s very close to 0). It therefore returns:</p>
-<p><figure>
-  <img src="../../assets/images/plot_mean_var_scale.data.png" width="400"/>
-</figure></p>
-</div>
-</div>
-</details>
                 
               
               
