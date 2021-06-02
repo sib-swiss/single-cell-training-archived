@@ -655,13 +655,9 @@ For the PCA, by default, only the previously determined variable features are us
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
 </code></pre></div>
 
-<p>The elblow plot ranks principle components based on the percentage of variance
-explained by each one. Where we observe an &ldquo;elblow&rdquo; or flattening curve, the majority of true signal
-is captured by this number of PCs, eg around 25 PCs for the gbm dataset.</p>
-<p>Including too many PCs usually does not affect much the result, while including too few
-PCs can affect the results very much.</p>
-<p>UMAP: The goal of these algorithms is to learn the underlying manifold of the data in order to place similar
-cells together in low-dimensional space.</p>
+<p>The elblow plot ranks principle components based on the percentage of variance explained by each one. Where we observe an &ldquo;elblow&rdquo; or flattening curve, the majority of true signal is captured by this number of PCs, eg around 25 PCs for the gbm dataset.</p>
+<p>Including too many PCs usually does not affect much the result, while including too few PCs can affect the results very much.</p>
+<p>UMAP: The goal of these algorithms is to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space.</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 
@@ -669,24 +665,17 @@ cells together in low-dimensional space.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Cells can be colored according to cell cycle phase.
+<p>Cells can be coloured according to cell cycle phase.
 Is there a group of cells than contains a high proportion of cells in G2/M phase?</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <h3 id="clustering">Clustering</h3>
-<p>The method implemented in Seurat first constructs a KNN graph based on the euclidean distance in PCA space,
-and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods
-(Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the
-previously defined dimensionality of the dataset.</p>
+<p>The method implemented in Seurat first constructs a KNN graph based on the euclidean distance in PCA space, and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods (Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the previously defined dimensionality of the dataset.</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 
-<p>To cluster the cells, Seurat next implements modularity optimization techniques such as the Louvain algorithm
-(default) or SLM [SLM, Blondel et al., Journal of Statistical Mechanics], to iteratively group cells together,
-with the goal of optimizing the standard modularity function. The `FindClusters()`` function implements this
-procedure, and contains a resolution parameter that sets the ‘granularity’ of the downstream clustering,
-with increased values leading to a greater number of clusters.</p>
+<p>To cluster the cells, Seurat next implements modularity optimization techniques such as the Louvain algorithm (default) or SLM [SLM, Blondel et al., Journal of Statistical Mechanics], to iteratively group cells together, with the goal of optimizing the standard modularity function. The <code>FindClusters()</code> function implements this procedure, and contains a resolution parameter that sets the ‘granularity’ of the downstream clustering, with increased values leading to a greater number of clusters.</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
 </code></pre></div>
 
