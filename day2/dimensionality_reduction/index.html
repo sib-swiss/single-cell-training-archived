@@ -393,39 +393,24 @@
     Exercises
   </a>
   
-    <nav class="md-nav" aria-label="Exercises">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dimensionality-reduction-using-seurat" class="md-nav__link">
-    Dimensionality reduction using Seurat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clustering" class="md-nav__link">
-    Clustering
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
-    Save the dataset and clear environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        Clustering
+      </a>
     </li>
   
 
@@ -561,33 +546,6 @@
     Exercises
   </a>
   
-    <nav class="md-nav" aria-label="Exercises">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dimensionality-reduction-using-seurat" class="md-nav__link">
-    Dimensionality reduction using Seurat
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clustering" class="md-nav__link">
-    Clustering
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
-    Save the dataset and clear environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -615,7 +573,6 @@
 <blockquote>
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
 </blockquote>
-<h3 id="dimensionality-reduction-using-seurat">Dimensionality reduction using Seurat</h3>
 <p>Load the <code>gbm</code> dataset you have created yesterday:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -664,49 +621,6 @@ For the PCA, by default, only the previously determined variable features are us
 Is there a group of cells than contains a high proportion of cells in G2/M phase?</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 </code></pre></div>
-
-<h3 id="clustering">Clustering</h3>
-<p>The method implemented in Seurat first constructs a KNN graph based on the euclidean distance in PCA space, and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods (Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the previously defined dimensionality of the dataset.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
-</code></pre></div>
-
-<p>To cluster the cells, Seurat next implements modularity optimization techniques such as the Louvain algorithm (default) or SLM [SLM, Blondel et al., Journal of Statistical Mechanics], to iteratively group cells together, with the goal of optimizing the standard modularity function. The <code>FindClusters()</code> function implements this procedure, and contains a resolution parameter that sets the ‘granularity’ of the downstream clustering, with increased values leading to a greater number of clusters.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
-</code></pre></div>
-
-<p>Cluster id of each cell is added to the metadata object, as a new column for each resolution tested:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
-</code></pre></div>
-
-<p>To view how clusters sub-divide at increasing resolution:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">clustree</span><span class="p">)</span>
-<span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data[</span><span class="p">,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;RNA_snn_res&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))</span><span class="n">]</span><span class="p">,</span>
-                   <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>You can view the UMAP coloring each cell according to a cluster id like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.1&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Exercise:</strong> Visualise clustering based on a few more resolutions. Taking the clustering and the UMAP plots into account what do you consider as a good resolution to perform the clustering?</p>
-<details class="done"><summary>Answer</summary><p>Of course, there is no &lsquo;optimal&rsquo; resolution, but based on resolution of 0.2, it seems that clustering fits the UMAP well:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p><figure>
-  <img src="../../assets/images/UMAP_res.0.2.png" width="400"/>
-</figure></p>
-</details>
-<h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
-<p>Now, save the dataset so you can use it later today:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
-</code></pre></div>
-
-<p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
-<span class="nf">gc</span><span class="p">()</span>
-<span class="nf">.rs.restartR</span><span class="p">()</span>
-</code></pre></div>
                 
               
               
@@ -742,13 +656,13 @@ Is there a group of cells than contains a high proportion of cells in G2/M phase
       
       
         
-        <a href="../integration/" class="md-footer__link md-footer__link--next" aria-label="Next: Integration" rel="next">
+        <a href="../clustering/" class="md-footer__link md-footer__link--next" aria-label="Next: Clustering" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Integration
+              Clustering
             </div>
           </div>
           <div class="md-footer__button md-icon">
