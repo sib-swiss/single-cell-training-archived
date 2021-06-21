@@ -1,0 +1,896 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Introduction scRNAseq - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction scRNAseq
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../general_introduction/" class="md-nav__link">
+        General introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introduction scRNAseq
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Introduction scRNAseq
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-scrnaseq-data" class="md-nav__link">
+    Loading scRNAseq data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seurat-object" class="md-nav__link">
+    The Seurat object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-quality-control" class="md-nav__link">
+    Basic Quality Control
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/clustering/" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/differential_gene_expression/" class="md-nav__link">
+        Differential gene expression
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/enrichment_analysis/" class="md-nav__link">
+        Enrichment analysis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/trajectory_analysis/" class="md-nav__link">
+        Trajectory analysis
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+    <nav class="md-nav" aria-label="Material">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-scrnaseq-data" class="md-nav__link">
+    Loading scRNAseq data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seurat-object" class="md-nav__link">
+    The Seurat object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-quality-control" class="md-nav__link">
+    Basic Quality Control
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/introduction_scrnaseq.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Introduction scRNAseq</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Explain what kind of information single cell RNA-seq can give you to answer a biological question</li>
+<li>Describe essential considerations during the design of a single cell RNA-seq experiment</li>
+<li>Describe the pros and cons of different single cell sequencing methods</li>
+<li>Load single cell data into R</li>
+<li>Explain the basic structure of a <code>Seurat</code> object and extract count data and metadata</li>
+<li>Perform a basic quality control by:<ul>
+<li>Evaluating the percentage of UMIs originating from mitochondrial genes</li>
+<li>Detecting doublets</li>
+</ul>
+</li>
+</ul>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../../assets/pdf/introduction_scRNAseq.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105 279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<ul>
+<li>Single cell introductory <a href="https://www.youtube.com/watch?v=k9VFNLLQP8c">video on iBiology</a></li>
+<li>Seurat <a href="https://satijalab.org/seurat/">website</a></li>
+<li><a href="https://doi.org/10.3389/fcell.2018.00108">Paper</a> on experimental considerations</li>
+<li><a href="https://doi.org/10.1093/bib/bby007">Paper</a> on experimental design</li>
+<li><a href="https://www.protocols.io/view/smart-seq3-protocol-bcq4ivyw">SMART-seq3 protocol</a> at protocols.io</li>
+<li><code>cellranger</code> <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/overview/system-requirements">system requirements</a> and <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/installation">installation</a></li>
+<li><a href="https://www.nature.com/articles/s41596-020-00409-w?proof=t">Review</a> by Tallulah Andrews</li>
+<li><a href="https://www.biorxiv.org/content/10.1101/749473v3.full">Paper</a> on correlation between mRNA and protein level in single cells</li>
+</ul>
+<h3 id="loading-scrnaseq-data">Loading scRNAseq data</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This part uses the <code>gbm</code> dataset</p>
+</blockquote>
+<p>Today we will mainly work with the package <code>Seurat</code>. Load it into your environment like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip: make an R script</p>
+<p>You could type and copy-paste the commands of these exercises directly in the console. However, that makes it hard to track what you have done. In addition, it can be nice to add comments to your code, so you can read back why you have made certain choices. In order to do that, do not write commands in the console, but write them in a script, and send them to the console with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (Windows) or <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (MacOS).</p>
+</div>
+<p>To run through a typical <code>Seurat</code> analysis, we will use the files that are in the directory <code>data/filtered_feature_bc_matrix</code>. This directory is part of the output generated by <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger"><code>cellranger</code></a>. To load in this data into R and generate a sparse matrix, run the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm.data</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">Read10X</span><span class="p">(</span><span class="n">data.dir</span> <span class="o">=</span> <span class="s">&quot;data/gbm_dataset/filtered_feature_bc_matrix/&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Basically, this imports a raw count matrix. Have a look at the counts of the first 30 cells of three genes by running:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm.data</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;PECAM1&quot;</span><span class="p">,</span> <span class="s">&quot;CD8A&quot;</span><span class="p">,</span> <span class="s">&quot;TSPAN1&quot;</span><span class="p">),</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="n">]</span>
+</code></pre></div>
+
+<p>To generate a <code>Seurat</code> object, we will run <code>CreateSeuratObject</code>. We choose to import only features (genes) that are expressed in at least 3 cells, and we include only cells that express 100 or more genes (features):</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">gbm.data</span><span class="p">,</span>
+                                  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;gbm&quot;</span><span class="p">,</span>
+                                  <span class="n">min.cells</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+                                  <span class="n">min.features</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Function notation with <code>::</code></p>
+<p>Here, we define the function together with its associated package. We do that by the syntax <code>package::function</code>. Of course, you can also call <code>library(package)</code>, and only type the function name. Since we use many different packages in this course, it can be confusing which function comes from which package. Therefore, we chose to always associate the package with the called function.</p>
+</div>
+<p><strong>Exercise:</strong> check what&rsquo;s in the <code>gbm</code> object, by typing <code>gbm</code> in the R console. How many features are in there? And how many cells?</p>
+<details class="done"><summary>Answer</summary><p>Typing <code>gbm</code> should return:</p>
+<div class="highlight"><pre><span></span><code>An object of class Seurat
+24363 features across 5553 samples within 1 assay
+Active assay: RNA (24363 features, 0 variable features)
+</code></pre></div>
+
+<p>This means that we have 24363 genes (features) in there, and 5553 cells (samples)</p>
+</details>
+<h3 id="the-seurat-object">The <code>Seurat</code> object</h3>
+<p>The <code>gbm</code> object we have created has the class <code>Seurat</code>. The object structure is rather complex, since it contains multi-level lists and slots.</p>
+<p><strong>Exercise:</strong></p>
+<p>A. Have a look at the <code>gbm</code> object by running <code>str(gbm)</code>. What is in there? Where in the object is the count data stored?</p>
+<p>B. Have a look at the <code>data.frame</code> stored at <code>gbm@meta.data</code> what kind of information is in there?</p>
+<details class="done"><summary>Answer</summary><div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Answer A</label><div class="tabbed-content">
+<p>Running <code>str(gbm)</code> shows you that the object contains many slots with different classes. The count data is both stored in <code>gbm@assays$RNA@counts</code> and <code>gbm@assays$RNA@data</code>.</p>
+<div class="highlight"><pre><span></span><code>Formal class &#39;Seurat&#39; [package &quot;SeuratObject&quot;] with 13 slots
+..@ assays      :List of 1
+.. ..$ RNA:Formal class &#39;Assay&#39; [package &quot;SeuratObject&quot;] with 8 slots
+.. .. .. ..@ counts       :Formal class &#39;dgCMatrix&#39; [package &quot;Matrix&quot;] with 6 slots
+.. .. .. .. .. ..@ i       : int [1:19378876] 18 67 82 116 118 158 173 227 240 281 ...
+.. .. .. .. .. ..@ p       : int [1:5554] 0 815 5575 7894 11289 14005 15664 16654 16792 19905 ...
+.. .. .. .. .. ..@ Dim     : int [1:2] 24363 5553
+.. .. .. .. .. ..@ Dimnames:List of 2
+.. .. .. .. .. .. ..$ : chr [1:24363] &quot;AL627309.1&quot; &quot;AL627309.5&quot; &quot;AP006222.2&quot; &quot;LINC01409&quot; ...
+.. .. .. .. .. .. ..$ : chr [1:5553] &quot;AAACCCAAGGCGATAC-1&quot; &quot;AAACCCACAAGTCCCG-1&quot; &quot;AAACCCACAGATGCGA-1&quot; &quot;AAACCCACAGGTGAGT-1&quot; ...
+.. .. .. .. .. ..@ x       : num [1:19378876] 1 1 1 1 5 1 1 1 1 1 ...
+.. .. .. .. .. ..@ factors : list()
+.. .. .. ..@ data         :Formal class &#39;dgCMatrix&#39; [package &quot;Matrix&quot;] with 6 slots
+.. .. .. .. .. ..@ i       : int [1:19378876] 18 67 82 116 118 158 173 227 240 281 ...
+.. .. .. .. .. ..@ p       : int [1:5554] 0 815 5575 7894 11289 14005 15664 16654 16792 19905 ...
+.. .. .. .. .. ..@ Dim     : int [1:2] 24363 5553
+.. .. .. .. .. ..@ Dimnames:List of 2
+.. .. .. .. .. .. ..$ : chr [1:24363] &quot;AL627309.1&quot; &quot;AL627309.5&quot; &quot;AP006222.2&quot; &quot;LINC01409&quot; ...
+.. .. .. .. .. .. ..$ : chr [1:5553] &quot;AAACCCAAGGCGATAC-1&quot; &quot;AAACCCACAAGTCCCG-1&quot; &quot;AAACCCACAGATGCGA-1&quot; &quot;AAACCCACAGGTGAGT-1&quot; ...
+.. .. .. .. .. ..@ x       : num [1:19378876] 1 1 1 1 5 1 1 1 1 1 ...
+.. .. .. .. .. ..@ factors : list()
+.. .. .. ..@ scale.data   : num[0 , 0 ]
+.. .. .. ..@ key          : chr &quot;rna_&quot;
+.. .. .. ..@ assay.orig   : NULL
+.. .. .. ..@ var.features : logi(0)
+.. .. .. ..@ meta.features:&#39;data.frame&#39;:    24363 obs. of  0 variables
+.. .. .. ..@ misc         : list()
+..@ meta.data   :&#39;data.frame&#39;:  5553 obs. of  3 variables:
+.. ..$ orig.ident  : Factor w/ 1 level &quot;gbm&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+.. ..$ nCount_RNA  : num [1:5553] 2225 17882 8172 9057 5612 ...
+.. ..$ nFeature_RNA: int [1:5553] 815 4760 2319 3395 2716 1659 990 138 3113 6045 ...
+..@ active.assay: chr &quot;RNA&quot;
+..@ active.ident: Factor w/ 1 level &quot;gbm&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+.. ..- attr(*, &quot;names&quot;)= chr [1:5553] &quot;AAACCCAAGGCGATAC-1&quot; &quot;AAACCCACAAGTCCCG-1&quot; &quot;AAACCCACAGATGCGA-1&quot; &quot;AAACCCACAGGTGAGT-1&quot; ...
+..@ graphs      : list()
+..@ neighbors   : list()
+..@ reductions  : list()
+..@ images      : list()
+..@ project.name: chr &quot;gbm&quot;
+..@ misc        : list()
+..@ version     :Classes &#39;package_version&#39;, &#39;numeric_version&#39;  hidden list of 1
+.. ..$ : int [1:3] 4 0 1
+..@ commands    : list()
+..@ tools       : list()
+</code></pre></div>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Answer B</label><div class="tabbed-content">
+<p>Running <code>head(gbm@meta.data)</code> returns:</p>
+<div class="highlight"><pre><span></span><code>                    orig.ident nCount_RNA nFeature_RNA
+AAACCCAAGGCGATAC-1        gbm       2225          815
+AAACCCACAAGTCCCG-1        gbm      17882         4760
+AAACCCACAGATGCGA-1        gbm       8172         2319
+AAACCCACAGGTGAGT-1        gbm       9057         3395
+AAACCCAGTCTTGCGG-1        gbm       5612         2716
+AAACCCATCGATAACC-1        gbm       6254         1659
+</code></pre></div>
+
+<p>Giving you the names of three columns and a row for each cell:</p>
+<ul>
+<li><code>orig_ident</code>: the original identity (origin) of a cell.</li>
+<li><code>nCount_RNA</code>: the number of reads assigned to a cell.</li>
+<li><code>nFeature_RNA</code>: the number of expressed features (genes) per cell.</li>
+</ul>
+</div>
+</div>
+</details>
+<p>Luckily, usually you do not have to dive into this structure to retrieve information. For example, information in the slot <code>@meta.data</code> can be retrieved and set by using <code>$</code> or <code>[[]]</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a subtle difference here between <code>$</code> and <code>[[]]</code>. While <code>$</code> returns a vector of the column in <code>@meta.data</code>, <code>[[]]</code> returns a <code>data.frame</code>.</p>
+</div>
+<p><strong>Exercise:</strong> Generate a histogram of the column <code>nCount_RNA</code> at <code>gbm@meta.data</code>, with the base function <code>hist</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">gbm</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<p>There are also built-in functions to plot data from <code>Seurat</code> object, for example <code>FeatureScatter</code>. This function enables you easily draw a scatterplot from a <code>Seurat</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="basic-quality-control">Basic Quality Control</h3>
+<p>A high number of UMIs originating from mitochondrial genes can point to dying cells. In order to calculate the percentage of UMIs coming from mitochondrial genes for each cell, we use the function <code>PercentageFeatureSet</code>. In our count matrix, the names of mitochondrial genes all start with <code>MT-</code>, so we can use that pattern to search these genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm[[</span><span class="s">&quot;percent.mt&quot;</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Finding mitochondrial genes for mouse</p>
+<p>For mouse, mitochondrial genes start with <code>mt-</code>, so the function call with look like this:</p>
+<div class="highlight"><pre><span></span><code>gbm[[&quot;percent.mt&quot;]] &lt;- Seurat::PercentageFeatureSet(gbm, pattern = &quot;^mt-&quot;)
+</code></pre></div>
+
+</div>
+<p>Now check out whether the column was added to the <code>meta.data</code> slot:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Let&rsquo;s have a look at the distribution of the three columns stored in <code>@meta.data</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="s">&quot;percent.mt&quot;</span><span class="p">),</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+</code></pre></div>
+
+<p>There is often a relationship between number of UMIs and percentage of mitochondrial genes. We can have a look at their relationship:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;percent.mt&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Based on what we know now, it would be sensible to keep cells that express between 500 and 7500 features, and in which less than 20% of the UMIs come from mitochondrial genes. We can filter like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+              <span class="n">subset</span> <span class="o">=</span> <span class="n">nFeature_RNA</span> <span class="o">&gt;</span> <span class="m">500</span> <span class="o">&amp;</span> <span class="n">nFeature_RNA</span> <span class="o">&lt;</span> <span class="m">7500</span> <span class="o">&amp;</span> <span class="n">percent.mt</span> <span class="o">&lt;</span> <span class="m">20</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> How many cells did we filter out?</p>
+<details class="done"><summary>Answer</summary><p>Just running <code>gbm</code> returns:
+<div class="highlight"><pre><span></span><code>An object of class Seurat
+24363 features across 5091 samples within 1 assay
+Active assay: RNA (24363 features, 0 variable features)
+</code></pre></div></p>
+<p>Meaning that 5553 - 5091 = 462 cells were filtered out.</p>
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../setup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setup" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Setup
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../normalization_scaling/" class="md-footer__link md-footer__link--next" aria-label="Next: Normalization and scaling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Normalization and scaling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>

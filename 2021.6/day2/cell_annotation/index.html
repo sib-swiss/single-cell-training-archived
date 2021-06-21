@@ -1,0 +1,822 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Cell annotation - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#material" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cell annotation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/general_introduction/" class="md-nav__link">
+        General introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/introduction_scrnaseq/" class="md-nav__link">
+        Introduction scRNAseq
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Cell annotation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Cell annotation
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-type-annotation-using-singler" class="md-nav__link">
+    Cell type annotation using SingleR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
+    Save the dataset and clear environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/differential_gene_expression/" class="md-nav__link">
+        Differential gene expression
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/enrichment_analysis/" class="md-nav__link">
+        Enrichment analysis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/trajectory_analysis/" class="md-nav__link">
+        Trajectory analysis
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-type-annotation-using-singler" class="md-nav__link">
+    Cell type annotation using SingleR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
+    Save the dataset and clear environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day2/cell_annotation.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Cell annotation</h1>
+                
+                <h2 id="material">Material</h2>
+<p><a class="md-button" href="../../assets/pdf/cell_annotation_scRNAseq_062021.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105 279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<h2 id="exercises">Exercises</h2>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
+</blockquote>
+<p>Load the <code>gbm</code> dataset you have created earlier today:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>And load the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">celldex</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">SingleR</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In the last exercise we saw that probably clustering at a resolution of 0.2 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From now on, grouping (e.g. for plotting) is done by the active identity (set at <code>@active.ident</code>) by default.</p>
+</div>
+<p>Based on the UMAP we have generated, we can visualize expression for a gene in each cluster:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;PMP2&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Based on expression of sets of genes you can do a manual cell type annotation. If you know the marker genes for some cell types, you can check whether they are up-regulated in one or the other cluster. Here we have some marker genes for two different cell types:</p>
+<div class="highlight"><pre><span></span><code><span class="n">immune_genes</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;GZMA&quot;</span><span class="p">,</span> <span class="s">&quot;CD3E&quot;</span><span class="p">,</span> <span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
+<span class="n">microglia_genes</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CCL4&quot;</span><span class="p">,</span> <span class="s">&quot;CCL3&quot;</span><span class="p">,</span> <span class="s">&quot;P2RY12&quot;</span><span class="p">,</span> <span class="s">&quot;C1QB&quot;</span><span class="p">,</span> <span class="s">&quot;CSF1ER&quot;</span><span class="p">,</span> <span class="s">&quot;CY3CR1&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Let&rsquo;s have a look at the expression of the three immune genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">immune_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>These cells are almost all in cluster 6. Which becomes clearer when looking at the violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                <span class="n">features</span> <span class="o">=</span> <span class="n">immune_genes</span><span class="p">,</span>
+                <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> Have a look at the microglia genes as well. Which cluster contains probably microglial cells?</p>
+<details class="done"><summary>Answer</summary><p>Running</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">microglia_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Returns:</p>
+<p><figure>
+  <img src="../../assets/images/featureplots_microglia.png" width="400"/>
+</figure></p>
+<p>Corresponding mainly to cluster 1 (and cluster 4):</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                <span class="n">features</span> <span class="o">=</span> <span class="n">microglia_genes</span><span class="p">,</span>
+                <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p><figure>
+  <img src="../../assets/images/violinplots_microglia.png" width="300"/>
+</figure></p>
+</details>
+<p>We can also automate this with the function <code>AddModuleScore</code>. For each cell, an expression score for a group of genes is calcuated:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">immune_genes</span><span class="p">),</span>
+                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;immune_genes&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> After running <code>AddModuleScore</code>, a column was added to <code>gbm@meta.data</code>.</p>
+<p><strong>A.</strong> What is the name of that column? What kind of data is in there?</p>
+<p><strong>B.</strong> Generate a UMAP with color accoding to this column and a violinplot grouped by cluster. Is this according to what we saw in the previous exercise?</p>
+<details class="done"><summary>Answer</summary><p><strong>A.</strong> The new column is called <code>immune_genes1</code>. It contains the module score for each cell (which is basically the average expression of the set of genes).</p>
+<p><strong>B.</strong> You can plot the UMAP with</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;immune_genes1&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Returning:</p>
+<p><figure>
+  <img src="../../assets/images/UMAP_immune_genes_modules.png" width="300"/>
+</figure></p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+                <span class="s">&quot;immune_genes1&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Which indeed shows these genes are mainly expressed in cluster 6:</p>
+<p><figure>
+  <img src="../../assets/images/violinplot_immune_genes_modules.png" width="300"/>
+</figure></p>
+</details>
+<h3 id="cell-type-annotation-using-singler">Cell type annotation using <code>SingleR</code></h3>
+<p>To do a fully automated annoation, we need a reference dataset of primary cells. Any reference could be used. The package <code>scRNAseq</code> in Bioconductor includes several scRNAseq datasets that can be used as reference to <code>SingleR</code>. One could also use a reference made of bulk RNA seq data. Here we are using the Human Primary Cell Atlas dataset from <code>celldex</code>. Check out what&rsquo;s in there:</p>
+<div class="highlight"><pre><span></span><code><span class="n">hpca.se</span> <span class="o">&lt;-</span> <span class="n">celldex</span><span class="o">::</span><span class="nf">HumanPrimaryCellAtlasData</span><span class="p">()</span>
+<span class="nf">class</span><span class="p">(</span><span class="n">hpca.se</span><span class="p">)</span>
+<span class="nf">table</span><span class="p">(</span><span class="n">hpca.se</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now <code>SingleR</code> compares our normalized count data to a reference set, and finds the most probable annation:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_SingleR</span> <span class="o">&lt;-</span> <span class="n">SingleR</span><span class="o">::</span><span class="nf">SingleR</span><span class="p">(</span><span class="n">test</span> <span class="o">=</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;data&quot;</span><span class="p">),</span>
+                                <span class="n">ref</span> <span class="o">=</span> <span class="n">hpca.se</span><span class="p">,</span>
+                                <span class="n">labels</span> <span class="o">=</span> <span class="n">hpca.se</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
+</code></pre></div>
+
+<p>See what&rsquo;s in there by using <code>head</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+</code></pre></div>
+
+<p>In order to visualize it in our UMAP, we have to add the annotation to <code>gbm@meta.data</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">gbm_SingleR</span><span class="o">$</span><span class="n">labels</span>
+
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> Compare our manual annotation (based on the set of immune genes) to the annotation with <code>SingleR</code>. Do they correspond?</p>
+<details class="done"><summary>Answer</summary><p>We can have a look at the mean module score for each <code>SingleR</code> annotation like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">mean_scores</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">gbm</span><span class="o">$</span><span class="n">immune_genes1</span><span class="p">,</span> <span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+<span class="n">mean_scores</span><span class="nf">[order</span><span class="p">(</span><span class="n">mean_scores</span><span class="p">,</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span><span class="n">[1</span><span class="o">:</span><span class="m">6</span><span class="n">]]</span>
+</code></pre></div>
+
+<p>Returning:</p>
+<div class="highlight"><pre><span></span><code>    T_cells             NK_cell                  DC            Monocyte          Macrophage        Chondrocytes
+1.015605822         0.679592135         0.017018871        -0.005414908        -0.011926460        -0.011975024
+</code></pre></div>
+
+<p>Showing that T-cells and NK-cells have a high module score based on our set of immune genes, which makes sense.</p>
+<p>Of course, it was also already clear from the UMAP plots that cluster 6 (the cluster with the high module score for the immune genes) contained the T-cells and NK-cells.</p>
+</details>
+<h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
+<p>Now, save the dataset so you can use it tomorrow:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part2.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Clear your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">gc</span><span class="p">()</span>
+<span class="nf">.rs.restartR</span><span class="p">()</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../clustering/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Clustering" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Clustering
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../integration/" class="md-footer__link md-footer__link--next" aria-label="Next: Integration" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Integration
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,997 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Trajectory analysis - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#material" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trajectory analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/single-cell-training/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/general_introduction/" class="md-nav__link">
+        General introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/introduction_scrnaseq/" class="md-nav__link">
+        Introduction scRNAseq
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/clustering/" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      <label class="md-nav__link" for="__nav_6">
+        Day 3
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../differential_gene_expression/" class="md-nav__link">
+        Differential gene expression
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enrichment_analysis/" class="md-nav__link">
+        Enrichment analysis
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Trajectory analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Trajectory analysis
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trajectory-analysis-using-slingshot" class="md-nav__link">
+    Trajectory analysis using Slingshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trajectory-analysis-with-monocle3" class="md-nav__link">
+    Trajectory analysis with monocle3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#trajectory-analysis-using-slingshot" class="md-nav__link">
+    Trajectory analysis using Slingshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trajectory-analysis-with-monocle3" class="md-nav__link">
+    Trajectory analysis with monocle3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day3/trajectory_analysis.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Trajectory analysis</h1>
+                
+                <h2 id="material">Material</h2>
+<p><a class="md-button" href="../../assets/pdf/Trajectories.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105 279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
+<ul>
+<li><code>slingshot</code> <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/slingshot/inst/doc/vignette.html">vignette</a></li>
+<li><a href="https://cole-trapnell-lab.github.io/monocle3/"><code>monocle3</code></a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<p>Load the following packages:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">SingleCellExperiment</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">scater</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">slingshot</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="trajectory-analysis-using-slingshot">Trajectory analysis using Slingshot</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 11h-3.18C14.4 9.84 13.3 9 12 9c-1.3 0-2.4.84-2.82 2H6c-.33 0-2-.1-2-2V8c0-1.83 1.54-2 2-2h10.18C16.6 7.16 17.7 8 19 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3c-1.3 0-2.4.84-2.82 2H6C4.39 4 2 5.06 2 8v1c0 2.94 2.39 4 4 4h3.18c.42 1.16 1.52 2 2.82 2 1.3 0 2.4-.84 2.82-2H18c.33 0 2 .1 2 2v1c0 1.83-1.54 2-2 2H7.82C7.4 16.84 6.3 16 5 16a3 3 0 0 0-3 3 3 3 0 0 0 3 3c1.3 0 2.4-.84 2.82-2H18c1.61 0 4-1.07 4-4v-1c0-2.93-2.39-4-4-4m1-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1M5 20a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1z"/></svg></span> This part uses the <code>Deng</code> dataset</p>
+</blockquote>
+<p>Read in data. It is an object of class <code>SingleCellExperiment</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;data/deng_dataset/deng-reads.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Perform the first steps of the analysis. The deng_SCE object contains cells that were isolated at different stages of mouse embryogenesis, from the zygote stage to the late blastula.</p>
+<p>The levels of the cell type are in alphabetical order. We now change the level order for plotting in developmental order:</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span> <span class="o">&lt;-</span> <span class="nf">factor</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+                              <span class="n">levels</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;zy&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;early2cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;mid2cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;late2cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;4cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;8cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;16cell&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;earlyblast&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;midblast&quot;</span><span class="p">,</span>
+                                         <span class="s">&quot;lateblast&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<p>We can run a PCA directly on the object of class <code>SingleCellExperiment</code> with the function <code>runPCA</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">runPCA</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="n">ncomponents</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Use the <code>reducedDim</code> function to access the PCA and store the results.</p>
+<div class="highlight"><pre><span></span><code><span class="n">pca</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDim</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="s">&quot;PCA&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Describe how the PCA is stored in a matrix. Why does it have this structure?</p>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">pca</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Add PCA data to the deng_SCE object.</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span> <span class="o">&lt;-</span> <span class="n">pca[</span><span class="p">,</span> <span class="m">1</span><span class="n">]</span>
+<span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC2</span> <span class="o">&lt;-</span> <span class="n">pca[</span><span class="p">,</span> <span class="m">2</span><span class="n">]</span>
+</code></pre></div>
+
+<p>Plot PC biplot with cells colored by cell_type2.
+<code>colData(deng_SCE)</code> accesses the cell metadata <code>DataFrame</code> object for <code>deng_SCE</code>.
+Look at Figure 1A of the <a href="https://science.sciencemag.org/content/343/6167/193">paper</a> as a comparison to your PC biplot.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">PC1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">PC2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
+  <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="m">20</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;PC2&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;PC biplot&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>PCA is a simple approach and can be good to compare to more complex algorithms
+designed to capture differentiation processes. As a simple measure of pseudotime
+we can use the coordinates of PC1.
+Plot PC1 vs cell_type2.</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">pseudotime_PC1</span> <span class="o">&lt;-</span> <span class="nf">rank</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span><span class="p">)</span>  <span class="c1"># rank cells by their PC1 score</span>
+</code></pre></div>
+
+<p>Create a jitter plot</p>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pseudotime_PC1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
+                                             <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
+  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by first principal component&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Read the Slingshot documentation (<code>?slingshot::slingshot</code>) and then run Slingshot below.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sce</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> Given your understanding of the algorithm and the documentation, what is one
+major set of parameters we omitted here when running Slingshot?</p>
+<details class="done"><summary>Answer</summary><p>We didn&rsquo;t set the parameter <code>clusterLabels</code></p>
+</details>
+<p>Here is a custom function to plot the PCA based on a <code>slingshot</code> object. Run it in the console to add it to your global environment:</p>
+<div class="highlight"><pre><span></span><code><span class="n">PCAplot_slingshot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span> <span class="n">draw_lines</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">){</span>
+  <span class="c1"># set palette for factorial variables</span>
+  <span class="n">palf</span> <span class="o">&lt;-</span> <span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="s">&quot;Set2&quot;</span><span class="p">))</span>
+  <span class="c1"># set palette for numeric variables</span>
+  <span class="n">paln</span> <span class="o">&lt;-</span> <span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="s">&quot;Blues&quot;</span><span class="p">))</span>
+  <span class="c1"># extract pca from SingleCellExperiment object</span>
+  <span class="n">pca</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDims</span><span class="p">(</span><span class="n">sce</span><span class="p">)</span><span class="o">$</span><span class="n">PCA</span>
+
+  <span class="nf">if</span><span class="p">(</span><span class="nf">is.null</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+    <span class="n">col</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
+  <span class="p">}</span>
+  <span class="nf">if</span><span class="p">(</span><span class="nf">is.character</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+    <span class="n">variable</span> <span class="o">&lt;-</span> <span class="nf">as.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nf">if</span><span class="p">(</span><span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+    <span class="n">colpal</span> <span class="o">&lt;-</span> <span class="nf">palf</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">)))</span>
+    <span class="n">colors</span> <span class="o">&lt;-</span> <span class="n">colpal[variable]</span>
+  <span class="p">}</span>
+  <span class="nf">if</span><span class="p">(</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+    <span class="n">colpal</span> <span class="o">&lt;-</span> <span class="nf">paln</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">&lt;-</span> <span class="n">colpal</span><span class="nf">[cut</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">)</span><span class="n">]</span>
+  <span class="p">}</span>
+
+  <span class="c1"># draw the plot</span>
+  <span class="nf">plot</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">21</span><span class="p">)</span>
+  <span class="c1"># draw lines</span>
+  <span class="nf">if</span><span class="p">(</span><span class="n">draw_lines</span><span class="p">){</span>
+    <span class="nf">lines</span><span class="p">(</span><span class="n">slingshot</span><span class="o">::</span><span class="nf">SlingshotDataSet</span><span class="p">(</span><span class="n">sce</span><span class="p">),</span> <span class="n">lwd</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="kc">...</span> <span class="p">)</span>
+  <span class="p">}</span>
+  <span class="c1"># add legend</span>
+  <span class="nf">if</span><span class="p">(</span><span class="n">legend</span> <span class="o">&amp;</span> <span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+    <span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> <span class="n">pt.bg</span> <span class="o">=</span> <span class="n">colpal</span><span class="p">,</span><span class="n">legend</span> <span class="o">=</span> <span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">),</span><span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">)</span>
+
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Have a look at the PCA with the slingshot pseudotime line:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span> <span class="n">draw_lines</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Also have a look at pseudotime versus cell type:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span>
+                                             <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
+                                             <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
+  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This already looks pretty good. Let&rsquo;s see whether we can improve it. First we generate clusters by using <code>Seurat</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">counts</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">),</span>
+                                     <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;slingshot&quot;</span><span class="p">)</span>
+
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
+                                <span class="n">normalization.method</span> <span class="o">=</span> <span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
+                                <span class="n">scale.factor</span> <span class="o">=</span> <span class="m">10000</span><span class="p">)</span>
+
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
+                                       <span class="n">mean.function</span> <span class="o">=</span> <span class="n">ExpMean</span><span class="p">,</span>
+                                       <span class="n">dispersion.function</span> <span class="o">=</span> <span class="n">LogVMR</span><span class="p">)</span>
+
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
+                            <span class="n">do.center</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span>
+                            <span class="n">do.scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
+                         <span class="n">pc.genes</span> <span class="o">=</span> <span class="n">gcdata</span><span class="o">@</span><span class="n">var.genes</span><span class="p">)</span>
+
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span>
+                                <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span>
+                                <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+
+<span class="c1"># clustering with resolution of 0.6</span>
+<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
+                               <span class="n">resolution</span> <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+</code></pre></div>
+
+<!-- **Exercise:** Have a look at the UMAP and color it according to the clustering (we used a resolution of 0.6). Does it look acceptable to you?
+
+!!! note
+    The UMAP has not yet been generated for this object.
+
+??? done "Answer"
+
+    First run the UMAP and after that generate the plot:
+
+    <div class="highlight"><pre><span></span><code><span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gcdata</span><span class="p">)</span>
+</code></pre></div>
+
+    Returns:
+
+    <figure>
+     <img src="../../assets/images/umap_gcdata.png" width="400"/>
+    </figure> -->
+
+<p>Now we can add these clusters to the <code>slingshot</code> function:</p>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span> <span class="o">&lt;-</span> <span class="nf">as.character</span><span class="p">(</span><span class="nf">Idents</span><span class="p">(</span><span class="n">gcdata</span><span class="p">))</span>  <span class="c1"># go from factor to character</span>
+
+<span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+                                 <span class="n">clusterLabels</span> <span class="o">=</span> <span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
+                                 <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">,</span>
+                                 <span class="n">start.clus</span> <span class="o">=</span> <span class="s">&quot;2&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>There have been added two <code>slingPseudotime</code> columns:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Check how the slingshot object has evolved</p>
+<div class="highlight"><pre><span></span><code><span class="nf">SlingshotDataSet</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Plot PC1 versus PC2 colored by slingshot pseudotime:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Plot Slingshot pseudotime vs cell stage.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+                  <span class="n">slingPseudotime_1</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">),</span>
+        <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">slingPseudotime_1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
+        <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
+  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+                  <span class="n">slingPseudotime_2</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">),</span>
+        <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">slingPseudotime_2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
+        <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
+  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
+  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Particularly the later stages, separation seems to improve. Since we have included the Seurat clustering, we can plot the PCA, with colors according to these clusters:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+                  <span class="n">variable</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span><span class="p">,</span>
+                  <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;lineages&#39;</span><span class="p">,</span>
+                  <span class="n">col</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span>
+                  <span class="n">legend</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+                  <span class="n">variable</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+                  <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;lineages&#39;</span><span class="p">,</span>
+                  <span class="n">col</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span>
+                  <span class="n">legend</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Clear your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">gc</span><span class="p">()</span>
+<span class="nf">.rs.restartR</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="trajectory-analysis-with-monocle3">Trajectory analysis with <code>monocle3</code></h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This part uses the <code>gbm</code> dataset</p>
+</blockquote>
+<p>This part showcases how you can use <code>monocle3</code> to perform a trajectory analysis. First load the <code>gbm</code> dataset:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day3.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Load the required package into your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">monocle3</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Generate a <code>monocle3</code> object (with class <code>cell_data_set</code>) from our <code>Seurat</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;gene_short_name&quot;</span>
+<span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
+                              <span class="n">cell_metadata</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
+                              <span class="n">gene_metadata</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+</code></pre></div>
+
+<p>We pre-process the newly created object. What does it involve? Check:</p>
+<div class="highlight"><pre><span></span><code><span class="o">?</span><span class="n">preprocess_cds</span>
+</code></pre></div>
+
+<p>Preprocess the dataset:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">preprocess_cds</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+</code></pre></div>
+
+<p>And check out the elbow plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_pc_variance_explained</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Perform UMAP using the implementation in the <code>monocle3</code> package and its default parameters:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">reduce_dimension</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">reduction_method</span> <span class="o">=</span> <span class="s">&quot;UMAP&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Plot the <code>monocle3</code> UMAP coloring cells according to the cluster ID ran with <code>Seurat</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="s">&quot;PMP2&quot;</span><span class="p">)</span> <span class="c1"># to plot expression level of a gene</span>
+</code></pre></div>
+
+<p>Cluster cells using <code>monocle3</code>&lsquo;s clustering function:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">cowplot</span><span class="o">::</span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="c1"># Are there differences?</span>
+</code></pre></div>
+
+<p>learn graph (i.e. identify trajectory) using <code>monocle3</code> UMAP and clustering:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Replace <code>monocle3</code> cluster id by <code>Seurat</code> cluster id if we want to keep the same information:</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span><span class="o">@</span><span class="n">clusters</span><span class="o">$</span><span class="n">UMAP</span><span class="o">$</span><span class="n">clusters</span> <span class="o">&lt;-</span> <span class="nf">colData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="o">@</span><span class="n">clusters</span><span class="o">$</span><span class="n">UMAP</span><span class="o">$</span><span class="n">clusters</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">))</span>
+<span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Select the &ldquo;initial&rdquo; cells to calculate pseudotime. A pop up window will open and you need to click on the &ldquo;initial&rdquo; cells (one node per trajectory), then click &ldquo;Done&rdquo;.</p>
+<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span><span class="o">&lt;-</span><span class="n">monocle3</span><span class="o">::</span><span class="nf">order_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="c1">#</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span>
+           <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;pseudotime&quot;</span><span class="p">,</span>
+           <span class="n">label_cell_groups</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
+           <span class="n">label_leaves</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
+           <span class="n">label_branch_points</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+           <span class="n">graph_label_size</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Plot a gene&rsquo;s expression vs pseudotime</p>
+<div class="highlight"><pre><span></span><code><span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="nf">rowData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span><span class="o">==</span><span class="s">&quot;PMP2&quot;</span><span class="p">))</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../enrichment_analysis/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Enrichment analysis" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Enrichment analysis
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>
