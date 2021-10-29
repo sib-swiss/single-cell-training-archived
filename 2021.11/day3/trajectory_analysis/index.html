@@ -834,6 +834,13 @@ major set of parameters we omitted here when running Slingshot?</p>
                   <span class="n">col</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span>
                   <span class="n">legend</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Exercise:</strong> Instead of providing an initial cluster, think of an end cluster that would fit this trajectory analysis and perform the slingshot analysis. Does slingshot find the initial cluster corresponding to the biological correct situation?</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+                             <span class="n">clusterLabels</span> <span class="o">=</span> <span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
+                             <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">,</span>
+                             <span class="n">end.clus</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span>« <span class="m">0</span> »<span class="p">,</span> « <span class="m">3</span> »<span class="p">,</span> « <span class="m">5</span> »<span class="p">))</span> <span class="c1">## check which would be the best according to bio</span>
+</code></pre></div>
+</details>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
 <span class="nf">gc</span><span class="p">()</span>

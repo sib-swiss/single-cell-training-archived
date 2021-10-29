@@ -633,6 +633,10 @@
   <img src="../../assets/images/UMAP_res.0.2.png" width="400"/>
 </figure></p>
 </details>
+<p><strong>Exercise:</strong> When do the number of neighbors need to be changed? How does changing the method of clustering in FindClusters affect the output? Which parameter should be changed?</p>
+<details class="done"><summary>Answer</summary><p>As FindClusters is an unsupervised clustering method supposedly telling yousomething about your UMAP plot, the two should go along. If one has reasons to change the number of neighbors in the UMAP function, here the same parameter should be adapted.</p>
+<p>The method can be changed with algorithm = 2,3 or 4</p>
+</details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it later today:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
