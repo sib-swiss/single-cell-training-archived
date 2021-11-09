@@ -704,7 +704,11 @@
                                 <span class="n">labels</span> <span class="o">=</span> <span class="n">hpca.se</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
 </code></pre></div>
 <p>See what&rsquo;s in there by using <code>head</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+</code></pre></div>
+Visualize singleR score quality scores:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">plotScoreHeatmap</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+<span class="nf">plotDeltaDistribution</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
 </code></pre></div>
 <p>In order to visualize it in our UMAP, we have to add the annotation to <code>gbm@meta.data</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">gbm_SingleR</span><span class="o">$</span><span class="n">labels</span>
