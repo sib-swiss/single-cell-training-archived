@@ -641,14 +641,14 @@
 -p <span class="m">8787</span>:8787 <span class="se">\</span>
 -e <span class="nv">PASSWORD</span><span class="o">=</span><span class="nb">test</span> <span class="se">\</span>
 -v <span class="nv">$PWD</span>:/home/rstudio <span class="se">\</span>
-geertvangeest/single-cell-rstudio:2021.6
+geertvangeest/single-cell-rstudio:latest
 </code></pre></div>
 <p>If this command has run successfully, approach Rstudio server like this:</p>
 <div class="highlight"><pre><span></span><code>http://localhost:8787
 </code></pre></div>
 <p>Copy this URL into your browser, and you will be able to use Rstudio with all required installations.</p>
 <p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/rstudio</code> in the docker container (&lsquo;rstudio&rsquo; is the default user for Rstudio containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer. Change the first path to a path on your computer that you want to use as a working directory.</p>
-<p>The part <code>geertvangeest/single-cell-rstudio:2021.6</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+<p>The part <code>geertvangeest/single-cell-rstudio:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
 </div>
 <h3 id="create-a-project">Create a project</h3>
