@@ -620,8 +620,9 @@
 <li><strong>Enrolled:</strong> if you are enrolled in a course with a teacher</li>
 <li><strong>Own installation:</strong> if you want to install packages on your own local Rstudio installation</li>
 <li><strong>Docker:</strong> if you want to use the docker image locally</li>
+<li><strong>renkulab.io</strong> if you want to easily  deploy the environment outside the course</li>
 </ul>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Enrolled</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Enrolled</label><div class="tabbed-content">
 <p>Log in to Rstudio server with the provided link and password, your username is <code>rstudio</code>.</p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Own installation</label><div class="tabbed-content">
@@ -649,6 +650,9 @@ geertvangeest/single-cell-rstudio:latest
 <p>Copy this URL into your browser, and you will be able to use Rstudio with all required installations.</p>
 <p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/rstudio</code> in the docker container (&lsquo;rstudio&rsquo; is the default user for Rstudio containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer. Change the first path to a path on your computer that you want to use as a working directory.</p>
 <p>The part <code>geertvangeest/single-cell-rstudio:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">renkulab.io</label><div class="tabbed-content">
+<p>To simply run the environment, you can use <a href="https://renkulab.io">renku</a>. You can find the repository (including the image) here: <a href="https://renkulab.io/projects/geert.vangeest/single-cell-training/">https://renkulab.io/projects/geert.vangeest/single-cell-training/</a>. </p>
 </div>
 </div>
 <h3 id="create-a-project">Create a project</h3>
