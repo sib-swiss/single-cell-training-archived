@@ -652,84 +652,74 @@
 <li><a href="https://satijalab.org/seurat/articles/pbmc3k_tutorial.html">Seurat vignette</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
-</blockquote>
 <h3 id="normalization">Normalization</h3>
 <p>After removing unwanted cells from the dataset, the next step is to normalize the data.
 By default, Seurat employs a global-scaling normalization method <code>"LogNormalize"</code> that normalizes the feature expression measurements for each cell by the total expression, multiplies this by a scale factor (10,000 by default), and log-transforms the result.
-Normalized values are stored in the &ldquo;RNA&rdquo; slot of the gbm object.</p>
+Normalized values are stored in the &ldquo;RNA&rdquo; assay (as item of the <code>@assay</code> slot) of the seu object.</p>
 <p><strong>Exercise:</strong> Have a look at the assay data before and after running <code>NormalizeData()</code>. Did it change?</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You can extract assay data with the function <code>Seurat::GetAssay</code></p>
+<p>You can extract assay data with the function <code>Seurat::GetAssayData</code>. By default, the slot <code>data</code> is used, containing raw counts before normalization, and normalized counts after normalization. Use <code>Seurat::GetAssayData(seu, slot = "counts")</code> to get the raw count data after normalization. </p>
 </div>
 <details class="done"><summary>Answer</summary><p>You can check out some assay data with:</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssay</span><span class="p">(</span><span class="n">gbm</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>  
+<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>  
 </code></pre></div>
 Returning:</p>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Before normalization</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>10 x 10 sparse Matrix of class &quot;dgCMatrix&quot;
-  [[ suppressing 10 column names ‘AAACCCAAGGCGATAC-1’, ‘AAACCCACAAGTCCCG-1’, ‘AAACCCACAGATGCGA-1’ ... ]]
+[[ suppressing 10 column names ‘PBMMC-1_AAACCTGCAGACGCAA-1’, ‘PBMMC-1_AAACCTGTCATCACCC-1’, ‘PBMMC-1_AAAGATGCATAAAGGT-1’ ... ]]
 
-AL627309.1 . . . . . . . . . .
-AL627309.5 . . . . . . . . . .
-AP006222.2 . . . . . . . . . .
-LINC01409  . . . 1 . . . . . .
-FAM87B     . . . . . . . . . .
-LINC01128  . . 1 . . . . 1 . 1
-LINC00115  . . . . . . . . . .
-FAM41C     . . . . . . . . . .
-AL645608.6 . . . . . . . . . .
-AL645608.2 . . . . . . . . . .
+RP11-34P13.7  . . . . . . . . . .
+FO538757.3    . . . . . . . . . .
+FO538757.2    1 . . . . . 2 . . .
+AP006222.2    . . . . . . . . . .
+RP4-669L17.10 . . . . . . . . . .
+RP5-857K21.4  . . . . . . . . . .
+RP11-206L10.9 . . . . . . . . . .
+LINC00115     . . . . . . . . . .
+FAM41C        . . . . . . . . . .
+RP11-54O7.1   . . . . . . . . . .
 </code></pre></div>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">After normalization</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>10 x 10 sparse Matrix of class &quot;dgCMatrix&quot;
-   [[ suppressing 10 column names ‘AAACCCAAGGCGATAC-1’, ‘AAACCCACAAGTCCCG-1’, ‘AAACCCACAGATGCGA-1’ ... ]]
+[[ suppressing 10 column names ‘PBMMC-1_AAACCTGCAGACGCAA-1’, ‘PBMMC-1_AAACCTGTCATCACCC-1’, ‘PBMMC-1_AAAGATGCATAAAGGT-1’ ... ]]
 
-AL627309.1 . . .         .         . . . .         . .        
-AL627309.5 . . .         .         . . . .         . .        
-AP006222.2 . . .         .         . . . .         . .        
-LINC01409  . . .         0.7438965 . . . .         . .        
-FAM87B     . . .         .         . . . .         . .        
-LINC01128  . . 0.7991683 .         . . . 0.5091777 . 0.3826447
-LINC00115  . . .         .         . . . .         . .        
-FAM41C     . . .         .         . . . .         . .        
-AL645608.6 . . .         .         . . . .         . .        
-AL645608.2 . . .         .         . . . .         . .  
+RP11-34P13.7  .        . . . . . .        . . .
+FO538757.3    .        . . . . . .        . . .
+FO538757.2    1.641892 . . . . . 1.381104 . . .
+AP006222.2    .        . . . . . .        . . .
+RP4-669L17.10 .        . . . . . .        . . .
+RP5-857K21.4  .        . . . . . .        . . .
+RP11-206L10.9 .        . . . . . .        . . .
+LINC00115     .        . . . . . .        . . .
+FAM41C        .        . . . . . .        . . .
+RP11-54O7.1   .        . . . . . .        . . .
 </code></pre></div>
 </div>
 </div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
                      <span class="n">normalization.method</span> <span class="o">=</span> <span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
                      <span class="n">scale.factor</span> <span class="o">=</span> <span class="m">10000</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">Updating <code>gbm</code></p>
-<p>As you might have noticed, this function takes the object <code>gbm</code> as input, and it returns it to an object named <code>gbm</code>. We can do this because the output of such calculations are added to the object, without loosing information.</p>
+<p class="admonition-title">Updating <code>seu</code></p>
+<p>As you might have noticed, this function takes the object <code>seu</code> as input, and it returns it to an object named <code>seu</code>. We can do this because the output of such calculations are added to the object, without loosing information.</p>
 </div>
 <h3 id="variable-features">Variable features</h3>
-<p>We next calculate a subset of features that exhibit high cell-to-cell variation in the
-dataset (i.e, they are highly expressed in some cells, and lowly expressed in others).
-Focusing on these genes in downstream analysis helps to highlight biological signal
-in single-cell datasets.
-The procedure in Seurat models the mean-variance relationship inherent in single-cell
-data, and is implemented in the <code>FindVariableFeatures()</code> function.
-By default, 2,000 genes (features) per dataset are returned and these will be used in
-downstream analysis, like PCA.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
+<p>We next calculate a subset of features that exhibit high cell-to-cell variation in the dataset (i.e, they are highly expressed in some cells, and lowly expressed in others). Focusing on these genes in downstream analysis helps to highlight biological signal in single-cell datasets. The procedure in Seurat models the mean-variance relationship inherent in single-cell data, and is implemented in the <code>FindVariableFeatures()</code> function. By default, 2,000 genes (features) per dataset are returned and these will be used in downstream analysis, like PCA.</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
                             <span class="n">selection.method</span> <span class="o">=</span> <span class="s">&quot;vst&quot;</span><span class="p">,</span>
                             <span class="n">nfeatures</span> <span class="o">=</span> <span class="m">2000</span><span class="p">)</span>
 </code></pre></div>
 <p>Let&rsquo;s have a look at the 10 most variable genes:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Identify the 10 most highly variable genes</span>
-<span class="n">top10</span> <span class="o">&lt;-</span> <span class="nf">head</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeatures</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span> <span class="m">10</span><span class="p">)</span>
+<span class="n">top10</span> <span class="o">&lt;-</span> <span class="nf">head</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">),</span> <span class="m">10</span><span class="p">)</span>
 <span class="n">top10</span>
 </code></pre></div>
 <p>We can plot them in a nicely labeled scatterplot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">vf_plot</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">vf_plot</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">LabelPoints</span><span class="p">(</span><span class="n">plot</span> <span class="o">=</span> <span class="n">vf_plot</span><span class="p">,</span>
             <span class="n">points</span> <span class="o">=</span> <span class="n">top10</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
@@ -740,13 +730,28 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
 <li>shifts the expression of each gene, so that the mean expression across cells is 0</li>
 <li>scales the expression of each gene, so that the variance across cells is 1</li>
 </ol>
-<p>This step gives equal weight in downstream analyses, so that highly-expressed genes do not dominate. The results of this are stored in <code>gbm$RNA@scale.data</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                 <span class="n">features</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span>
+<p>This step gives equal weight in downstream analyses, so that highly-expressed genes do not dominate. The results of this are stored in <code>seu$RNA@scale.data</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+                 <span class="n">features</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu</span><span class="p">))</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">The use of <code>Seurat::SCTransform</code></p>
 <p>The functions <code>NormalizeData</code>, <code>VariableFeatures</code> and <code>ScaleData</code> can be replaced by the function <code>SCTransform</code>. The latter uses a more sophisticated way to perform the normalization and scaling, and is <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1874-1">argued to perform better</a>. However, it is slower, and a bit less transparent compared to using the three separate functions. Therefore, we chose not to use <code>SCTransform</code> for the exercises.</p>
+</div>
+<p><strong>Bonus exercise</strong>: Run <code>SCTransform</code> on the <code>seu</code> object. Where is the output stored?</p>
+<details class="done"><summary>Answer</summary><p>You can run it like so:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SCTransform</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
+</code></pre></div>
+<p>And it will add an extra assay to the object. <code>names(seu@assay)</code> returns:</p>
+<div class="highlight"><pre><span></span><code>[1] &quot;RNA&quot; &quot;SCT&quot;
+</code></pre></div>
+<p>Meaning that a whole new assay was added (including the sparse matrices with counts, normalized data and scaled data). </p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Running <code>SCTransform</code> will change <code>@active.assay</code> into <code>SCT</code>(in stead of <code>RNA</code>; check it with <code>DefaultAssay(seu)</code>). This assay is used as a default for following function calls. To change the active assay to <code>RNA</code> run:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+</code></pre></div>
 </div>
                 
               
