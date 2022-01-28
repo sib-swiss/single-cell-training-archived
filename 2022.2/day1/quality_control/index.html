@@ -368,43 +368,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cell-cycle-analysis" class="md-nav__link">
-    Cell cycle analysis
+  <a href="#visualizing-qc-per-cell-and-gene" class="md-nav__link">
+    Visualizing QC per cell and gene
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quality-control-with-scater" class="md-nav__link">
-    Quality control with scater
+  <a href="#cell-filtering" class="md-nav__link">
+    Cell filtering
   </a>
-  
-    <nav class="md-nav" aria-label="Quality control with scater">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#per-cell-qc" class="md-nav__link">
-    Per cell QC
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#highly-expressed-genes" class="md-nav__link">
-    Highly expressed genes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#find-explanatory-variables" class="md-nav__link">
-    Find explanatory variables
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -624,43 +597,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cell-cycle-analysis" class="md-nav__link">
-    Cell cycle analysis
+  <a href="#visualizing-qc-per-cell-and-gene" class="md-nav__link">
+    Visualizing QC per cell and gene
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quality-control-with-scater" class="md-nav__link">
-    Quality control with scater
+  <a href="#cell-filtering" class="md-nav__link">
+    Cell filtering
   </a>
-  
-    <nav class="md-nav" aria-label="Quality control with scater">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#per-cell-qc" class="md-nav__link">
-    Per cell QC
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#highly-expressed-genes" class="md-nav__link">
-    Highly expressed genes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#find-explanatory-variables" class="md-nav__link">
-    Find explanatory variables
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -698,130 +644,125 @@
                 <h2 id="learning-outcomes">Learning outcomes</h2>
 <p><strong>After having completed this chapter you will be able to:</strong></p>
 <ul>
-<li>Assign cell cycle phases to a single cell dataset</li>
-<li>Use the package <code>scater</code> evaluate cell quality based on reads originating from:<ul>
+<li>Calculate and visualize quality measures based on:<ul>
 <li>mitochondrial genes</li>
 <li>ribosomal genes</li>
-<li>dissociation-related genes</li>
+<li>hemoglobin genes</li>
+<li>relative gene expression</li>
 </ul>
 </li>
-<li>Evaluate confounding effects on expression data by analyzing the explained variance</li>
+<li>Interpret the above quality measures per cell.</li>
+<li>Perform cell filtering based on quality thresholds</li>
 </ul>
 <h2 id="material">Material</h2>
 <p><a class="md-button" href="../../assets/pdf/quality_control.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105 279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
-<ul>
-<li><a href="https://www.embopress.org/doi/full/10.15252/msb.20209946">Paper</a> on annotating more refined cell stages</li>
-</ul>
 <h2 id="exercises">Exercises</h2>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
-</blockquote>
-<h3 id="cell-cycle-analysis">Cell cycle analysis</h3>
-<p>Cells can be captured in different cycling phases, which can be identified.</p>
-<p>A list of cell cycle markers is described by:</p>
-<blockquote>
-<p>Tirosh I, Izar B, Prakadan SM, Wadsworth MH, Treacy D, Trombetta JJ, et al. Dissecting the multicellular ecosystem of metastatic melanoma by single-cell RNA-seq. Science. 2016;352:189–96.</p>
-</blockquote>
-<p>The dataset is directly available from Seurat:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span>
+<h3 id="visualizing-qc-per-cell-and-gene">Visualizing QC per cell and gene</h3>
+<p>While generating the <code>Seurat</code> object, there were already some quality measures calculated for each cell, namely the total UMI counts per cell (<code>nCount_RNA</code>) and the total number of detected features per cell (<code>nFeature_RNA</code>). We can plot those in a violin plot and evaluate their distribution per sample:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">))</span>
 </code></pre></div>
-<p>Extract the genes specific to the S phase and to the G2/M phase:</p>
-<div class="highlight"><pre><span></span><code><span class="n">s.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">s.genes</span>
-<span class="n">g2m.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">g2m.genes</span>
-</code></pre></div>
-<p>The <code>CellCycleScoring()</code> function allows to assign cell cycle phase information
-to each cell, stored in the metadata as the &ldquo;S.Score&rdquo;, &ldquo;G2M.Score&rdquo; and &ldquo;Phase&rdquo; columns</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                                <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span>
-                                <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
-<span class="nf">table</span><span class="p">(</span><span class="n">gbm</span><span class="o">$</span><span class="n">Phase</span><span class="p">)</span>
-<span class="c1">#   G1  G2M    S</span>
-<span class="c1"># 2887  711 1493</span>
-</code></pre></div>
-<p>Visualize the distribution of cell cycle markers:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">RidgePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;PCNA&quot;</span><span class="p">,</span> <span class="s">&quot;MKI67&quot;</span><span class="p">),</span>
-          <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">,</span>
-          <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
-</code></pre></div>
-<p>We can proceed with downstream analysis without removing cell cycle for example,
-perform clustering, and come back to remove the effect of cell cycle if
-we identify a cluster of cells which is
-mostly composed of G2/M cells for example.</p>
-<h3 id="quality-control-with-scater">Quality control with <code>scater</code></h3>
-<p>For the below exercises we will use the following packages:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">scater</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">SingleCellExperiment</span><span class="p">)</span>
-</code></pre></div>
-<p>Scater includes different types of quality controls:</p>
-<ol>
-<li>QC and filtering of cells</li>
-<li>QC and filtering of features (genes)</li>
-<li>QC of experimental variables</li>
-</ol>
-<p>the scater package as well as other bioconductor packages, rely on
-an object of the class <code>SingleCellExperiment</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+<p>You can see that there is quite a wide range for both. A cell with low number of detected features or counts might not give you a lot of information, while a high number of detected features/counts might point to doublets.</p>
+<p>Single cells have often undergone sampling and/or dissociation and/or sorting. Therefore, there are often cells and genes in your dataset that cause variation due to technical reasons. In the following steps, we will visualize those and make decisions on whether or not to remove cells or genes with extreme values.</p>
+<p>We will start with calculating the percentage of counts coming from transcript types:</p>
+<ul>
+<li><strong>Mitochondrial genes</strong>: If a cell membrane is damaged, it looses free RNA quicker compared to mitochondrial RNA, because the latter is part of the mitochondrion. A high relative amount of mitochondrial counts can therefore point to damaged cells (<a href="https://f1000research.com/articles/5-2122">Lun et al. 2016</a>). </li>
+<li><strong>Ribosomal genes</strong>: Although rRNA transcripts are depleted due to poly-A enrichment, they are often abundant. They do not point to specific issues, but it can be good to have a look at their relative abundance. Sometimes, they might even have a biological relevance (e.g. <a href="https://www.nature.com/articles/s41598-020-64929-x">Caron et al. 2020</a>).</li>
+<li><strong>Hemoglobin genes</strong>: these transcripts are very abundant in erythrocytes. Depending on your application, you can expect &lsquo;contamination&rsquo; of erythrocytes and select against it. </li>
+</ul>
+<p>In order to have an idea about the relative counts of these type of genes in our dataset, we can calculate their expression as relative counts in each cell. We do that by selecting genes based on patterns (e.g. <code>^MT-</code> matches with all gene names starting with <code>MT</code>, i.e. mitochondrial genes):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># mitochondrial genes</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> 
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.mito&quot;</span><span class="p">)</span>
 
-<span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">SingleCellExperiment</span><span class="p">(</span>
-  <span class="n">assays</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">cts</span><span class="p">),</span>
-  <span class="n">colData</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
-  <span class="n">rowData</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="nf">class</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
-<span class="nf">class</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>
-<span class="n">gbm_sce</span>
+<span class="c1"># ribosomal genes</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[SL]&quot;</span><span class="p">,</span>
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.ribo&quot;</span><span class="p">)</span>
+
+<span class="c1"># hemoglobin genes (but not HBP)</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^HB[^(P)]&quot;</span><span class="p">,</span>
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h4 id="per-cell-qc">Per cell QC</h4>
-<p>We can again check percent mitochondrial gene expression as well as dissociation protocol-related gene expression. Genes associated with the dissociation protocol, i.e. stress genes, can sometimes cause clustering of stressed cells apart from the other cells.
-They have been described by:</p>
-<blockquote>
-<p>Van Den Brink SC, Sage F, Vértesy Á, Spanjaard B, Peterson-Maduro J, Baron CS, et al. Single-cell sequencing reveals dissociation-induced gene expression in tissue subpopulations. Nat Methods. 2017;14:935–6.</p>
-</blockquote>
-<p>And are availabe in the file <code>data/dissocation_genes.txt</code>. Load these into a vector, and generate also a vector of ribosomal genes and mitochondrial genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dissoc_genes</span> <span class="o">&lt;-</span> <span class="nf">readLines</span><span class="p">(</span><span class="s">&quot;data/gbm_dataset/dissocation_genes.txt&quot;</span><span class="p">)</span>
-<span class="n">ribo_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)[</span><span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[S|L]&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">),</span> <span class="n">perl</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)]</span>
-<span class="n">mito_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)[</span><span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))]</span>
+<p><strong>Exercise:</strong> Run the commands and check out the metadata data frame at <code>sc@meta.data</code>. What has changed?</p>
+<details class="done"><summary>Answer</summary><p>If we type <code>head(sc@meta.data)</code> it returns:</p>
+<p><div class="highlight"><pre><span></span><code>                           orig.ident nCount_RNA nFeature_RNA percent.mito percent.ribo percent.globin
+PBMMC-1_AAACCTGCAGACGCAA-1    PBMMC-1       2401          909     2.540608     28.65473      0.1665973
+PBMMC-1_AAACCTGTCATCACCC-1    PBMMC-1       3532          760     5.181200     55.03964      0.1981880
+PBMMC-1_AAAGATGCATAAAGGT-1    PBMMC-1       3972         1215     4.934542     30.43807      0.3776435
+PBMMC-1_AAAGCAAAGCAGCGTA-1    PBMMC-1       3569          894     3.250210     55.02942      0.3642477
+PBMMC-1_AAAGCAACAATAACGA-1    PBMMC-1       2982          730     3.688799     54.49363      0.1006036
+PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108     3.181655     23.40693     36.9682283
 </code></pre></div>
-<p><code>scater</code> calls the <code>addPerCellQC</code> function of the <code>scuttle</code> package to compute a number of quality control metrics for each cell and feature (i.e gene)</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scuttle</span><span class="o">::</span><span class="nf">addPerCellQC</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
-                        <span class="n">subsets</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">mito_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">mito_genes</span><span class="p">),</span>
-                                     <span class="n">dissoc_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">dissoc_genes</span><span class="p">),</span>
-                                     <span class="n">ribo_genes</span><span class="o">=</span><span class="nf">which</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span> <span class="o">%in%</span> <span class="n">ribo_genes</span><span class="p">)))</span>
+So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.data</code>, specifying the percentage of counts for the specified gene sets. </p>
+</details>
+<p>Now we can plot the distribution of these percentages in a violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;percent.mito&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.ribo&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.globin&quot;</span><span class="p">))</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">colData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>
+<p>You can see that <code>PBMMC-2</code> is quite different from the two others, it has a group of cells with very low ribosomal counts and very high globin counts. Maybe these two percentages are negatively correlated? Let&rsquo;s have a look, by plotting the two percentages against each other:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                       <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">,</span> 
+                       <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;percent.ribo&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;sum&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;detected&quot;</span><span class="p">)</span>
-<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;detected&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_mito_genes_percent&quot;</span><span class="p">)</span>
-<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;detected&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_dissoc_genes_percent&quot;</span><span class="p">)</span>
-<span class="n">scater</span><span class="o">::</span><span class="nf">plotColData</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;subsets_mito_genes_percent&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&quot;subsets_ribo_genes_percent&quot;</span><span class="p">)</span>
+<p><strong>Exercise:</strong> Are they correlated? What kind of cells might have a high abundance of hemoglobin transcripts and low ribosomal transcripts? </p>
+<details class="done"><summary>Answer</summary><p>Yes there is a negative correlation:</p>
+<p><figure>
+<img src="../../assets/images/globin_vs_ribo.png" width="500"/>
+</figure></p>
+<p>Erythrocytes (red blood cells) have a high abundance of hemoglobin transcripts and low abundance of ribosomal transcripts. As they don&rsquo;t have a nucleus, we don&rsquo;t expect them in this set of Bone Marrow <strong>Mononuclear</strong> Cells (BMMCs). </p>
+</details>
+<p>We can also evaluate the relative expression of other genes in our dataset, for example, the ones that are most highly expressed. Some very highly expressed genes might point to a technical cause, and we might consider to remove them. Below you will find a simple function to generate a boxplot of relative counts per gene per cell. Load it into your environment and run it on our <code>seu</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Matrix</span><span class="p">)</span>
+
+<span class="n">most_expressed_boxplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">ngenes</span> <span class="o">=</span> <span class="m">20</span><span class="p">){</span>
+
+  <span class="c1"># matrix of raw counts</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+
+  <span class="c1"># get percentage/cell</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">/</span><span class="nf">colSums</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>
+  <span class="n">medians</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">cts</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">median</span><span class="p">)</span>
+
+  <span class="c1"># get top n genes</span>
+  <span class="n">most_expressed</span> <span class="o">&lt;-</span> <span class="nf">order</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)[</span><span class="n">ngenes</span><span class="o">:</span><span class="m">1</span><span class="p">]</span>
+  <span class="n">most_exp_matrix</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">((</span><span class="n">cts</span><span class="p">[,</span><span class="n">most_expressed</span><span class="p">]))</span>
+
+  <span class="c1"># prepare for plotting</span>
+  <span class="n">most_exp_df</span> <span class="o">&lt;-</span> <span class="nf">stack</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">most_exp_matrix</span><span class="p">))</span>
+  <span class="nf">colnames</span><span class="p">(</span><span class="n">most_exp_df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;perc_total&quot;</span><span class="p">,</span> <span class="s">&quot;gene&quot;</span><span class="p">)</span>
+
+  <span class="c1"># boxplot with ggplot2</span>
+  <span class="n">boxplot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">most_exp_df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">gene</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">perc_total</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_boxplot</span><span class="p">()</span> <span class="o">+</span>
+    <span class="nf">coord_flip</span><span class="p">()</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">boxplot</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">most_expressed_boxplot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="m">20</span><span class="p">)</span>
 </code></pre></div>
-<h4 id="highly-expressed-genes">Highly expressed genes</h4>
-<p>On the gene level, we can look at a plot that shows the top (by default 50) most-expressed genes. Each row in the plot corresponds to a gene; each bar corresponds to the expression of a gene in a single cell; and the circle indicates the median expression of each gene, with which genes are sorted. We expect to see the “usual suspects”, i.e., mitochondrial genes, actin, ribosomal protein, MALAT1. If used, few spike-in transcripts may also be present here, though if all of the spike-ins are in the top 50, it suggests that too much spike-in RNA was added. A large number of pseudo-genes or predicted genes may indicate problems with alignment.</p>
-<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotHighestExprs</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span> <span class="n">exprs_values</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+<p>As for most 10X based poly-A enriched single cell datasets, we find a relatively high expression of MALAT1. Many researchers choose to remove it, but it can have biological relevance (e.g. <a href="https://www.nature.com/articles/s41420-020-00383-y">Shaat et al. 2021</a>). </p>
+<h3 id="cell-filtering">Cell filtering</h3>
+<p>Based on the QC process we went through we can come to the following conclusions:</p>
+<ul>
+<li>There no cells with very high mitochondrial gene counts.</li>
+<li>There are some cells with a hemoglobin and low ribosomal counts, and these are probably erythrocytes.</li>
+<li>There are some cells with a very low and very high number of features. These might point to non-informative cells and doublets respectively. </li>
+<li>The &lsquo;usual suspect&rsquo; MALAT1 sometimes makes up a large part of the counts per cell. As we do not see any other suggestions of dying/stressed cells, we leave it in. </li>
+</ul>
+<p>In this case, a sensible decision would be to do mild filtering on the number of features per cell and mitochondrial counts. We can leave the possible erythrocytes in for now, and see where they end up later during the dimensionality reduction. </p>
+<p>In the M&amp;M of the <a href="https://www.nature.com/articles/s41598-020-64929-x#Sec7">publication</a>, the authors describe that they have used a threshold of &lt; 8% mitochondrial counts and &gt; 200 features per cell. To filter against possible doublets, here, we also filter out cells with &gt; 5000 detected features/cell. Filtering <code>Seurat</code> objects can be done with the <code>subset</code> method for class <code>SeuratObject</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">nFeature_RNA</span> <span class="o">&gt;</span> <span class="m">200</span> <span class="o">&amp;</span> 
+                <span class="n">nFeature_RNA</span> <span class="o">&lt;</span> <span class="m">5000</span> <span class="o">&amp;</span>
+                <span class="n">percent.mito</span> <span class="o">&lt;</span> <span class="m">8</span><span class="p">)</span>
 </code></pre></div>
-<h4 id="find-explanatory-variables">Find explanatory variables</h4>
-<p>Variable-level metrics are computed by the <code>getVarianceExplained()</code> function (after normalization, see below). This calculates the percentage of variance of each gene’s expression that is explained by each variable in the <code>colData</code> of the <code>SingleCellExperiment</code> object. We can then use this to determine which experimental factors are contributing most to the variance in expression. This is useful for diagnosing batch effects or to quickly verify that a treatment has an effect.</p>
-<p>First, computing variance explained on the log-counts,
-so that the statistics reflect changes in relative expression.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_sce</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">logNormCounts</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">)</span>  <span class="c1"># alternative to Seurat&#39;s normalization here using scater</span>
-</code></pre></div>
-<p>In the gbm dataset, we only have 1 patient, so we cannot calculate the effect of experimental variables like sex or donor id, but in case we would have several variables, here is the method with the cell cycle phase as example:</p>
-<div class="highlight"><pre><span></span><code><span class="n">vars</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">getVarianceExplained</span><span class="p">(</span><span class="n">gbm_sce</span><span class="p">,</span>
-                             <span class="n">variables</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
-</code></pre></div>
-<p>A distribution of percentage variance explained by each gene is shown, and can indicate whether one or the other experimental variable has high contribution to the variance in the data:</p>
-<div class="highlight"><pre><span></span><code><span class="n">scater</span><span class="o">::</span><span class="nf">plotExplanatoryVariables</span><span class="p">(</span><span class="n">vars</span><span class="p">)</span>
-</code></pre></div>
-<p>If we think that the cell cycling has an effect on the analysis, and if we want to regress out this effect so that cycling cells are integrated into the rest of the cells and not clustering apart anymore, we can regress out the cell cycling phase at the moment of scaling the data using <code>ScaleData</code>. This might be slow to compute.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The code below is an example, you don&rsquo;t need to run it.</p>
-</div>
-<div class="highlight"><pre><span></span><code># do not run
-gbm_cc &lt;- Seurat::ScaleData(gbm, vars.to.regress = c(&quot;S.Score&quot;, &quot;G2M.Score&quot;))
+<p>To evaluate this did the trick we can visualize those parameters again in a violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span>
+                          <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
 </code></pre></div>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it tomorrow:</p>
