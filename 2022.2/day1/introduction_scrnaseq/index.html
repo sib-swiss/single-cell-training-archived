@@ -357,13 +357,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#basic-quality-control" class="md-nav__link">
-    Basic Quality Control
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -382,8 +375,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../normalization_scaling/" class="md-nav__link">
-        Normalization and scaling
+      <a href="../quality_control/" class="md-nav__link">
+        Quality control
       </a>
     </li>
   
@@ -394,8 +387,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
       </a>
     </li>
   
@@ -448,6 +441,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../day2/clustering/" class="md-nav__link">
         Clustering
       </a>
@@ -462,18 +467,6 @@
     <li class="md-nav__item">
       <a href="../../day2/cell_annotation/" class="md-nav__link">
         Cell annotation
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../day2/integration/" class="md-nav__link">
-        Integration
       </a>
     </li>
   
@@ -606,13 +599,6 @@
           <li class="md-nav__item">
   <a href="#the-seurat-object" class="md-nav__link">
     The Seurat object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#basic-quality-control" class="md-nav__link">
-    Basic Quality Control
   </a>
   
 </li>
@@ -815,41 +801,6 @@ PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>You can find a nice overview of such functions <a href="https://satijalab.org/seurat/articles/essential_commands.html">here</a>. </p>
-<h3 id="basic-quality-control">Basic Quality Control</h3>
-<p>A high number of UMIs originating from mitochondrial genes can point to dying cells. In order to calculate the percentage of UMIs coming from mitochondrial genes for each cell, we use the function <code>PercentageFeatureSet</code>. In our count matrix, the names of mitochondrial genes all start with <code>MT-</code>, so we can use that pattern to search these genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="o">$</span><span class="n">percent.mt</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">)</span>
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Finding mitochondrial genes for mouse</p>
-<p>For mouse, mitochondrial genes start with <code>mt-</code>, so the function call with look like this:</p>
-<div class="highlight"><pre><span></span><code>seu$percent.mt &lt;- Seurat::PercentageFeatureSet(seu, pattern = &quot;^mt-&quot;)
-</code></pre></div>
-</div>
-<p>Now check out whether the column was added to the <code>meta.data</code> slot:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">seu</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
-</code></pre></div>
-<p>Let&rsquo;s have a look at the distribution of the three columns stored in <code>@meta.data</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
-                <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span> 
-                             <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span>
-                             <span class="s">&quot;percent.mt&quot;</span><span class="p">),</span> 
-                <span class="n">ncol</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
-</code></pre></div>
-<p>There is often a relationship between number of UMIs and percentage of mitochondrial genes. We can have a look at their relationship:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;percent.mt&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Based on what we know now, it would be sensible to keep cells in which less than 15% of the UMIs come from mitochondrial genes. We can filter like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
-              <span class="n">subset</span> <span class="o">=</span> <span class="n">percent.mt</span> <span class="o">&lt;</span> <span class="m">15</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Exercise:</strong> How many cells did we filter out?</p>
-<details class="done"><summary>Answer</summary><p>Just running <code>seu</code> returns:
-<div class="highlight"><pre><span></span><code>An object of class Seurat 
-18673 features across 6939 samples within 1 assay 
-Active assay: RNA (18673 features, 0 variable features)
-</code></pre></div></p>
-<p>Meaning that 6946 - 6939 = 7 cells were filtered out.</p>
-</details>
                 
               
               
@@ -885,13 +836,13 @@ Active assay: RNA (18673 features, 0 variable features)
       
       
         
-        <a href="../normalization_scaling/" class="md-footer__link md-footer__link--next" aria-label="Next: Normalization and scaling" rel="next">
+        <a href="../quality_control/" class="md-footer__link md-footer__link--next" aria-label="Next: Quality control" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Normalization and scaling
+              Quality control
             </div>
           </div>
           <div class="md-footer__button md-icon">

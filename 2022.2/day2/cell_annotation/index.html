@@ -303,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/normalization_scaling/" class="md-nav__link">
-        Normalization and scaling
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
       </a>
     </li>
   
@@ -315,8 +315,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
       </a>
     </li>
   
@@ -361,6 +361,18 @@
     <li class="md-nav__item">
       <a href="../dimensionality_reduction/" class="md-nav__link">
         Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        Integration
       </a>
     </li>
   
@@ -449,18 +461,6 @@
   
 </nav>
       
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integration/" class="md-nav__link">
-        Integration
-      </a>
     </li>
   
 
@@ -619,117 +619,135 @@
 <li><a href="https://www.sciencedirect.com/science/article/pii/S2001037021000192">Review on automated cell annotation</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
-</blockquote>
-<p>Load the <code>gbm</code> dataset you have created earlier today:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
+<p>Load the <code>seu_int</code> dataset you have created earlier today:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>And load the following packages:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">celldex</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">SingleR</span><span class="p">)</span>
 </code></pre></div>
-<p>In the last exercise we saw that probably clustering at a resolution of 0.2 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span><span class="p">)</span>
+<p>In the last exercise we saw that probably clustering at a resolution of 0.3 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">$</span><span class="n">integrated_snn_res.0.3</span><span class="p">)</span>
+</code></pre></div>
+<p>During cell annotation we will use the original count data (not the integrated data):</p>
+<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>From now on, grouping (e.g. for plotting) is done by the active identity (set at <code>@active.ident</code>) by default.</p>
 </div>
 <p>Based on the UMAP we have generated, we can visualize expression for a gene in each cluster:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;PMP2&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Based on expression of sets of genes you can do a manual cell type annotation. If you know the marker genes for some cell types, you can check whether they are up-regulated in one or the other cluster. Here we have some marker genes for two different cell types:</p>
-<div class="highlight"><pre><span></span><code><span class="n">immune_genes</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;GZMA&quot;</span><span class="p">,</span> <span class="s">&quot;CD3E&quot;</span><span class="p">,</span> <span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
-<span class="n">microglia_genes</span><span class="o">&lt;-</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CCL4&quot;</span><span class="p">,</span> <span class="s">&quot;CCL3&quot;</span><span class="p">,</span> <span class="s">&quot;P2RY12&quot;</span><span class="p">,</span> <span class="s">&quot;C1QB&quot;</span><span class="p">,</span> <span class="s">&quot;CSF1ER&quot;</span><span class="p">,</span> <span class="s">&quot;CY3CR1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tcell_genes</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;IL7R&quot;</span><span class="p">,</span> <span class="s">&quot;LTB&quot;</span><span class="p">,</span> <span class="s">&quot;TRAC&quot;</span><span class="p">,</span> <span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
+<span class="n">monocyte_genes</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD14&quot;</span><span class="p">,</span> <span class="s">&quot;CST3&quot;</span><span class="p">,</span> <span class="s">&quot;CD68&quot;</span><span class="p">,</span> <span class="s">&quot;CTSS&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Let&rsquo;s have a look at the expression of the three immune genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">immune_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<p>Let&rsquo;s have a look at the expression of the four T cell genes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">tcell_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
-<p>These cells are almost all in cluster 6. Which becomes clearer when looking at the violin plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                <span class="n">features</span> <span class="o">=</span> <span class="n">immune_genes</span><span class="p">,</span>
+<p>These cells are almost all in cluster 0 and 8. Which becomes clearer when looking at the violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+                <span class="n">features</span> <span class="o">=</span> <span class="n">tcell_genes</span><span class="p">,</span>
                 <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Exercise:</strong> Have a look at the microglia genes as well. Which cluster contains probably microglial cells?</p>
+<p><strong>Exercise:</strong> Have a look at the monocyte genes as well. Which clusters contain probably monocytes?</p>
 <details class="done"><summary>Answer</summary><p>Running</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">microglia_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">monocyte_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <p>Returns:</p>
 <p><figure>
-  <img src="../../assets/images/featureplots_microglia.png" width="400"/>
+  <img src="../../assets/images/featureplots_monocytes.png" width="500"/>
 </figure></p>
-<p>Corresponding mainly to cluster 1 (and cluster 4):</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                <span class="n">features</span> <span class="o">=</span> <span class="n">microglia_genes</span><span class="p">,</span>
+<p>Corresponding mainly to cluster 2 and 9:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+                <span class="n">features</span> <span class="o">=</span> <span class="n">monocyte_genes</span><span class="p">,</span>
                 <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
-  <img src="../../assets/images/violinplots_microglia.png" width="300"/>
+  <img src="../../assets/images/violinplots_monocytes.png" width="500"/>
 </figure></p>
 </details>
 <p>We can also automate this with the function <code>AddModuleScore</code>. For each cell, an expression score for a group of genes is calcuated:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">immune_genes</span><span class="p">),</span>
-                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;immune_genes&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">tcell_genes</span><span class="p">),</span>
+                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;tcell_genes&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Exercise:</strong> After running <code>AddModuleScore</code>, a column was added to <code>gbm@meta.data</code>.</p>
+<p><strong>Exercise:</strong> After running <code>AddModuleScore</code>, a column was added to <code>seu_int@meta.data</code>.</p>
 <p><strong>A.</strong> What is the name of that column? What kind of data is in there?</p>
 <p><strong>B.</strong> Generate a UMAP with color accoding to this column and a violinplot grouped by cluster. Is this according to what we saw in the previous exercise?</p>
-<details class="done"><summary>Answer</summary><p><strong>A.</strong> The new column is called <code>immune_genes1</code>. It contains the module score for each cell (which is basically the average expression of the set of genes).</p>
+<details class="done"><summary>Answer</summary><p><strong>A.</strong> The new column is called <code>tcell_genes1</code>. It contains the module score for each cell (which is basically the average expression of the set of genes).</p>
 <p><strong>B.</strong> You can plot the UMAP with</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;immune_genes1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Returning:</p>
 <p><figure>
-  <img src="../../assets/images/UMAP_immune_genes_modules.png" width="300"/>
+  <img src="../../assets/images/UMAP_immune_genes_modules.png" width="500"/>
 </figure></p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span>
-                <span class="s">&quot;immune_genes1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+                <span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Which indeed shows these genes are mainly expressed in cluster 6:</p>
 <p><figure>
-  <img src="../../assets/images/violinplot_immune_genes_modules.png" width="300"/>
+  <img src="../../assets/images/violinplot_immune_genes_modules.png" width="500"/>
 </figure></p>
 </details>
 <h3 id="cell-type-annotation-using-singler">Cell type annotation using <code>SingleR</code></h3>
-<p>To do a fully automated annoation, we need a reference dataset of primary cells. Any reference could be used. The package <code>scRNAseq</code> in Bioconductor includes several scRNAseq datasets that can be used as reference to <code>SingleR</code>. One could also use a reference made of bulk RNA seq data. Here we are using the Human Primary Cell Atlas dataset from <code>celldex</code>. Check out what&rsquo;s in there:</p>
-<div class="highlight"><pre><span></span><code><span class="n">hpca.se</span> <span class="o">&lt;-</span> <span class="n">celldex</span><span class="o">::</span><span class="nf">HumanPrimaryCellAtlasData</span><span class="p">()</span>
-<span class="nf">class</span><span class="p">(</span><span class="n">hpca.se</span><span class="p">)</span>
-<span class="nf">table</span><span class="p">(</span><span class="n">hpca.se</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
+<p>To do a fully automated annoation, we need a reference dataset of primary cells. Any reference could be used. The package <code>scRNAseq</code> in Bioconductor includes several scRNAseq datasets that can be used as reference to <code>SingleR</code>. One could also use a reference made of bulk RNA seq data. Here we are using the a hematopoietic reference dataset from <code>celldex</code>. Check out what&rsquo;s in there:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ref</span> <span class="o">&lt;-</span> <span class="n">celldex</span><span class="o">::</span><span class="nf">NovershternHematopoieticData</span><span class="p">()</span>
+<span class="nf">class</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+<span class="nf">table</span><span class="p">(</span><span class="n">ref</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find more information on different reference datasets at the <a href="https://bioconductor.org/packages/3.14/data/experiment/vignettes/celldex/inst/doc/userguide.html"><code>celldex</code> documentation</a></p>
+</div>
 <p>Now <code>SingleR</code> compares our normalized count data to a reference set, and finds the most probable annation:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_SingleR</span> <span class="o">&lt;-</span> <span class="n">SingleR</span><span class="o">::</span><span class="nf">SingleR</span><span class="p">(</span><span class="n">test</span> <span class="o">=</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;data&quot;</span><span class="p">),</span>
-                                <span class="n">ref</span> <span class="o">=</span> <span class="n">hpca.se</span><span class="p">,</span>
-                                <span class="n">labels</span> <span class="o">=</span> <span class="n">hpca.se</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_SingleR</span> <span class="o">&lt;-</span> <span class="n">SingleR</span><span class="o">::</span><span class="nf">SingleR</span><span class="p">(</span><span class="n">test</span> <span class="o">=</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;data&quot;</span><span class="p">),</span>
+                                <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="p">,</span>
+                                <span class="n">labels</span> <span class="o">=</span> <span class="n">ref</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
 </code></pre></div>
 <p>See what&rsquo;s in there by using <code>head</code>:</p>
-<p><div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">seu_int_SingleR</span><span class="p">)</span>
 </code></pre></div>
-Visualize singleR score quality scores:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plotScoreHeatmap</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
-<span class="nf">plotDeltaDistribution</span><span class="p">(</span><span class="n">gbm_SingleR</span><span class="p">)</span>
+<p>Visualize singleR score quality scores:</p>
+<div class="highlight"><pre><span></span><code><span class="n">SingleR</span><span class="o">::</span><span class="nf">plotScoreHeatmap</span><span class="p">(</span><span class="n">seu_int_SingleR</span><span class="p">)</span>
+<span class="n">SingleR</span><span class="o">::</span><span class="nf">plotDeltaDistribution</span><span class="p">(</span><span class="n">seu_int_SingleR</span><span class="p">)</span>
 </code></pre></div>
-<p>In order to visualize it in our UMAP, we have to add the annotation to <code>gbm@meta.data</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">gbm_SingleR</span><span class="o">$</span><span class="n">labels</span>
-
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span>
+<p>There are some annotations that contain only a few cells. They are usually not of interest, and they clogg our plots. Therefore we remove them from the annotation:</p>
+<div class="highlight"><pre><span></span><code><span class="n">singleR_labels</span> <span class="o">&lt;-</span> <span class="n">seu_int_SingleR</span><span class="o">$</span><span class="n">labels</span>
+<span class="n">t</span> <span class="o">&lt;-</span> <span class="nf">table</span><span class="p">(</span><span class="n">singleR_labels</span><span class="p">)</span>
+<span class="n">other</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="n">t</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">]</span>
+<span class="n">singleR_labels</span><span class="p">[</span><span class="n">singleR_labels</span> <span class="o">%in%</span> <span class="n">other</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">NA</span>
 </code></pre></div>
-<p><strong>Exercise:</strong> Compare our manual annotation (based on the set of immune genes) to the annotation with <code>SingleR</code>. Do they correspond?</p>
+<p>In order to visualize it in our UMAP, we have to add the annotation to <code>seu_int@meta.data</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">singleR_labels</span>
+</code></pre></div>
+<p>We can plot the annotations in the UMAP. Here, we use a different package for plotting (<code>dittoSeq</code>) as it has a bit better default coloring, and some other plotting functionality we will use later on.</p>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoDimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">)</span>
+</code></pre></div>
+<p>We can check out how many cells per sample we have for each annotated cell type:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Exercise:</strong> Compare our manual annotation (based on the set of T cell genes) to the annotation with <code>SingleR</code>. Do they correspond?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can for example use the plotting function <code>dittoBarPlot</code> to visualize the cell types according to cluster (use <code>integrated_snn_res.0.3</code> in stead of <code>orig.ident</code>))</p>
+</div>
 <details class="done"><summary>Answer</summary><p>We can have a look at the mean module score for each <code>SingleR</code> annotation like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">mean_scores</span> <span class="o">&lt;-</span> <span class="nf">tapply</span><span class="p">(</span><span class="n">gbm</span><span class="o">$</span><span class="n">immune_genes1</span><span class="p">,</span> <span class="n">gbm</span><span class="o">$</span><span class="n">SingleR_annot</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
-<span class="n">mean_scores</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">mean_scores</span><span class="p">,</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">]]</span>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> 
+                   <span class="n">var</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> 
+                   <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Returning:</p>
-<div class="highlight"><pre><span></span><code>    T_cells             NK_cell                  DC            Monocyte          Macrophage        Chondrocytes
-1.015605822         0.679592135         0.017018871        -0.005414908        -0.011926460        -0.011975024
-</code></pre></div>
-<p>Showing that T-cells and NK-cells have a high module score based on our set of immune genes, which makes sense.</p>
-<p>Of course, it was also already clear from the UMAP plots that cluster 6 (the cluster with the high module score for the immune genes) contained the T-cells and NK-cells.</p>
+<p>This returns:</p>
+<p><figure>
+  <img src="../../assets/images/barplot_cluster_singler.png" width="700"/>
+</figure></p>
+<p>Here, you can see that cluster 0 and 8 contain cells annotated as T cells (CD4+ and CD8+).</p>
 </details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it tomorrow:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part2.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
@@ -771,13 +789,13 @@ Visualize singleR score quality scores:</p>
       
       
         
-        <a href="../integration/" class="md-footer__link md-footer__link--next" aria-label="Next: Integration" rel="next">
+        <a href="../../day3/differential_gene_expression/" class="md-footer__link md-footer__link--next" aria-label="Next: Differential gene expression" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Integration
+              Differential gene expression
             </div>
           </div>
           <div class="md-footer__button md-icon">

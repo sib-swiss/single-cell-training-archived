@@ -303,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/normalization_scaling/" class="md-nav__link">
-        Normalization and scaling
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
       </a>
     </li>
   
@@ -315,8 +315,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
       </a>
     </li>
   
@@ -414,6 +414,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../clustering/" class="md-nav__link">
         Clustering
       </a>
@@ -428,18 +440,6 @@
     <li class="md-nav__item">
       <a href="../cell_annotation/" class="md-nav__link">
         Cell annotation
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integration/" class="md-nav__link">
-        Integration
       </a>
     </li>
   
@@ -585,62 +585,69 @@
 </ul>
 <h2 id="exercises">Exercises</h2>
 <blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>seu</code> dataset</p>
 </blockquote>
-<p>Load the <code>gbm</code> dataset you have created yesterday:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day1.rds&quot;</span><span class="p">)</span>
+<p>Load the <code>seu</code> dataset you have created yesterday:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_day1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>And load the following packages:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">clustree</span><span class="p">)</span>
 </code></pre></div>
 <p>Once the data is normalized, scaled and variable features have been identified, we can start to reduce the dimensionality of the data.
-For the PCA, by default, only the previously determined variable features are used as input, but can be defined using features argument if you wish to specify a vector of genes. The PCA will only be run on the variable features, that you can check with <code>VariableFeatures(gbm)</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+For the PCA, by default, only the previously determined variable features are used as input, but can be defined using features argument if you wish to specify a vector of genes. The PCA will only be run on the variable features, that you can check with <code>VariableFeatures(seu)</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
 </code></pre></div>
 <p>To view the PCA plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>We can colour the PCA plot according to any factor that is present in <code>@meta.data</code>. For example we can take the column <code>Phase</code> (i.e. predicted cell cycle phase):</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
+<p>We can colour the PCA plot according to any factor that is present in <code>@meta.data</code>, or for any gene. For example we can take the column <code>percent.globin</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Coming back to the cell cycle analysis, we can check the distribution of the different cell cycle phases over the PCA, and eventually regress it out using the <code>ScaleData()</code> function. But here, the PCA doesn&rsquo;t seem to cluster according to the cell cycle phase.</p>
+<p>Note that we used a different plotting function here <code>FeaturePlot</code>. The difference between <code>DimPlot</code> and <code>FeaturePlot</code> is that the first allows you to color the points in the plot according to a grouping variable (e.g. sample) while the latter allows you to color the points according to a continuous variable (e.g. gene expression).</p>
 </div>
+<p><strong>Exercise:</strong> Generate a PCA plot where color is according to counts of a gene (i.e. gene expression). For example, you can take <code>HBA1</code> (alpha subunit of hemoglobin), or one of the most variable genes (e.g. <code>IGKC</code>).</p>
+<details class="done"><summary>Answer</summary><p>Generating a PCA plot coloured according to gene expression (here <code>HBA1</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
+</code></pre></div>
+</details>
 <p>We can generate heatmaps according to the correlations with the different dimensions of our PCA:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
-<p>The elblowplot can help you in determining how many PCs to use for downstream analysis such as UMAP:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
+<p>The elbowplot can help you in determining how many PCs to use for downstream analysis such as UMAP:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
 </code></pre></div>
-<p>The elblow plot ranks principle components based on the percentage of variance explained by each one. Where we observe an &ldquo;elblow&rdquo; or flattening curve, the majority of true signal is captured by this number of PCs, eg around 25 PCs for the gbm dataset.</p>
+<p>The elbow plot ranks principle components based on the percentage of variance explained by each one. Where we observe an &ldquo;elbow&rdquo; or flattening curve, the majority of true signal is captured by this number of PCs, eg around 25 PCs for the seu dataset.</p>
 <p>Including too many PCs usually does not affect much the result, while including too few PCs can affect the results very much.</p>
 <p>UMAP: The goal of these algorithms is to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 <p>To view the UMAP plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Cells can be coloured according to cell cycle phase.
-Is there a group of cells than contains a high proportion of cells in G2/M phase?</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Try to change:</p>
-<p><strong>A.</strong> The number of neighbors used for the calculation of the UMAP. Which is the parameter to change and how did it affect the output. What is the default ? In which situation would you lower/increase this ?</p>
-<p><strong>B.</strong> The number of dims to extremes dims = 1:5 or dims = 1:50 how
+<p><strong>A.</strong> Color the dots in the UMAP according to a variable (e.g. <code>percent.globin</code> or <code>HBA1</code>). Any idea where the erythrocytes probably are in the UMAP?</p>
+<p><strong>B.</strong> The number of neighbors used for the calculation of the UMAP. Which is the parameter to change and how did it affect the output. What is the default ? In which situation would you lower/increase this ?</p>
+<p><strong>C.</strong> The number of dims to extremes dims = 1:5 or dims = 1:50 how
 did it affect the output ? In your opinion better few PCAs too much or too few ?
-Why does dims = 1:100 not work ? When would more precision be needed ?</p>
-<details class="done"><summary>Answer</summary><p><strong>Answer A</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="n">n.neighbors</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
+Why does dims = 1:100 not work? When would more precision be needed?</p>
+<details class="done"><summary>Answer</summary><p><strong>Answer A</strong> </p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;HBA1&quot;</span><span class="p">,</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">,</span> <span class="s">&quot;IGKC&quot;</span><span class="p">,</span> <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
 </code></pre></div>
-<p>It can be of interest to change the number of neighbors if one has subset the data (for instance in the situation where you would only consider the t-cells inyour data set), then maybe the number of neighbors in a cluster would anyway be most of the time lower than 30 then 30 is too much. In the other extreme where your dataset is extremely big an increase in the number of neighbors can be considered.</p>
-<p><strong>Answer B</strong> </p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+<p>The erythrocytes are probably in the cluster with a higher percentage of globin expression.</p>
+<p><strong>Answer B</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span> <span class="n">n.neighbors</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
 </code></pre></div>
-<p><div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">)</span> 
+<p>The default number of neighbours is 30. It can be of interest to change the number of neighbors if one has subset the data (for instance in the situation where you would only consider the t-cells inyour data set), then maybe the number of neighbors in a cluster would anyway be most of the time lower than 30 then 30 is too much. In the other extreme where your dataset is extremely big an increase in the number of neighbors can be considered.</p>
+<p><strong>Answer C</strong> </p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
-Taking dims = 1:100 does not work as in the step RunPCA by default only 50pcs are calculated, so the maximum that we can consider in further steps are 50, if more precision makes sense, for instance, if the genes that is of interest for your study is not present when the RunPCA was calculated, then an increase in the number of components calculated at start might be interesting tobe considered. Taking too few PCs we have a « blob » everything looks connected. Too many PCs tends to separate everything. Personally it is more interesting for me too have maybe 2 clusters separated of epithelial cells that I then group for further downstream analysis rather than having very distinct cells being clustered together. So I would rather take the « elbow » of the elbow plota bit further to the right.</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">)</span> 
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Taking dims = 1:100 does not work as in the step RunPCA by default only 50pcs are calculated, so the maximum that we can consider in further steps are 50, if more precision makes sense, for instance, if the genes that is of interest for your study is not present when the RunPCA was calculated, then an increase in the number of components calculated at start might be interesting tobe considered. Taking too few PCs we have a « blob » everything looks connected. Too many PCs tends to separate everything. Personally it is more interesting for me too have maybe 2 clusters separated of epithelial cells that I then group for further downstream analysis rather than having very distinct cells being clustered together. So I would rather take the « elbow » of the elbow plot a bit further to the right.</p>
 </details>
                 
               
@@ -661,7 +668,7 @@ Taking dims = 1:100 does not work as in the step RunPCA by default only 50pcs ar
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../day1/quality_control/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quality control" rel="prev">
+        <a href="../../day1/normalization_scaling/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Normalization and scaling" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -670,20 +677,20 @@ Taking dims = 1:100 does not work as in the step RunPCA by default only 50pcs ar
               <span class="md-footer__direction">
                 Previous
               </span>
-              Quality control
+              Normalization and scaling
             </div>
           </div>
         </a>
       
       
         
-        <a href="../clustering/" class="md-footer__link md-footer__link--next" aria-label="Next: Clustering" rel="next">
+        <a href="../integration/" class="md-footer__link md-footer__link--next" aria-label="Next: Integration" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Clustering
+              Integration
             </div>
           </div>
           <div class="md-footer__button md-icon">

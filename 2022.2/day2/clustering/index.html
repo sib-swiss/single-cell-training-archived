@@ -303,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/normalization_scaling/" class="md-nav__link">
-        Normalization and scaling
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
       </a>
     </li>
   
@@ -315,8 +315,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
       </a>
     </li>
   
@@ -361,6 +361,18 @@
     <li class="md-nav__item">
       <a href="../dimensionality_reduction/" class="md-nav__link">
         Dimensionality reduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        Integration
       </a>
     </li>
   
@@ -441,18 +453,6 @@
     <li class="md-nav__item">
       <a href="../cell_annotation/" class="md-nav__link">
         Cell annotation
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integration/" class="md-nav__link">
-        Integration
       </a>
     </li>
   
@@ -605,41 +605,42 @@
 <li>Evaluation of <a href="https://f1000research.com/articles/7-1141">clustering methods</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This chapter uses the <code>gbm</code> dataset</p>
-</blockquote>
 <p>The method implemented in Seurat first constructs a SNN graph based on the euclidean distance in PCA space, and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods (Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the previously defined dimensionality of the dataset.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use the integrated object (<code>seu_int</code>) and the assay <code>integrated</code>. Unsure? Check <code>DefaultAssay(seu_int)</code>, and set it by <code>DefaultAssay(seu_int) &lt;- "integrated"</code>. </p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 <p>To cluster the cells, Seurat next implements modularity optimization techniques such as the Louvain algorithm (default) or SLM [SLM, Blondel et al., Journal of Statistical Mechanics], to iteratively group cells together, with the goal of optimizing the standard modularity function. The <code>FindClusters()</code> function implements this procedure, and contains a resolution parameter that sets the ‘granularity’ of the downstream clustering, with increased values leading to a greater number of clusters.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
 </code></pre></div>
 <p>Cluster id of each cell is added to the metadata object, as a new column for each resolution tested:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
 </code></pre></div>
 <p>To view how clusters sub-divide at increasing resolution:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">clustree</span><span class="p">)</span>
-<span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">[,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;RNA_snn_res&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))],</span>
-                   <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.&quot;</span><span class="p">)</span>
+<span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">[,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;integrated_snn_res&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))],</span>
+                   <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>You can view the UMAP coloring each cell according to a cluster id like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Visualise clustering based on a few more resolutions. Taking the clustering and the UMAP plots into account what do you consider as a good resolution to perform the clustering?</p>
-<details class="done"><summary>Answer</summary><p>Of course, there is no &lsquo;optimal&rsquo; resolution, but based on resolution of 0.2, it seems that clustering fits the UMAP well:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
+<details class="done"><summary>Answer</summary><p>Of course, there is no &lsquo;optimal&rsquo; resolution, but based on resolution of 0.3, the tree stays relatively stable for a few resolution steps, and it seems that clustering fits the UMAP well:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
-  <img src="../../assets/images/UMAP_res.0.2.png" width="400"/>
+  <img src="../../assets/images/UMAP_res_0.3.png" width="400"/>
 </figure></p>
 </details>
-<p><strong>Exercise:</strong> When do the number of neighbors need to be changed? How does changing the method of clustering in FindClusters affect the output? Which parameter should be changed?</p>
+<p><strong>Exercise:</strong> When do the number of neighbors need to be changed? How does changing the method of clustering in <code>FindClusters</code> affect the output? Which parameter should be changed?</p>
 <details class="done"><summary>Answer</summary><p>As FindClusters is an unsupervised clustering method supposedly telling yousomething about your UMAP plot, the two should go along. If one has reasons to change the number of neighbors in the UMAP function, here the same parameter should be adapted.</p>
 <p>The method can be changed with algorithm = 2,3 or 4</p>
 </details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it later today:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day2_part1.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
@@ -665,7 +666,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../dimensionality_reduction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dimensionality reduction" rel="prev">
+        <a href="../integration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Integration" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -674,7 +675,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Dimensionality reduction
+              Integration
             </div>
           </div>
         </a>

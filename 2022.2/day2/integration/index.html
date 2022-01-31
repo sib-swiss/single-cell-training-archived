@@ -303,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/normalization_scaling/" class="md-nav__link">
-        Normalization and scaling
+      <a href="../../day1/quality_control/" class="md-nav__link">
+        Quality control
       </a>
     </li>
   
@@ -315,8 +315,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../../day1/normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
       </a>
     </li>
   
@@ -361,30 +361,6 @@
     <li class="md-nav__item">
       <a href="../dimensionality_reduction/" class="md-nav__link">
         Dimensionality reduction
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../clustering/" class="md-nav__link">
-        Clustering
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cell_annotation/" class="md-nav__link">
-        Cell annotation
       </a>
     </li>
   
@@ -454,6 +430,30 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
     </li>
   
 
@@ -602,77 +602,23 @@
                 <h2 id="material">Material</h2>
 <p><a class="md-button" href="../../assets/pdf/Integration_only.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105 279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"/></svg></span> Download the presentation</a></p>
 <h2 id="exercises">Exercises</h2>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="m472.29 195.9-67.06-23c-19.28-6.6-33.54-20.92-38.14-38.31l-16-60.45c-11.58-43.77-76.57-57.13-110-22.62L195 99.24c-13.26 13.71-33.54 20.93-54.2 19.31l-71.9-5.62c-52-4.07-86.93 44.89-59 82.84l38.54 52.42c11.08 15.07 12.82 33.86 4.64 50.24l-28.43 57C4 396.67 47.46 440.29 98.11 429.23l70-15.28c20.11-4.39 41.45 0 57.07 11.73l54.32 40.83c39.32 29.56 101 7.57 104.45-37.22l4.7-61.86c1.35-17.8 12.8-33.87 30.63-43l62-31.74c44.84-22.96 39.55-80.17-8.99-96.79zM160 256a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm128 96a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm16-128a16 16 0 1 1 16-16 16 16 0 0 1-16 16z"/></svg></span> This chapter uses the <code>pancreas</code> dataset</p>
-</blockquote>
-<p>The <code>gbm</code> dataset does not contain any samples, treatments or methods to integrate. Therefore for these exercises we will use a different dataset that is described in <a href="https://www.biorxiv.org/content/10.1101/460147v1">Comprehensive Integration of Single CellData</a>. It is a dataset comprising of four different single cell experiment performed by using four different methods.</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas.data</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;data/pancreas_dataset/pancreas_expression_matrix.rds&quot;</span><span class="p">)</span>
-<span class="n">metadata</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;data/pancreas_dataset/pancreas_metadata.rds&quot;</span><span class="p">)</span>
+<p>Let&rsquo;s have a look at the UMAP again. Although cells of different samples are shared amongst &lsquo;clusters&rsquo;, you can still see seperation within the clusters:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Create a Seurat object with all datasets.</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">pancreas.data</span><span class="p">,</span> <span class="n">meta.data</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">)</span>
-</code></pre></div>
-<p>The object <code>pancreas</code> is now of class <code>Seurat</code> and comparable with the object <code>gbm</code> that we have used in the previous exercises.</p>
-<p><strong>Exercise:</strong> Have a look at the object. How many cells are in there? And how many features? What kind of information is in the <code>meta.data</code> slot?</p>
-<details class="done"><summary>Answer</summary><p>Just by running <code>pancreas</code>, we get the following information:</p>
-<div class="highlight"><pre><span></span><code>An object of class Seurat
-34363 features across 6321 samples within 1 assay
-Active assay: RNA (34363 features, 0 variable features)
-</code></pre></div>
-<p>Running <code>head(pancreas@meta.data)</code> gives you:</p>
-<div class="highlight"><pre><span></span><code>              orig.ident nCount_RNA nFeature_RNA   tech celltype
-D101_5     SeuratProject   4615.810         1986 celseq    gamma
-D101_43    SeuratProject  11711.506         3942 celseq    gamma
-D101_93    SeuratProject   5567.659         2418 celseq    gamma
-D102_4     SeuratProject   6804.533         2846 celseq    gamma
-D172444_23 SeuratProject   5541.101         2436 celseq    gamma
-D172444_68 SeuratProject   4301.892         2015 celseq    gamma
-</code></pre></div>
-<p>So, apparently there is also information in there about the technology (<code>tech</code>) and cell type annotation (<code>celltype</code>)</p>
-</details>
-<p>Now, we can repeat what we have learned in the previous chapters. Let&rsquo;s assume we don&rsquo;t have to filter for e.g. mitochondrial UMIs and number of features, and we can directly proceed to the normalization and scaling.</p>
-<p><strong>Exercise:</strong> To perform normalization, scaling, PCA and UMAP, run the following functions (with sensible parameters) on the <code>pancreas</code> object:</p>
-<ul>
-<li><code>Seurat::NormalizeData</code></li>
-<li><code>Seurat::FindVariableFeatures</code></li>
-<li><code>Seurat::ScaleData</code></li>
-<li><code>Seurat::RunPCA</code></li>
-<li><code>Seurat::RunUMAP</code></li>
-</ul>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">pancreas</span><span class="p">)</span>
-<span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">selection.method</span> <span class="o">=</span> <span class="s">&quot;vst&quot;</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="m">2000</span><span class="p">)</span>
-<span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">pancreas</span><span class="p">)</span>
-<span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">npcs</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-<span class="n">pancreas</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
-</code></pre></div>
-</details>
-<p>Now we plot the UMAP based on technology. There is clearly clustering according to technology:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Exercise:</strong> Generate the same UMAP plot but now grouped by <code>celltype</code>. Does cell type group correctly together?</p>
-<details class="done"><summary>Answer</summary><p>Generate the plot:
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;celltype&quot;</span><span class="p">)</span>
-</code></pre></div>
-This returns:</p>
-<p><figure>
-  <img src="../../assets/images/umap_celltype.png" width="400"/>
-</figure></p>
-<p>This shows that within a techology cell types cluster together, but not between technology (this is e.g. very clear if you look at the clusters annotated as &ldquo;alpha&rdquo;)</p>
-</details>
-<p>To perform the integration, we split the combined object into a list, with each dataset as an element. We perform standard preprocessing (log-normalization), and identify variable features individually for each dataset based on a variance stabilizing transformation (<code>"vst"</code>).</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas.list</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SplitObject</span><span class="p">(</span><span class="n">pancreas</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
+<p>To perform the integration, we split our object by sample, resulting into a list with each sample as an element. We perform standard preprocessing (log-normalization), and identify variable features individually for each dataset based on a variance stabilizing transformation (<code>"vst"</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_list</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SplitObject</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
 
-<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">pancreas.list</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">pancreas.list</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">pancreas.list</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
-    <span class="n">pancreas.list</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">pancreas.list</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span> <span class="n">selection.method</span> <span class="o">=</span> <span class="s">&quot;vst&quot;</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="m">2000</span><span class="p">,</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">seu_list</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">seu_list</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">seu_list</span><span class="p">[[</span><span class="n">i</span><span class="p">]])</span>
+    <span class="n">seu_list</span><span class="p">[[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">seu_list</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span> <span class="n">selection.method</span> <span class="o">=</span> <span class="s">&quot;vst&quot;</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="m">2000</span><span class="p">,</span>
         <span class="n">verbose</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>After this, we prepare the integration by selecting integration anchors:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas.anchors</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindIntegrationAnchors</span><span class="p">(</span><span class="n">object.list</span> <span class="o">=</span> <span class="n">pancreas.list</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_anchors</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindIntegrationAnchors</span><span class="p">(</span><span class="n">object.list</span> <span class="o">=</span> <span class="n">seu_list</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
 </code></pre></div>
 <p>And finally perform the integration:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas.integrated</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">IntegrateData</span><span class="p">(</span><span class="n">anchorset</span> <span class="o">=</span> <span class="n">pancreas.anchors</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">IntegrateData</span><span class="p">(</span><span class="n">anchorset</span> <span class="o">=</span> <span class="n">seu_anchors</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
 </code></pre></div>
 <p>After running <code>IntegrateData</code>, the <code>Seurat</code> object will contain an additional element of class <code>Assay</code> with the integrated (or ‘batch-corrected’) expression matrix. This new <code>Assay</code> is called <code>integrated</code>, and exists next to the already existing <code>RNA</code> element with class <code>Assay</code>.</p>
 <div class="admonition warning">
@@ -685,30 +631,25 @@ This returns:</p>
 <p>No need to re-run <code>FindVariableFeatures</code>, these were automatically set by calling <code>IntegrateData</code>.</p>
 </div>
 <p>First, switch the default <code>Assay</code> to <code>integrated</code> (in stead of <code>RNA</code>).</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;integrated&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;integrated&quot;</span>
 </code></pre></div>
-<p><strong>Exercise:</strong> In order to redo the clustering, scale the integrated data, run the PCA and the UMAP again (using the function <code>ScaleData</code>, <code>RunPCA</code> and <code>RunUMAP</code>). After that, generate the same two UMAP plots (grouped by <code>tech</code> and by <code>celltype</code>). Did the integration perform well?</p>
+<p><strong>Exercise:</strong> In order to redo the clustering, scale the integrated data, run the PCA and the UMAP again (using the function <code>ScaleData</code>, <code>RunPCA</code> and <code>RunUMAP</code>). After that, generate the UMAP plot. Did the integration perform well?</p>
 <details class="done"><summary>Answer</summary><p>Performing the scaling, PCA and UMAP:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pancreas.integrated</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">)</span>
-<span class="n">pancreas.integrated</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="n">npcs</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
-<span class="n">pancreas.integrated</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span>
+<span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">npcs</span> <span class="o">=</span> <span class="m">30</span><span class="p">)</span>
+<span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">)</span>
 </code></pre></div>
 <p>Plotting the UMAP:</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;celltype&quot;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 Returning:</p>
 <p><figure>
-  <img src="../../assets/images/umap_integrated_tech.png" width="400"/>
+  <img src="../../assets/images/umap_integrated.png" width="400"/>
 </figure></p>
-<p><figure>
-  <img src="../../assets/images/umap_integrated_celltype.png" width="400"/>
-</figure></p>
-<p>So, yes, integration performed well. Clustering is now not according to technology, but according to cell type.  </p>
 </details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Finally, store the integrated dataset as an <code>.rds</code> file. We will use it tomorrow:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">pancreas.integrated</span><span class="p">,</span> <span class="s">&quot;pancreas.integrated.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
@@ -734,7 +675,7 @@ Returning:</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../cell_annotation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Cell annotation" rel="prev">
+        <a href="../dimensionality_reduction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dimensionality reduction" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -743,20 +684,20 @@ Returning:</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Cell annotation
+              Dimensionality reduction
             </div>
           </div>
         </a>
       
       
         
-        <a href="../../day3/differential_gene_expression/" class="md-footer__link md-footer__link--next" aria-label="Next: Differential gene expression" rel="next">
+        <a href="../clustering/" class="md-footer__link md-footer__link--next" aria-label="Next: Clustering" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Differential gene expression
+              Clustering
             </div>
           </div>
           <div class="md-footer__button md-icon">
