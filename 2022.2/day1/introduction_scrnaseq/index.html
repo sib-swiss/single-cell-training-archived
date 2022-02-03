@@ -709,7 +709,7 @@
 <span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;course_data&quot;</span><span class="p">,</span> <span class="s">&quot;count_matrices&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">,</span>
                       <span class="s">&quot;outs&quot;</span><span class="p">,</span> <span class="s">&quot;filtered_feature_bc_matrix&quot;</span><span class="p">)</span>
 <span class="nf">names</span><span class="p">(</span><span class="n">datadirs</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">)</span>
-<span class="n">datadirs</span>
+<span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="n">datadirs</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span>
 </code></pre></div>
 <p>The object <code>datadirs</code> is a named vector specifying the paths of the count directories for each sample:</p>
 <div class="highlight"><pre><span></span><code>                                                                  PBMMC-1 
@@ -749,7 +749,7 @@ Active assay: RNA (18673 features, 0 variable features)
 </figure>
 
 <p>In addition to the original count table, the <code>Seurat</code> object can therefore store a lot of information that is generated during your analysis, like results of a normalization (<code>@assays$RNA@data</code>) a PCA or UMAP (<code>@reductions</code>) and the clustering (<code>@graphs</code>). It also tracks all the commands that have been used to generate the object in its current state (<code>@commands</code>). Therefore, while going through the analysis steps, the same object gets more and more of its slots filled. Because most <code>Seurat</code> functions return the input object + adjusted slots, we can use this syntax:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seurat_object</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">function</span><span class="p">(</span><span class="n">seurat_object</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code>seurat_object &lt;- Seurat::function(seurat_object)
 </code></pre></div>
 <p>So, the function takes an object as input and we assign it to an object with the same name. Meaning that we overwrite the object used as input. This is fine in many cases, because <code>Seurat</code> adds information to the input object, and returns is. We will use this syntax for the first time at <a href="../normalization_scaling/">Normalization and scaling</a>.</p>
 <div class="admonition note">

@@ -653,8 +653,7 @@ label types use:</p>
                      <span class="n">showCategory</span> <span class="o">=</span> <span class="m">30</span><span class="p">,</span> <span class="n">cex_label_category</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
 </code></pre></div>
 <p>In stead of testing for gene ontology terms, we can also test for other gene set collections. For example the hallmark collection from <a href="http://www.gsea-msigdb.org/gsea/msigdb/index.jsp">MSigDB</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gmt</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">read.gmt</span><span class="p">(</span><span class="s">&quot;data/gbm_dataset/h.all.v7.2.symbols.xls&quot;</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">gmt</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">gmt</span> <span class="o">&lt;-</span> <span class="n">msigdbr</span><span class="o">::</span><span class="nf">msigdbr</span><span class="p">(</span><span class="n">species</span> <span class="o">=</span> <span class="s">&quot;human&quot;</span><span class="p">,</span> <span class="n">category</span> <span class="o">=</span> <span class="s">&quot;H&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>We can use the function <code>enricher</code> to test for enrichment of any set of genes. But we would have to test it against a &ldquo;universe&rdquo;, i.e. the background genes:</p>
 <div class="highlight"><pre><span></span><code><span class="n">tum_vs_norm_enrich</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enricher</span><span class="p">(</span><span class="n">gene</span> <span class="o">=</span> <span class="n">tum_down_genes</span><span class="p">,</span>
@@ -665,11 +664,11 @@ label types use:</p>
                                                 <span class="n">TERM2GENE</span> <span class="o">=</span> <span class="n">gmt</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;gs_name&quot;</span><span class="p">,</span> <span class="s">&quot;gene_symbol&quot;</span><span class="p">)])</span>
 </code></pre></div>
 <p>The most signifcantly enriched group of genes is <code>HALLMARK_G2M_CHECKPOINT</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">AC_MAC_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">tum_vs_norm_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it later today:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">gbm</span><span class="p">,</span> <span class="s">&quot;gbm_day3.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day3.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
