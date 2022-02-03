@@ -439,6 +439,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotating-cells-according-to-cycling-phase" class="md-nav__link">
+    Annotating cells according to cycling phase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell-type-annotation-using-singler" class="md-nav__link">
     Cell type annotation using SingleR
   </a>
@@ -576,6 +583,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotating-cells-according-to-cycling-phase" class="md-nav__link">
+    Annotating cells according to cycling phase
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cell-type-annotation-using-singler" class="md-nav__link">
     Cell type annotation using SingleR
   </a>
@@ -629,13 +643,13 @@
 <p>In the last exercise we saw that probably clustering at a resolution of 0.3 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">$</span><span class="n">integrated_snn_res.0.3</span><span class="p">)</span>
 </code></pre></div>
-<p>During cell annotation we will use the original count data (not the integrated data):</p>
-<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
-</code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>From now on, grouping (e.g. for plotting) is done by the active identity (set at <code>@active.ident</code>) by default.</p>
 </div>
+<p>During cell annotation we will use the original count data (not the integrated data):</p>
+<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+</code></pre></div>
 <p>Based on the UMAP we have generated, we can visualize expression for a gene in each cluster:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
 </code></pre></div>
@@ -692,6 +706,16 @@
   <img src="../../assets/images/violinplot_immune_genes_modules.png" width="500"/>
 </figure></p>
 </details>
+<h3 id="annotating-cells-according-to-cycling-phase">Annotating cells according to cycling phase</h3>
+<div class="highlight"><pre><span></span><code><span class="n">s.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">s.genes</span>
+<span class="n">g2m.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">g2m.genes</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+                                     <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span>
+                                     <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="cell-type-annotation-using-singler">Cell type annotation using <code>SingleR</code></h3>
 <p>To do a fully automated annoation, we need a reference dataset of primary cells. Any reference could be used. The package <code>scRNAseq</code> in Bioconductor includes several scRNAseq datasets that can be used as reference to <code>SingleR</code>. One could also use a reference made of bulk RNA seq data. Here we are using the a hematopoietic reference dataset from <code>celldex</code>. Check out what&rsquo;s in there:</p>
 <div class="highlight"><pre><span></span><code><span class="n">ref</span> <span class="o">&lt;-</span> <span class="n">celldex</span><span class="o">::</span><span class="nf">NovershternHematopoieticData</span><span class="p">()</span>

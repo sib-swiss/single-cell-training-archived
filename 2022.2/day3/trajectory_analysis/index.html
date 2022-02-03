@@ -844,69 +844,110 @@ major set of parameters we omitted here when running Slingshot?</p>
 <span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="trajectory-analysis-with-monocle3">Trajectory analysis with <code>monocle3</code></h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/></svg></span> This part uses the <code>gbm</code> dataset</p>
-</blockquote>
-<p>This part showcases how you can use <code>monocle3</code> to perform a trajectory analysis. First load the <code>gbm</code> dataset:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;gbm_day3.rds&quot;</span><span class="p">)</span>
+<p>This part showcases how you can use <code>monocle3</code> to perform a trajectory analysis. First load the <code>seu_int</code> dataset:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day3.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Load the required package into your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">monocle3</span><span class="p">)</span>
 </code></pre></div>
 <p>Generate a <code>monocle3</code> object (with class <code>cell_data_set</code>) from our <code>Seurat</code> object:</p>
-<div class="highlight"><pre><span></span><code><span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">))</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">gbm</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_int</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;gene_short_name&quot;</span>
-<span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">gbm</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
-                              <span class="n">cell_metadata</span> <span class="o">=</span> <span class="n">gbm</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
-                              <span class="n">gene_metadata</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+<span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
+                                              <span class="n">cell_metadata</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
+                                              <span class="n">gene_metadata</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
 </code></pre></div>
 <p>We pre-process the newly created object. What does it involve? Check:</p>
 <div class="highlight"><pre><span></span><code><span class="o">?</span><span class="n">preprocess_cds</span>
 </code></pre></div>
 <p>Preprocess the dataset:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">preprocess_cds</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">preprocess_cds</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <p>And check out the elbow plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_pc_variance_explained</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_pc_variance_explained</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <p>Perform UMAP using the implementation in the <code>monocle3</code> package and its default parameters:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">reduce_dimension</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">reduction_method</span> <span class="o">=</span> <span class="s">&quot;UMAP&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">reduce_dimension</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">reduction_method</span> <span class="o">=</span> <span class="s">&quot;UMAP&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Plot the <code>monocle3</code> UMAP coloring cells according to the cluster ID ran with <code>Seurat</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="s">&quot;PMP2&quot;</span><span class="p">)</span> <span class="c1"># to plot expression level of a gene</span>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> 
+                     <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">,</span> 
+                     <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> 
+                     <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="s">&quot;CD79A&quot;</span><span class="p">,</span> 
+                     <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                     <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 <p>Cluster cells using <code>monocle3</code>&lsquo;s clustering function:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
-<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
-<span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
-<span class="n">cowplot</span><span class="o">::</span><span class="nf">plot_grid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="c1"># Are there differences?</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 </code></pre></div>
 <p>learn graph (i.e. identify trajectory) using <code>monocle3</code> UMAP and clustering:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;RNA_snn_res.0.2&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
-<p>Replace <code>monocle3</code> cluster id by <code>Seurat</code> cluster id if we want to keep the same information:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span><span class="o">@</span><span class="n">clusters</span><span class="o">$</span><span class="n">UMAP</span><span class="o">$</span><span class="n">clusters</span> <span class="o">&lt;-</span> <span class="nf">colData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="o">$</span><span class="n">RNA_snn_res.0.2</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="o">@</span><span class="n">clusters</span><span class="o">$</span><span class="n">UMAP</span><span class="o">$</span><span class="n">clusters</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">))</span>
-<span class="n">gbm_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<p><strong>Exercise:</strong> Find the CD34+ B-cell cluster in the monocle UMAP. This cluster has a high expressession of CD79A and expresses CD34.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD79A&quot;</span><span class="p">,</span> <span class="s">&quot;CD34&quot;</span><span class="p">),</span>
+                 <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+                 <span class="n">cell_size</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">)</span>
 </code></pre></div>
-<p>Select the &ldquo;initial&rdquo; cells to calculate pseudotime. A pop up window will open and you need to click on the &ldquo;initial&rdquo; cells (one node per trajectory), then click &ldquo;Done&rdquo;.</p>
-<div class="highlight"><pre><span></span><code><span class="n">gbm_monocl</span><span class="o">&lt;-</span><span class="n">monocle3</span><span class="o">::</span><span class="nf">order_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="c1">#</span>
+<p>Returns:</p>
+<p><figure>
+ <img src="../../assets/images/umap_bcell_cd34plus.png" width="800"/>
+</figure></p>
+<p>Cluster 13 has both a high expression of CD79A and CD34. </p>
+</details>
+<p>Select the &ldquo;initial&rdquo; cells in the B-cell cluster to calculate pseudotime. The initial cells in this case are the CD34+ B-cells we have just identified. A pop up window will open and you need to click on the &ldquo;initial&rdquo; cells (one node per trajectory), then click &ldquo;Done&rdquo;.</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="o">&lt;-</span><span class="n">monocle3</span><span class="o">::</span><span class="nf">order_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span><span class="c1">#</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span>
            <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;pseudotime&quot;</span><span class="p">,</span>
            <span class="n">label_cell_groups</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
            <span class="n">label_leaves</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
            <span class="n">label_branch_points</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
            <span class="n">graph_label_size</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </code></pre></div>
-<p>Plot a gene&rsquo;s expression vs pseudotime</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">,</span> <span class="nf">rowData</span><span class="p">(</span><span class="n">gbm_monocl</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span><span class="o">==</span><span class="s">&quot;PMP2&quot;</span><span class="p">))</span>
+<p>In order to find genes which expression is affected by pseudtime, we first have to isolate the B-cell cluster. Therefore, extract all cells in the B-cell cluster with the interactive <code>choose_cells</code> function:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seuB</span> <span class="o">&lt;-</span> <span class="nf">choose_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../../assets/images/choose_cells.gif" width="800"/>
+</figure>
+
+<p>Check whether you have selected the right cells:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we can use the cells in this trajectory to test which genes are affected by the trajectory:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pr_test</span> <span class="o">&lt;-</span> <span class="nf">graph_test</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> 
+                      <span class="n">cores</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> 
+                      <span class="n">neighbor_graph</span> <span class="o">=</span> <span class="s">&quot;principal_graph&quot;</span><span class="p">)</span>
+<span class="c1"># order by test statistic</span>
+<span class="n">pr_test</span> <span class="o">&lt;-</span> <span class="n">pr_test</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">pr_test</span><span class="o">$</span><span class="n">morans_test_statistic</span><span class="p">,</span> 
+                         <span class="n">decreasing</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),]</span>
+<span class="nf">View</span><span class="p">(</span><span class="n">pr_test</span><span class="p">)</span>
+</code></pre></div>
+<p>There are some interesting genes in there, for example related to cell cycling (MKI67, CKS2), related to B-cell development (CD34, MS4A1) and immunoglobulins (IGLL1 and IGLL5). We can plot those in the UMAP:</p>
+<div class="highlight"><pre><span></span><code><span class="n">goi</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD34&quot;</span><span class="p">,</span> <span class="s">&quot;MS4A1&quot;</span><span class="p">,</span> <span class="s">&quot;IGLL1&quot;</span><span class="p">,</span> <span class="s">&quot;IGLL5&quot;</span><span class="p">,</span> 
+         <span class="s">&quot;MKI67&quot;</span><span class="p">,</span> <span class="s">&quot;CKS2&quot;</span><span class="p">)</span>
+<span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> <span class="n">label_cell_groups</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="n">goi</span><span class="p">,</span>
+           <span class="n">show_trajectory_graph</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</code></pre></div>
+<p>But also against pseudotime:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seuB</span><span class="o">@</span><span class="n">colData</span><span class="o">$</span><span class="n">monocle_cluster</span> <span class="o">&lt;-</span> <span class="nf">clusters</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span>
+
+<span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> 
+                                <span class="nf">rowData</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span> <span class="o">%in%</span> <span class="n">goi</span><span class="p">),</span>
+                         <span class="n">min_expr</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;monocle_cluster&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Plot a gene&rsquo;s expression vs pseudotime</p>
+<div class="highlight"><pre><span></span><code><span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="nf">rowData</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span><span class="o">==</span><span class="s">&quot;PMP2&quot;</span><span class="p">))</span>
+</code></pre></div>
+<figure>
+  <img src="../../assets/images/exp_pseudotime.png" width="500"/>
+</figure>
                 
               
               
