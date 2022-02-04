@@ -689,6 +689,10 @@ So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.d
                                   <span class="s">&quot;percent.ribo&quot;</span><span class="p">,</span>
                                   <span class="s">&quot;percent.globin&quot;</span><span class="p">))</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/violin_percent.png" width="500"/>
+</figure>
+
 <p>You can see that <code>PBMMC-2</code> is quite different from the two others, it has a group of cells with very low ribosomal counts and one with very high globin counts. Maybe these two percentages are negatively correlated? Let&rsquo;s have a look, by plotting the two percentages against each other:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
                        <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">,</span> 
@@ -704,11 +708,12 @@ So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.d
 <p>We can also evaluate the relative expression of other genes in our dataset, for example, the ones that are most highly expressed. Some very highly expressed genes might point to a technical cause, and we might consider to remove them. Below you will find a simple function to generate a boxplot of relative counts per gene per cell. Load it into your environment and run it on our <code>seu</code> object:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">Matrix</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 
 <span class="n">most_expressed_boxplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">ngenes</span> <span class="o">=</span> <span class="m">20</span><span class="p">){</span>
 
   <span class="c1"># matrix of raw counts</span>
-  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
 
   <span class="c1"># get percentage/cell</span>
   <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">/</span><span class="nf">colSums</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>
@@ -731,6 +736,10 @@ So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.d
 
 <span class="nf">most_expressed_boxplot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="m">20</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/boxplot_mostexp.png" width="500"/>
+</figure>
+
 <p>As for most 10X based poly-A enriched single cell datasets, we find a relatively high expression of MALAT1. Many researchers choose to remove it, but it can have biological relevance (e.g. <a href="https://www.nature.com/articles/s41420-020-00383-y">Shaat et al. 2021</a>). </p>
 <h3 id="cell-filtering">Cell filtering</h3>
 <p>Based on the QC process we went through we can come to the following conclusions:</p>
@@ -747,8 +756,8 @@ So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.d
                 <span class="n">percent.mito</span> <span class="o">&lt;</span> <span class="m">8</span><span class="p">)</span>
 </code></pre></div>
 <p>To evaluate this did the trick we can visualize those parameters again in a violin plot:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span>
-                          <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
 </code></pre></div>
                 
               

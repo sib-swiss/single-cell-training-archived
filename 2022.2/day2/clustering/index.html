@@ -423,19 +423,6 @@
     Exercises
   </a>
   
-    <nav class="md-nav" aria-label="Exercises">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
-    Save the dataset and clear environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -565,19 +552,6 @@
     Exercises
   </a>
   
-    <nav class="md-nav" aria-label="Exercises">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#save-the-dataset-and-clear-environment" class="md-nav__link">
-    Save the dataset and clear environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -605,6 +579,9 @@
 <li>Evaluation of <a href="https://f1000research.com/articles/7-1141">clustering methods</a></li>
 </ul>
 <h2 id="exercises">Exercises</h2>
+<p>Load the <code>seu_int</code> dataset you have created earlier today:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p>The method implemented in Seurat first constructs a SNN graph based on the euclidean distance in PCA space, and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods (Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the previously defined dimensionality of the dataset.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -623,30 +600,29 @@
 <span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">[,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;integrated_snn_res&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))],</span>
                    <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/clustree.png" width="400"/>
+</figure>
+
 <p>You can view the UMAP coloring each cell according to a cluster id like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.1&quot;</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/umap_integrated_res.0.1.png" width="500"/>
+</figure>
+
 <p><strong>Exercise:</strong> Visualise clustering based on a few more resolutions. Taking the clustering and the UMAP plots into account what do you consider as a good resolution to perform the clustering?</p>
 <details class="done"><summary>Answer</summary><p>Of course, there is no &lsquo;optimal&rsquo; resolution, but based on resolution of 0.3, the tree stays relatively stable for a few resolution steps, and it seems that clustering fits the UMAP well:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
-  <img src="../../assets/images/UMAP_res_0.3.png" width="400"/>
+    <img src="../../assets/images/umap_integrated_res.0.3.png" width="500"/>
 </figure></p>
 </details>
 <p><strong>Exercise:</strong> When do the number of neighbors need to be changed? How does changing the method of clustering in <code>FindClusters</code> affect the output? Which parameter should be changed?</p>
 <details class="done"><summary>Answer</summary><p>As FindClusters is an unsupervised clustering method supposedly telling yousomething about your UMAP plot, the two should go along. If one has reasons to change the number of neighbors in the UMAP function, here the same parameter should be adapted.</p>
 <p>The method can be changed with algorithm = 2,3 or 4</p>
 </details>
-<h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
-<p>Now, save the dataset so you can use it later today:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
-<span class="nf">gc</span><span class="p">()</span>
-<span class="nf">.rs.restartR</span><span class="p">()</span>
-</code></pre></div>
                 
               
               

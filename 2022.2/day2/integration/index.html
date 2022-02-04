@@ -605,6 +605,10 @@
 <p>Let&rsquo;s have a look at the UMAP again. Although cells of different samples are shared amongst &lsquo;clusters&rsquo;, you can still see seperation within the clusters:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/umap_nonintegrated.png" width="700"/>
+</figure>
+
 <p>To perform the integration, we split our object by sample, resulting into a list with each sample as an element. We perform standard preprocessing (log-normalization), and identify variable features individually for each dataset based on a variance stabilizing transformation (<code>"vst"</code>).</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_list</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SplitObject</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
 
@@ -644,12 +648,12 @@
 </code></pre></div>
 Returning:</p>
 <p><figure>
-  <img src="../../assets/images/umap_integrated.png" width="400"/>
+  <img src="../../assets/images/umap_integrated.png" width="700"/>
 </figure></p>
 </details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Finally, store the integrated dataset as an <code>.rds</code> file. We will use it tomorrow:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
