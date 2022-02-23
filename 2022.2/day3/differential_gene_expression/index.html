@@ -735,10 +735,13 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <h3 id="differential-expression-using-limma">Differential expression using <code>limma</code></h3>
 <p>The Wilcoxon test implemented in <code>FindMarkers</code> does not allow to test for complex design (eg factorial experiments) or to include batch as a covariate.</p>
 <p>We can use <code>edgeR</code> or <code>limma</code> which are designed for microarray or bulk RNA seq data and provide a design matrix that includes covariates for example.</p>
-<p>We will go back to the pancreas cells sequenced with different technologies, analyze differentially expressed genes between 2 clusters of cells using the technologies as covariates. Similar approaches can be used to analyze differentially expressed genes between conditions, eg sick vs healthy, wild type versus knockout, etc, and including batches in the model if they are present.</p>
-<p>We will load an objects containing only pro B cells, both from the healthy tissues, and malignant tissues. We can load it like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">proB</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;proB.rds&quot;</span><span class="p">)</span>
+<p>We will load an object containing only pro B cells, both from the healthy tissues, and malignant tissues. We can load it like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">proB</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;course_data/proB.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to know how this pro-B cell subset is generated, have a look at the script <a href="../../assets/scripts/generate_object_proB.R">here</a>.</p>
+</div>
 <p>Since we will start wit differential gene expression, we set the default assay back to &ldquo;RNA&rdquo;. Also, we set the default identity to the cell type:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">Idents</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span>
@@ -778,8 +781,8 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <div class="highlight"><pre><span></span><code><span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <p>And we can check whether this corresponds to the counts by generating a violin plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;CD52&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;IGLL1&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;tech&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;CD52&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;IGLL1&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>We can run a similar analysis with <code>Seurat</code>. Run the code below. We will use the output object for the enrichment analysis. </p>
 <div class="highlight"><pre><span></span><code><span class="n">tum_vs_norm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> 

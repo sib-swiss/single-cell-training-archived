@@ -757,7 +757,7 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
 <details class="done"><summary>Answer</summary><p>You can run it like so:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SCTransform</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
 </code></pre></div>
-<p>And it will add an extra assay to the object. <code>names(seu@assay)</code> returns:</p>
+<p>And it will add an extra assay to the object. <code>names(seu@assays)</code> returns:</p>
 <div class="highlight"><pre><span></span><code>[1] &quot;RNA&quot; &quot;SCT&quot;
 </code></pre></div>
 <p>Meaning that a whole new assay was added (including the sparse matrices with counts, normalized data and scaled data). </p>

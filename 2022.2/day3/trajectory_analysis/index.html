@@ -880,15 +880,30 @@ major set of parameters we omitted here when running Slingshot?</p>
                      <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
                      <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../../assets/images/umap_monocle.png" width="500"/>
+</figure>
+
+<figure>
+  <img src="../../assets/images/umap_monocle_CD79A.png" width="500"/>
+</figure>
+
 <p>Cluster cells using <code>monocle3</code>&lsquo;s clustering function:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
 <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../../assets/images/umap_monocle3_clustered.png" width="500"/>
+</figure>
+
 <p>learn graph (i.e. identify trajectory) using <code>monocle3</code> UMAP and clustering:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+  <img src="../../assets/images/umap_monocle_trajectory.png" width="500"/>
+</figure>
+
 <p><strong>Exercise:</strong> Find the CD34+ B-cell cluster in the monocle UMAP. This cluster has a high expressession of CD79A and expresses CD34.</p>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD79A&quot;</span><span class="p">,</span> <span class="s">&quot;CD34&quot;</span><span class="p">),</span>
                  <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 

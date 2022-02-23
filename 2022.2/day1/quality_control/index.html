@@ -713,7 +713,7 @@ So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.d
 <span class="n">most_expressed_boxplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">ngenes</span> <span class="o">=</span> <span class="m">20</span><span class="p">){</span>
 
   <span class="c1"># matrix of raw counts</span>
-  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
 
   <span class="c1"># get percentage/cell</span>
   <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">/</span><span class="nf">colSums</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>

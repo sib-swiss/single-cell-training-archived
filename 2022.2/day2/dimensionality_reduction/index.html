@@ -622,6 +622,10 @@ For the PCA, by default, only the previously determined variable features are us
 <p>We can generate heatmaps according to the correlations with the different dimensions of our PCA:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
+<figure>
+    <img src="../../assets/images/pca_heatmap.png" width="700"/>
+</figure>
+
 <p>The elbowplot can help you in determining how many PCs to use for downstream analysis such as UMAP:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
 </code></pre></div>
@@ -658,6 +662,9 @@ Why does dims = 1:100 not work? When would more precision be needed?</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span> <span class="n">n.neighbors</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
+<p><figure>
+    <img src="../../assets/images/umap_nonintegrated_neighb5.png" width="700"/>
+</figure></p>
 <p>The default number of neighbours is 30. It can be of interest to change the number of neighbors if one has subset the data (for instance in the situation where you would only consider the t-cells inyour data set), then maybe the number of neighbors in a cluster would anyway be most of the time lower than 30 then 30 is too much. In the other extreme where your dataset is extremely big an increase in the number of neighbors can be considered.</p>
 <p><strong>Answer C</strong> </p>
 <div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
