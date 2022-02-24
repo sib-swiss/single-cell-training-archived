@@ -343,20 +343,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#loading-scrnaseq-data" class="md-nav__link">
-    Loading scRNAseq data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-seurat-object" class="md-nav__link">
-    The Seurat object
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -589,20 +575,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#loading-scrnaseq-data" class="md-nav__link">
-    Loading scRNAseq data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#the-seurat-object" class="md-nav__link">
-    The Seurat object
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -655,7 +627,7 @@
 </ul>
 <h3 id="running-cellranger-count">Running <code>cellranger count</code></h3>
 <p>Have a look in the directory <code>course_data/reads</code> and <code>reference</code>. In the <code>reads</code> directory you will find reads on one sample: <code>ETV6-RUNX1_1</code>. In the analysis part of the course we will work with six samples, but due to time and computational limitations we will run <code>cellranger count</code> on one of the samples, and only reads originating from chromsome 21 and 22. </p>
-<p>The only thing you need to run <code>cellranger count</code> are the sequence reads and a reference. Here, we have prepared a reference only with chromosome 21 and 22, but in &lsquo;real life&rsquo; you would of course get the full reference genome of your species. The reference has a specific format. You can download precomputed human and mouse references from the <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/downloads/latest">10X website</a>. If your species of interest is not one of those, you will have to generate it yourself. For that, have a look <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/tutorial_mr">here</a>.</p>
+<p>The input you need to run <code>cellranger count</code> are the sequence reads and a reference. Here, we have prepared a reference only with chromosome 21 and 22, but in &lsquo;real life&rsquo; you would of course get the full reference genome of your species. The reference has a specific format. You can download precomputed human and mouse references from the <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/downloads/latest">10X website</a>. If your species of interest is not one of those, you will have to generate it yourself. For that, have a look <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/tutorial_mr">here</a>.</p>
 <p>Have a look at the documentation of <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/using/count"><code>cellranger count</code></a> (scroll down to <em>Command-line argument reference</em>), fill out the missing arguments (at <code>FIXME</code>) in the script below, and run it:</p>
 <div class="highlight"><pre><span></span><code>cellranger count <span class="se">\</span>
 --id<span class="o">=</span>FIXME <span class="se">\</span>
@@ -696,111 +668,6 @@
 <p>What should worry us more is the <strong>number of reads per cell</strong> (363) and the <strong>sequencing saturation</strong> (7.9%). In most cases you should aim for 30.000 - 50.000 reads per cell, and a sequencing saturation &gt;~70% (depending on the application). We therefore don&rsquo;t have enough reads per cell. However, as you might remember, this was a subset of reads (1 million) mapped against chromosome 21 &amp; 22, while the original dataset contains 210,987,037 reads. You can check out the original report at <code>course_data/count_matrices/ETV6-RUNX1_1/outs/web_summary.html</code>.</p>
 <p>For more info on sequencing saturation, have a look <a href="https://kb.10xgenomics.com/hc/en-us/articles/115002474263-How-much-sequencing-saturation-should-I-aim-for-">here</a>. </p>
 </details>
-<h3 id="loading-scrnaseq-data">Loading scRNAseq data</h3>
-<p>The next step after the generation of the count matrices with <code>cellranger count</code>, is the data analysis. The <code>R</code> package <code>Seurat</code> is currently the most popular software to do this. To start working with <code>Seurat</code> you can load it into your environment like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
-</code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Tip: make an R script</p>
-<p>You could type and copy-paste the commands of these exercises directly in the console. However, that makes it hard to track what you have done. In addition, it can be nice to add comments to your code, so you can read back why you have made certain choices. In order to do that, do not write commands in the console, but write them in a script, and send them to the console with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (Windows) or <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (MacOS).</p>
-</div>
-<p>First, we will load a file specifying the different samples, and create an object specifying the location of the count data:</p>
-<div class="highlight"><pre><span></span><code><span class="n">sample_info</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;course_data/sample_info_course.csv&quot;</span><span class="p">)</span>
-<span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;course_data&quot;</span><span class="p">,</span> <span class="s">&quot;count_matrices&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">,</span>
-                      <span class="s">&quot;outs&quot;</span><span class="p">,</span> <span class="s">&quot;filtered_feature_bc_matrix&quot;</span><span class="p">)</span>
-<span class="nf">names</span><span class="p">(</span><span class="n">datadirs</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">)</span>
-<span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="n">datadirs</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span>
-</code></pre></div>
-<p>The object <code>datadirs</code> is a named vector specifying the paths of the count directories for each sample:</p>
-<div class="highlight"><pre><span></span><code>                                                                  PBMMC-1 
-     &quot;course_data/count_matrices/PBMMC_1/outs/filtered_feature_bc_matrix&quot; 
-                                                                  PBMMC-2 
-     &quot;course_data/count_matrices/PBMMC_2/outs/filtered_feature_bc_matrix&quot; 
-                                                                  PBMMC-3 
-     &quot;course_data/count_matrices/PBMMC_3/outs/filtered_feature_bc_matrix&quot; 
-</code></pre></div>
-<p>To run through a typical <code>Seurat</code> analysis, we will use the files that are in the directory <code>data/filtered_feature_bc_matrix</code>. This directory is part of the output generated by <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger"><code>cellranger</code></a>. To load this data into R and generate a sparse matrix, run the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="n">sparse_matrix</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">Read10X</span><span class="p">(</span><span class="n">data.dir</span> <span class="o">=</span> <span class="n">datadirs</span><span class="p">)</span>
-</code></pre></div>
-<p>This imports a raw count matrix. Have a look at the counts of the first 30 cells of three genes by running:</p>
-<div class="highlight"><pre><span></span><code><span class="n">sparse_matrix</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;PECAM1&quot;</span><span class="p">,</span> <span class="s">&quot;CD8A&quot;</span><span class="p">,</span> <span class="s">&quot;TSPAN1&quot;</span><span class="p">),</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
-</code></pre></div>
-<p>You will see many dots (zeros) and a few integers representing the counts per gene per cell. </p>
-<p>To generate a <code>Seurat</code> object, we will run <code>CreateSeuratObject</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">sparse_matrix</span><span class="p">,</span>
-                                  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;pbmmc&quot;</span><span class="p">)</span>
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Function notation with <code>::</code></p>
-<p>Here, we define the function together with its associated package. We do that by the syntax <code>package::function</code>. Of course, you can also call <code>library(package)</code>, and only type the function name. Since we use many different packages in this course, it can be confusing which function comes from which package. Therefore, we chose to always associate the package with the called function.</p>
-</div>
-<p><strong>Exercise:</strong> check what&rsquo;s in the <code>seu</code> object, by typing <code>seu</code> in the R console. How many features are in there? And how many cells?</p>
-<details class="done"><summary>Answer</summary><p>Typing <code>seu</code> should return:</p>
-<div class="highlight"><pre><span></span><code>An object of class Seurat 
-18673 features across 6946 samples within 1 assay 
-Active assay: RNA (18673 features, 0 variable features)
-</code></pre></div>
-<p>This means that we have 18673 genes (features) in there, and 6946 cells (samples)</p>
-</details>
-<h3 id="the-seurat-object">The <code>Seurat</code> object</h3>
-<p>The <code>seu</code> object we have created has the class <code>Seurat</code>. The object contains multi-level slots and lists. Each <code>Seurat</code> object contains exactly the same slots that are specified in the image below (get slot descriptions by typing <code>?SeuratObject::Seurat</code>). You can get the information inside a slot with <code>@</code>, in the same way as you would use the <code>$</code> for lists (e.g. <code>seu@meta.data</code> will return the a data frame with information on each cell). Slots can be filled with other R objects, like lists, vectors, data frames or any other class. Here&rsquo;s an overview of all slots that are in a <code>Seurat</code> object:</p>
-<figure>
-  <img src="../../assets/images/seurat_object.png" width="500"/>
-</figure>
-
-<p>In addition to the original count table, the <code>Seurat</code> object can therefore store a lot of information that is generated during your analysis, like results of a normalization (<code>@assays$RNA@data</code>) a PCA or UMAP (<code>@reductions</code>) and the clustering (<code>@graphs</code>). It also tracks all the commands that have been used to generate the object in its current state (<code>@commands</code>). Therefore, while going through the analysis steps, the same object gets more and more of its slots filled. Because most <code>Seurat</code> functions return the input object + adjusted slots, we can use this syntax:</p>
-<div class="highlight"><pre><span></span><code>seurat_object &lt;- Seurat::function(seurat_object)
-</code></pre></div>
-<p>So, the function takes an object as input and we assign it to an object with the same name. Meaning that we overwrite the object used as input. This is fine in many cases, because <code>Seurat</code> adds information to the input object, and returns is. We will use this syntax for the first time at <a href="../normalization_scaling/">Normalization and scaling</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Getting specific information out of the <code>Seurat</code> object<p>In order to get specific data you can use the <code>@</code> and <code>$</code> symbols to browse through the objects. However, <code>Seurat</code> comes with a lot of convenience functions, that are easier to use. So, e.g. to get the raw count matrix, you could type <code>seurat_object@assays$RNA@counts</code>, however, this is equivalent to <code>GetAssayData(object = seurat_object, slot = "counts")</code>. More information on these convenience functions <a href="https://satijalab.org/seurat/articles/essential_commands.html">here</a>.</p>
-</p>
-</div>
-<p><strong>Exercise:</strong></p>
-<p>A. Have a look at the <code>seu</code> object by running <code>View(seu)</code>. What is in there? What is stored in <code>@active.ident</code>? </p>
-<p>B. Have a look at the <code>data.frame</code> stored at <code>seu@meta.data</code> what kind of information is in there?</p>
-<details class="done"><summary>Answer</summary><div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Answer A</label><div class="tabbed-content">
-<p>There are many slots as described in the above figure. The slot <code>@active.ident</code> contains data specifying the samples, e.g. <code>table(seu@active.ident)</code> returns:</p>
-<div class="highlight"><pre><span></span><code>PBMMC-1 PBMMC-2 PBMMC-3 
-1612    3105    2229 
-</code></pre></div>
-<p>Which are the number of cells per sample. </p>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Answer B</label><div class="tabbed-content">
-<p>Running <code>head(seu@meta.data)</code> returns:</p>
-<div class="highlight"><pre><span></span><code>                           orig.ident nCount_RNA nFeature_RNA
-PBMMC-1_AAACCTGCAGACGCAA-1    PBMMC-1       2401          909
-PBMMC-1_AAACCTGTCATCACCC-1    PBMMC-1       3532          760
-PBMMC-1_AAAGATGCATAAAGGT-1    PBMMC-1       3972         1215
-PBMMC-1_AAAGCAAAGCAGCGTA-1    PBMMC-1       3569          894
-PBMMC-1_AAAGCAACAATAACGA-1    PBMMC-1       2982          730
-PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108
-</code></pre></div>
-<p>Giving you the names of three columns and a row for each cell:</p>
-<ul>
-<li><code>orig_ident</code>: the original identity (origin) of a cell.</li>
-<li><code>nCount_RNA</code>: the number of reads assigned to a cell.</li>
-<li><code>nFeature_RNA</code>: the number of expressed features (genes) per cell.</li>
-</ul>
-</div>
-</div>
-</details>
-<p>Luckily, usually you do not have to dive into this structure to retrieve information. For example, information in the slot <code>@meta.data</code> can be retrieved and set by using <code>$</code> or <code>[[]]</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>There is a subtle difference here between <code>$</code> and <code>[[]]</code>. While <code>$</code> returns a vector of the column in <code>@meta.data</code>, <code>[[]]</code> returns a <code>data.frame</code>.</p>
-</div>
-<p><strong>Exercise:</strong> Generate a histogram of the column <code>nCount_RNA</code> at <code>seu@meta.data</code>, with the base function <code>hist</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">seu</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
-</code></pre></div>
-<p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">seu</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
-</code></pre></div>
-</details>
-<p>There are also built-in functions to plot data from <code>Seurat</code> object, for example <code>FeatureScatter</code>. This function enables you easily draw a scatterplot from a <code>Seurat</code> object:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>You can find a nice overview of such functions <a href="https://satijalab.org/seurat/articles/essential_commands.html">here</a>. </p>
                 
               
               
