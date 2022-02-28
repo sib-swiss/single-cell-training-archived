@@ -786,7 +786,7 @@ PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108
 <p>We will start with calculating the percentage of counts coming from transcript types:</p>
 <ul>
 <li><strong>Mitochondrial genes</strong>: If a cell membrane is damaged, it looses free RNA quicker compared to mitochondrial RNA, because the latter is part of the mitochondrion. A high relative amount of mitochondrial counts can therefore point to damaged cells (<a href="https://f1000research.com/articles/5-2122">Lun et al. 2016</a>). </li>
-<li><strong>Ribosomal genes</strong>: They do not point to specific issues, but it can be good to have a look at their relative abundance. Sometimes, they might even have a biological relevance (e.g. <a href="https://www.nature.com/articles/s41598-020-64929-x">Caron et al. 2020</a>).</li>
+<li><strong>Ribosomal genes</strong>: Are not rRNA (ribosomal RNA) but is mRNA that code for ribosomal proteins. They do not point to specific issues, but it can be good to have a look at their relative abundance. They can have biological relevance (e.g. <a href="https://www.nature.com/articles/s41598-020-64929-x">Caron et al. 2020</a>).</li>
 <li><strong>Hemoglobin genes</strong>: these transcripts are very abundant in erythrocytes. Depending on your application, you can expect &lsquo;contamination&rsquo; of erythrocytes and select against it. </li>
 </ul>
 <p>In order to have an idea about the relative counts of these type of genes in our dataset, we can calculate their expression as relative counts in each cell. We do that by selecting genes based on patterns (e.g. <code>^MT-</code> matches with all gene names starting with <code>MT</code>, i.e. mitochondrial genes):</p>
