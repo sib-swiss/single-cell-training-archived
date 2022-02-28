@@ -639,9 +639,9 @@
 <p>Load the <code>seu_int</code> dataset you have created yesterday:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>And load the following packages:</p>
+<p>And load the following packages (install them if they are missing):</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">edgeR</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">edgeR</span><span class="p">)</span> <span class="c1"># BiocManager::install(&quot;edgeR&quot;)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">limma</span><span class="p">)</span>
 </code></pre></div>
 <p>The function <code>FindAllMarkers</code> performs a Wilcoxon plot to determine the genes differentially expressed between each cluster and the rest of the cells. Other types of tests than the Wilcoxon test are available. Check it out by running <code>?Seurat::FindAllMarkers</code>.</p>
@@ -653,8 +653,12 @@
 <p class="admonition-title">Time for coffee</p>
 <p>This takes a while. Have a break.</p>
 </div>
-<p>We can extract the top 3 markers per cluster:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<p>Subset the table to only keep the significant genes, and you can save it as a csv file if you wish to explore it further. Then extract the top 3 markers per cluster:</p>
+<div class="highlight"><pre><span></span><code><span class="n">de_genes</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">de_genes</span><span class="p">,</span> <span class="n">de_genes</span><span class="o">$</span><span class="n">p_val_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">de_genes</span><span class="p">,</span> <span class="s">&quot;de_genes_FindAllMarkers.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">,</span> <span class="n">quote</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+
+
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="n">top_specific_markers</span> <span class="o">&lt;-</span> <span class="n">de_genes</span> <span class="o">%&gt;%</span>
   <span class="nf">group_by</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span> <span class="o">%&gt;%</span>
   <span class="nf">top_n</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="n">avg_log2FC</span><span class="p">)</span>
@@ -690,19 +694,20 @@ LTB.8   1.580808e-61  1.6529117 0.774 0.461  2.951843e-57       8  LTB
 IL7R.2  4.497526e-45  1.1489439 0.458 0.173  8.398231e-41       8 IL7R
 LTB.11  2.727014e-25  0.8193337 0.750 0.467  5.092153e-21      11  LTB
 </code></pre></div></p>
-<p>So, yes, the t-cell genes are highly significant markers for cluster 0 and 8.</p>
+<p>So, yes, the T-cell genes are highly significant markers for cluster 0 and 8.</p>
 </details>
 <h3 id="differential-expression-between-groups-of-cells">Differential expression between groups of cells</h3>
 <p>The <code>FindMarkers</code> function allows to test for differential gene expression analysis specifically between 2 groups of cells, i.e. perform pairwise comparisons, eg between cells of cluster 0 vs cluster 2, or between cells annotated as T-cells and B-cells.</p>
 <p>First we can set the default cell identity to the cell types defined by <code>SingleR</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>Run the differential gene expression analysis:</p>
+<p>Run the differential gene expression analysis and subset the table to keep the significant genes:</p>
 <div class="highlight"><pre><span></span><code><span class="n">deg_cd8_cd4</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
                                    <span class="n">ident.1</span> <span class="o">=</span> <span class="s">&quot;CD8+ T cells&quot;</span><span class="p">,</span>
                                    <span class="n">ident.2</span> <span class="o">=</span> <span class="s">&quot;CD4+ T cells&quot;</span><span class="p">,</span>
                                    <span class="n">group.by</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">$</span><span class="n">SingleR_annot</span><span class="p">,</span>
                                    <span class="n">test.use</span> <span class="o">=</span> <span class="s">&quot;wilcox&quot;</span><span class="p">)</span>
+<span class="n">deg_cd8_cd4</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">deg_cd8_cd4</span><span class="p">,</span> <span class="n">deg_cd8_cd4</span><span class="o">$</span><span class="n">p_val_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Are CD8A, CD8B and CD4 in there? What does the sign (i.e. positive or negative) mean in the log fold change values? Are they according to the CD8+ and CD4+ annotations? Check your answer by generating a violin plot of a top differentially expressed gene.</p>
 <details class="done"><summary>Answer</summary><p>You can check out the results with:</p>
@@ -721,8 +726,8 @@ CD4  1.070126e-13 -0.4000835 0.012 0.103 1.998246e-09
 CD8A 1.409306e-77  1.2956354 0.344 0.008 2.631597e-73
 CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 </code></pre></div>
-<p>Indeed, a negative log2FC for CD4 meaning a lower expression in CD8+ T-cells, and a positive log2FC for CD8A and CD8B, meaning a higher expression in CD8+ T-cells.</p>
-<p>Plotting the the genes in the T cells:</p>
+<p>Indeed, because we compared ident.1 = &ldquo;CD8+ T cells&rdquo; to ident.2 = &ldquo;CD4+ T cells&rdquo;, a negative log2FC for the CD4 gene indicates a lower expression in CD8+ T-cells than in CD4+ T-cells, while a positive log2FC for the CD8A and CD8B genes indicates a higher expression in CD8+ T-cells.</p>
+<p>Plotting the genes in these two T-cell groups only:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> 
             <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD4&quot;</span><span class="p">,</span> <span class="s">&quot;CD8A&quot;</span><span class="p">,</span> <span class="s">&quot;CD8B&quot;</span><span class="p">),</span>
             <span class="n">idents</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD8+ T cells&quot;</span><span class="p">,</span> <span class="s">&quot;CD4+ T cells&quot;</span><span class="p">))</span>
@@ -733,16 +738,29 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 </figure></p>
 </details>
 <h3 id="differential-expression-using-limma">Differential expression using <code>limma</code></h3>
-<p>The Wilcoxon test implemented in <code>FindMarkers</code> does not allow to test for complex design (eg factorial experiments) or to include batch as a covariate.</p>
-<p>We can use <code>edgeR</code> or <code>limma</code> which are designed for microarray or bulk RNA seq data and provide a design matrix that includes covariates for example.</p>
-<p>We will load an object containing only pro B cells, both from the healthy tissues, and malignant tissues. We can load it like this:</p>
+<p>The Wilcoxon test implemented in <code>FindMarkers</code> does not allow you to test for complex design (eg factorial experiments) or to include batch as a covariate. It doesn&rsquo;t allow you to run paired-sample T tests for example. </p>
+<p>For more complex designs, we can use <code>edgeR</code> or <code>limma</code> which are designed for microarray or bulk RNA seq data and provide a design matrix that includes covariates for example, or sample IDs for paired analyses.</p>
+<p>We will load an object containing only pro B cells, both from healthy tissues (PBMMC), and malignant tissues (ETV6-RUNX1). </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please NOTE that in the original design of this data set, the healthy and malignant tissues were not  patient-matched, i.e. the real design was not the one of paired healthy and malignant tissues. However, for demonstration purposes, we will show you how to run a paired analysis, and do as if the PBMMC-1 and ETV6-RUNX1-1 samples both came from the same patient 1, the PBMMC-2 and ETV6-RUNX1-2 samples both came from the same patient 2, etc&hellip;</p>
+</div>
+<p>We can load the object and explore its UMAP and meta.data like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">proB</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;course_data/proB.rds&quot;</span><span class="p">)</span>
+
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
+
+<span class="nf">table</span><span class="p">(</span><span class="n">proB</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">type</span><span class="p">)</span>
+<span class="c1"># ETV6-RUNX1      PBMMC </span>
+<span class="c1">#      2000       1021</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">proB</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you want to know how this pro-B cell subset is generated, have a look at the script <a href="../../assets/scripts/generate_object_proB.R">here</a>.</p>
 </div>
-<p>Since we will start wit differential gene expression, we set the default assay back to &ldquo;RNA&rdquo;. Also, we set the default identity to the cell type:</p>
+<p>Since we will start with differential gene expression, we set the default assay back to &ldquo;RNA&rdquo;. Also, we set the default identity to the cell type:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">Idents</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span>
 </code></pre></div>
@@ -755,19 +773,29 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <p>Here we could also test for e.g. healthy versus diseased within a celltype/cluster.</p>
 </div>
 <p>Now we will run differential expression analysis between cell type <em>delta</em> and <em>gamma</em> using the technology as a covariate by using <code>limma</code>.</p>
-<p>Get the count matrix and keep only genes that are expressed in at least one cell:</p>
+<p>Get the count matrix and keep only genes that are expressed in at least one cell (how many are left?):</p>
 <div class="highlight"><pre><span></span><code><span class="n">counts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
 <span class="n">counts</span> <span class="o">&lt;-</span> <span class="n">counts</span><span class="p">[</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">!=</span> <span class="m">0</span><span class="p">,]</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </code></pre></div>
 <p>Generate a <code>DGEList</code> object to use as input for <code>limma</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">DGEList</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span><span class="p">)</span>
 <span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">calcNormFactors</span><span class="p">(</span><span class="n">dge</span><span class="p">)</span>  
 </code></pre></div>
-<p>Generate a design matrix:</p>
-<div class="highlight"><pre><span></span><code><span class="n">design</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span> <span class="m">0</span> <span class="o">+</span> <span class="n">type</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">proB</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">design</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">make.names</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;PBMMC&quot;</span><span class="p">))</span>
+<p>Generate a design matrix, including patient ID to model for a paired analysis. If you need help to generate a design matrix, check out the very nice <a href="https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf">edgeR User Guide</a>, sections 3.3 and 3.4.
+Extract the sample ID from the meta.data, then create the design matrix:</p>
+<div class="highlight"><pre><span></span><code><span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;ETV6_RUNX1&quot;</span><span class="p">,</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">)</span>
+<span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">sapply</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">),</span> <span class="s">&#39;[&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+
+<span class="n">design</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span> <span class="m">0</span> <span class="o">+</span> <span class="n">type</span> <span class="o">+</span> <span class="n">patient.id</span> <span class="p">,</span> 
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">proB</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
+
+<span class="nf">head</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
+
+<span class="c1"># change column names to more simple group names: </span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">design</span><span class="p">)[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="nf">make.names</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;PBMMC&quot;</span><span class="p">))</span>
 </code></pre></div>
-<p>Specify which contrasts to check:</p>
+<p>Specify which contrast to analyse:</p>
 <div class="highlight"><pre><span></span><code><span class="n">contrast.mat</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">makeContrasts</span><span class="p">(</span><span class="n">ETV6.RUNX1</span> <span class="o">-</span> <span class="n">PBMMC</span><span class="p">,</span>
                                      <span class="n">levels</span> <span class="o">=</span> <span class="n">design</span><span class="p">)</span>
 </code></pre></div>
@@ -777,19 +805,45 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">contrasts.fit</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">contrast.mat</span><span class="p">)</span>
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">eBayes</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">)</span>
 </code></pre></div>
-<p>We can use <code>topTable</code> to get the most significantly differentially expressed genes:
+<p>We can use <code>topTable</code> to get the most significantly differentially expressed genes, and save the full DE results to an object. How many genes are significant? Are you suprised by this number?
 <div class="highlight"><pre><span></span><code><span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+
+<span class="n">limma_de</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
+<span class="nf">length</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">))</span>
 </code></pre></div></p>
-<p>And we can check whether this corresponds to the counts by generating a violin plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;CD52&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;IGLL1&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
+<p>And we can check whether this corresponds to the counts by generating a violin plot, or a gene downregulated in tumor, or a gene upregulated in tumor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;S100A9&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;SOCS2&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>We can run a similar analysis with <code>Seurat</code>. Run the code below. We will use the output object for the enrichment analysis. </p>
+<p>We can run a similar analysis with <code>Seurat</code>, but this will not take into account the paired design. Run the code below. </p>
 <div class="highlight"><pre><span></span><code><span class="n">tum_vs_norm</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindMarkers</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> 
                                    <span class="n">ident.1</span> <span class="o">=</span> <span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> 
                                    <span class="n">ident.2</span> <span class="o">=</span> <span class="s">&quot;PBMMC&quot;</span><span class="p">,</span> 
                                    <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
+<span class="n">tum_vs_norm</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> <span class="n">tum_vs_norm</span><span class="o">$</span><span class="n">p_val_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">)</span>
 </code></pre></div>
+<p>How many genes are significant? How does the fold change of these genes compare to the fold change of the top genes found by limma?</p>
+<p>Keep the <code>tum_vs_norm</code> object because we will use this output object for the enrichment analysis in the next section.</p>
+<details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code><span class="nf">dim</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">)</span> 
+</code></pre></div>
+We find 1893 significant genes. If we merge the <code>FindMarkers</code> and the <code>limma</code> results, keep <code>limma</code>&lsquo;s most significant genes and plot:
+<div class="highlight"><pre><span></span><code><span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> <span class="n">limma_de</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span>
+                           <span class="n">all.x</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="p">,</span>
+                            <span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.00001</span><span class="p">)</span>
+
+<span class="nf">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">avg_log2FC</span><span class="p">,</span>
+<span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">logFC</span><span class="p">,</span>
+<span class="n">xlab</span><span class="o">=</span><span class="s">&quot;log2FC Wilcoxon&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;log2FC limma&quot;</span><span class="p">,</span>
+<span class="n">pch</span><span class="o">=</span><span class="m">15</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
+</code></pre></div>
+Returning:</p>
+<p><figure>
+  <img src="../../assets/images/limma_vs_wilcoxon.png" width="600"/>
+</figure></p>
+</details>
                 
               
               
