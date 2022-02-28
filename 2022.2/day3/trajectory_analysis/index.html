@@ -855,16 +855,22 @@ major set of parameters we omitted here when running Slingshot?</p>
 </code></pre></div>
 <h3 id="trajectory-analysis-with-monocle3">Trajectory analysis with <code>monocle3</code></h3>
 <p>This part showcases how you can use <code>monocle3</code> to perform a trajectory analysis. First load the <code>seu_int</code> dataset:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day3.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Load the required package into your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">monocle3</span><span class="p">)</span>
 </code></pre></div>
 <p>Generate a <code>monocle3</code> object (with class <code>cell_data_set</code>) from our <code>Seurat</code> object:</p>
-<div class="highlight"><pre><span></span><code><span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_int</span><span class="p">))</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># get matrix and filter for minimum number of cells and features (the latter is a fix for backward compatibility)</span>
+<span class="n">mat_tmp</span> <span class="o">&lt;-</span> <span class="n">seu_int</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span>
+<span class="n">seu_tmp</span> <span class="o">&lt;-</span> <span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">mat_tmp</span><span class="p">,</span> <span class="n">min.cells</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+                              <span class="n">min.features</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+
+<span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">)</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;gene_short_name&quot;</span>
-<span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
+
+<span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">seu_tmp</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
                                               <span class="n">cell_metadata</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
                                               <span class="n">gene_metadata</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
 </code></pre></div>

@@ -489,6 +489,19 @@
     Exercises
   </a>
   
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clear-environment" class="md-nav__link">
+    Clear environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -551,6 +564,19 @@
   <a href="#exercises" class="md-nav__link">
     Exercises
   </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clear-environment" class="md-nav__link">
+    Clear environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -647,6 +673,12 @@ label types use:</p>
 </code></pre></div>
 <p>When using the genes down-regulated in tumor, among the over-represented Hallmark gene sets, we have <code>HALLMARK_G2M_CHECKPOINT</code>, which includes genes involved in the G2/M checkpoint in the progression through the cell division cycle.</p>
 <div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">tum_vs_norm_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="n">tum_vs_norm_enrich</span><span class="o">@</span><span class="n">result</span><span class="o">$</span><span class="n">p.adjust</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">),])</span>
+</code></pre></div>
+<h3 id="clear-environment">Clear environment</h3>
+<p>Clear your environment:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">gc</span><span class="p">()</span>
+<span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>
                 
               
