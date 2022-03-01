@@ -619,7 +619,7 @@ For the PCA, by default, only the previously determined variable features are us
     <img src="../../assets/images/pca_HBA1.png" width="500"/>
 </figure></p>
 </details>
-<p>We can generate heatmaps according to the correlations with the different dimensions of our PCA:</p>
+<p>We can generate heatmaps according to their principal component scores calculated in the rotation matrix:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 <figure>
