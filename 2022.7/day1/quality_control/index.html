@@ -761,9 +761,11 @@
 <div class="highlight"><pre><span></span><code><span class="n">sparse_matrix</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;PECAM1&quot;</span><span class="p">,</span> <span class="s">&quot;CD8A&quot;</span><span class="p">,</span> <span class="s">&quot;TSPAN1&quot;</span><span class="p">),</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
 </code></pre></div>
 <p>You will see many dots (zeros) and a few integers representing the counts per gene per cell. </p>
-<p>To generate a <code>Seurat</code> object, we will run <code>CreateSeuratObject</code>:</p>
+<p>To generate a <code>Seurat</code> object, we will run <code>CreateSeuratObject</code>. Note that while creating the object, we already do some mild filtering; we only import genes that are expressed in at least 3 cells, and we only import cells that have at least 100 different genes expressed:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">sparse_matrix</span><span class="p">,</span>
-                                  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;pbmmc&quot;</span><span class="p">)</span>
+                                  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;pbmmc&quot;</span><span class="p">,</span>
+                                  <span class="n">min.cells</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+                                  <span class="n">min.features</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Function notation with <code>::</code></p>
@@ -772,10 +774,10 @@
 <p><strong>Exercise:</strong> check what&rsquo;s in the <code>seu</code> object, by typing <code>seu</code> in the R console. How many features are in there? And how many cells?</p>
 <details class="done"><summary>Answer</summary><p>Typing <code>seu</code> should return:</p>
 <div class="highlight"><pre><span></span><code>An object of class Seurat 
-33694 features across 6946 samples within 1 assay 
-Active assay: RNA (33694 features, 0 variable features)
+18673 features across 6946 samples within 1 assay 
+Active assay: RNA (18673 features, 0 variable features)
 </code></pre></div>
-<p>This means that we have 33694 genes (features) in there, and 6946 cells (samples)</p>
+<p>This means that we have 18673 genes (features) in there, and 6946 cells (samples)</p>
 </details>
 <h3 id="the-seurat-object">The <code>Seurat</code> object</h3>
 <p>The <code>seu</code> object we have created has the class <code>Seurat</code>. The object contains multi-level slots and lists. Each <code>Seurat</code> object contains exactly the same slots that are specified in the image below (get slot descriptions by typing <code>?SeuratObject::Seurat</code>). You can get the information inside a slot with <code>@</code>, in the same way as you would use the <code>$</code> for lists (e.g. <code>seu@meta.data</code> will return the a data frame with information on each cell). Slots can be filled with other R objects, like lists, vectors, data frames or any other class. Here&rsquo;s an overview of all slots that are in a <code>Seurat</code> object:</p>

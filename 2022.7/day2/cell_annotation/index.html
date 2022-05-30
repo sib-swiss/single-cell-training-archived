@@ -842,7 +842,7 @@
 <div class="highlight"><pre><span></span><code><span class="n">singleR_labels</span> <span class="o">&lt;-</span> <span class="n">seu_int_SingleR</span><span class="o">$</span><span class="n">labels</span>
 <span class="n">t</span> <span class="o">&lt;-</span> <span class="nf">table</span><span class="p">(</span><span class="n">singleR_labels</span><span class="p">)</span>
 <span class="n">other</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="n">t</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">]</span>
-<span class="n">singleR_labels</span><span class="p">[</span><span class="n">singleR_labels</span> <span class="o">%in%</span> <span class="n">other</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="kc">NA</span>
+<span class="n">singleR_labels</span><span class="p">[</span><span class="n">singleR_labels</span> <span class="o">%in%</span> <span class="n">other</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;none&quot;</span>
 </code></pre></div>
 <p>In order to visualize it in our UMAP, we have to add the annotation to <code>seu_int@meta.data</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">singleR_labels</span>

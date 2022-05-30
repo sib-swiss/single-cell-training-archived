@@ -887,10 +887,12 @@ Extract the sample ID from the meta.data, then create the design matrix:</p>
 <details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code><span class="nf">dim</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">)</span> 
 </code></pre></div>
 We find 1893 significant genes. If we merge the <code>FindMarkers</code> and the <code>limma</code> results, keep <code>limma</code>&lsquo;s most significant genes and plot:
-<div class="highlight"><pre><span></span><code><span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> <span class="n">limma_de</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span>
-                           <span class="n">all.x</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> 
+                                 <span class="n">limma_de</span><span class="p">,</span> 
+                                 <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span>
+                                 <span class="n">all.x</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 <span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="p">,</span>
-                            <span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.00001</span><span class="p">)</span>
+                                  <span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.00001</span><span class="p">)</span>
 
 <span class="nf">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">avg_log2FC</span><span class="p">,</span>
