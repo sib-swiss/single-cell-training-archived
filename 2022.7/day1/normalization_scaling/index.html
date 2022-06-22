@@ -323,8 +323,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../analysis_tools_qc/" class="md-nav__link">
+        Analysis tools and QC
       </a>
     </li>
   
@@ -739,7 +739,9 @@ Normalized values are stored in the &ldquo;RNA&rdquo; assay (as item of the <cod
 <p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>  
 </code></pre></div>
 Returning:</p>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Before normalization</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Before normalization</label><label for="__tabbed_1_2">After normalization</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>10 x 10 sparse Matrix of class &quot;dgCMatrix&quot;
 [[ suppressing 10 column names ‘PBMMC-1_AAACCTGCAGACGCAA-1’, ‘PBMMC-1_AAACCTGTCATCACCC-1’, ‘PBMMC-1_AAAGATGCATAAAGGT-1’ ... ]]
 
@@ -755,7 +757,7 @@ FAM41C        . . . . . . . . . .
 RP11-54O7.1   . . . . . . . . . .
 </code></pre></div>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">After normalization</label><div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>10 x 10 sparse Matrix of class &quot;dgCMatrix&quot;
 [[ suppressing 10 column names ‘PBMMC-1_AAACCTGCAGACGCAA-1’, ‘PBMMC-1_AAACCTGTCATCACCC-1’, ‘PBMMC-1_AAAGATGCATAAAGGT-1’ ... ]]
 
@@ -770,6 +772,7 @@ LINC00115     .        . . . . . .        . . .
 FAM41C        .        . . . . . .        . . .
 RP11-54O7.1   .        . . . . . .        . . .
 </code></pre></div>
+</div>
 </div>
 </div>
 </details>
@@ -850,7 +853,7 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../quality_control/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quality control" rel="prev">
+        <a href="../analysis_tools_qc/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Analysis tools and QC" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -859,7 +862,7 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
               <span class="md-footer__direction">
                 Previous
               </span>
-              Quality control
+              Analysis tools and QC
             </div>
           </div>
         </a>

@@ -387,8 +387,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../quality_control/" class="md-nav__link">
-        Quality control
+      <a href="../analysis_tools_qc/" class="md-nav__link">
+        Analysis tools and QC
       </a>
     </li>
   
@@ -682,13 +682,15 @@
 <li><strong>Docker:</strong> if you want to use the docker image locally</li>
 <li><strong>renkulab.io</strong> if you want to easily  deploy the environment outside the course</li>
 </ul>
-<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Enrolled</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Enrolled</label><label for="__tabbed_1_2">Own installation</label><label for="__tabbed_1_3">Docker</label><label for="__tabbed_1_4">renkulab.io</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>Log in to Rstudio server with the provided link and password, your username is <code>rstudio</code>.</p>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Own installation</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Install the required packages using the script <a href="https://raw.githubusercontent.com/sib-swiss/single-cell-training/master/Docker/install_packages.R"><code>install_packages.R</code></a></p>
 </div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Docker</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>With docker, you can use exactly the same environment as we use in the enrolled course, but than running locally.</p>
 <p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
 <p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
@@ -711,8 +713,9 @@ geertvangeest/single-cell-rstudio:latest
 <p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/rstudio</code> in the docker container (&lsquo;rstudio&rsquo; is the default user for Rstudio containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer. Change the first path to a path on your computer that you want to use as a working directory.</p>
 <p>The part <code>geertvangeest/single-cell-rstudio:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
-<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">renkulab.io</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>To simply run the environment, you can use <a href="https://renkulab.io">renku</a>. You can find the repository (including the image) here: <a href="https://renkulab.io/projects/geert.vangeest/single-cell-training/">https://renkulab.io/projects/geert.vangeest/single-cell-training/</a>. </p>
+</div>
 </div>
 </div>
 <h3 id="create-a-project">Create a project</h3>
@@ -795,7 +798,7 @@ rm course_data.tar.gz
 </code></pre></div>
 <p>This data comes from:</p>
 <p>Caron M, St-Onge P, Sontag T, Wang YC, Richer C, Ragoussis I, et al. <strong>Single-cell analysis of childhood leukemia reveals a link between developmental states and ribosomal protein expression as a source of intra-individual heterogeneity.</strong> Scientific Reports. 2020;10:1–12. Available from: http://dx.doi.org/10.1038/s41598-020-64929-x</p>
-<p>We will use the reads to showcase the use of <code>cellranger count</code>. The directory only reads from chromosome 21 and 22 of one sample (<code>ETV6-RUNX1_1</code>). The count matrices are output of <code>cellranger count</code>, and we will use those for the other exercises in <code>R</code>.</p>
+<p>We will use the reads to showcase the use of <code>cellranger count</code>. The directory contains only reads from chromosome 21 and 22 of one sample (<code>ETV6-RUNX1_1</code>). The count matrices are output of <code>cellranger count</code>, and we will use those for the other exercises in <code>R</code>.</p>
 
               
             </article>

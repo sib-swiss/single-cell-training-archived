@@ -13,7 +13,7 @@
     
     
       
-        <title>Quality control - Single cell transcriptomics</title>
+        <title>Analysis tools and QC - Single cell transcriptomics</title>
       
     
     
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Quality control
+              Analysis tools and QC
             
           </span>
         </div>
@@ -331,12 +331,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Quality control
+          Analysis tools and QC
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Quality control
+        Analysis tools and QC
       </a>
       
         
@@ -707,13 +707,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/quality_control.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/analysis_tools_qc.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-  <h1>Quality control</h1>
+  <h1>Analysis tools and QC</h1>
 
 <h2 id="learning-outcomes">Learning outcomes</h2>
 <p><strong>After having completed this chapter you will be able to:</strong></p>
@@ -796,14 +796,16 @@ Active assay: RNA (18673 features, 0 variable features)
 <p><strong>Exercise:</strong></p>
 <p>A. Have a look at the <code>seu</code> object by running <code>View(seu)</code>. What is in there? What is stored in <code>@active.ident</code>? </p>
 <p>B. Have a look at the <code>data.frame</code> stored at <code>seu@meta.data</code> what kind of information is in there?</p>
-<details class="done"><summary>Answer</summary><div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Answer A</label><div class="tabbed-content">
+<details class="done"><summary>Answer</summary><div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Answer A</label><label for="__tabbed_1_2">Answer B</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>There are many slots as described in the above figure. The slot <code>@active.ident</code> contains data specifying the samples, e.g. <code>table(seu@active.ident)</code> returns:</p>
 <div class="highlight"><pre><span></span><code>PBMMC-1 PBMMC-2 PBMMC-3 
 1612    3105    2229 
 </code></pre></div>
 <p>Which are the number of cells per sample. </p>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Answer B</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>Running <code>head(seu@meta.data)</code> returns:</p>
 <div class="highlight"><pre><span></span><code>                           orig.ident nCount_RNA nFeature_RNA
 PBMMC-1_AAACCTGCAGACGCAA-1    PBMMC-1       2401          909
@@ -819,6 +821,7 @@ PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108
 <li><code>nCount_RNA</code>: the number of reads assigned to a cell.</li>
 <li><code>nFeature_RNA</code>: the number of expressed features (genes) per cell.</li>
 </ul>
+</div>
 </div>
 </div>
 </details>
