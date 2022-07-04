@@ -733,7 +733,7 @@ Normalized values are stored in the &ldquo;RNA&rdquo; assay (as item of the <cod
 <p><strong>Exercise:</strong> Have a look at the assay data before and after running <code>NormalizeData()</code>. Did it change?</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You can extract assay data with the function <code>Seurat::GetAssayData</code>. By default, the slot <code>data</code> is used, containing raw counts before normalization, and normalized counts after normalization. Use <code>Seurat::GetAssayData(seu, slot = "counts")</code> to get the raw count data after normalization. </p>
+<p>You can extract assay data with the function <code>Seurat::GetAssayData</code>. By default, the slot <code>data</code> is used (inside the slot <code>assay</code>), containing normalized counts. Use <code>Seurat::GetAssayData(seu, slot = "counts")</code> to get the raw counts. </p>
 </div>
 <details class="done"><summary>Answer</summary><p>You can check out some assay data with:</p>
 <p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>  
