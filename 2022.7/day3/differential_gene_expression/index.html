@@ -835,11 +835,6 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <span class="c1">##first an sce object is needed</span>
 <span class="n">sce_proB</span> <span class="o">&lt;-</span> <span class="nf">as.SingleCellExperiment</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span>
 
-<span class="c1">#The needed package has to be installed if not already done:</span>
-<span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">require</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">,</span> <span class="n">quietly</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
-  <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
-<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;scuttle&quot;</span><span class="p">)</span>
-
 <span class="nf">library</span><span class="p">(</span><span class="n">scuttle</span><span class="p">)</span>
 
 <span class="c1">##aggregateAcrossCells here it is only aggregated by sample, one could imagine</span>
@@ -891,12 +886,12 @@ Extract the sample ID from the meta.data, then create the design matrix:</p>
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">contrasts.fit</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">contrast.mat</span><span class="p">)</span>
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">eBayes</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">)</span>
 </code></pre></div>
-<p>We can use <code>topTable</code> to get the most significantly differentially expressed genes, and save the full DE results to an object. How many genes are significant? Are you suprised by this number?
+<p>We can use <code>topTable</code> to get the most significantly differentially expressed genes, and save the full DE results to an object. How many genes are significant? Are you suprised by this number?</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Show the top differentially expressed genes:</span>
 <span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
 <span class="n">limma_de</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
 <span class="nf">length</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">))</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>And we can check whether this corresponds to the counts by generating a violin plot, or a gene downregulated in tumor, or a gene upregulated in tumor:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;S100A9&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="s">&quot;SOCS2&quot;</span><span class="p">,</span> <span class="n">split.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
