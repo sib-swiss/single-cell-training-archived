@@ -279,20 +279,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/general_introduction/" class="md-nav__link">
-        General introduction
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../day1/setup/" class="md-nav__link">
         Setup
       </a>
@@ -307,8 +293,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../day1/introduction_scrnaseq/" class="md-nav__link">
-        Introduction scRNAseq
+      <a href="../../day1/introduction_cellranger/" class="md-nav__link">
+        Introduction & cellranger
       </a>
     </li>
   
@@ -832,42 +818,82 @@ CD8B 7.113148e-36  0.8536693 0.479 0.177 1.328238e-31
 <p class="admonition-title">Note</p>
 <p>Here we could also test for e.g. healthy versus diseased within a celltype/cluster.</p>
 </div>
-<p>Now we will run differential expression analysis between cell type <em>delta</em> and <em>gamma</em> using the technology as a covariate by using <code>limma</code>.</p>
-<p>Get the count matrix and keep only genes that are expressed in at least one cell (how many are left?):</p>
-<div class="highlight"><pre><span></span><code><span class="n">counts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">proB</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
-<span class="n">counts</span> <span class="o">&lt;-</span> <span class="n">counts</span><span class="p">[</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span> <span class="o">!=</span> <span class="m">0</span><span class="p">,]</span>
-<span class="nf">dim</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<p>Now we will run differential expression analysis between tumor and healthy cells using the patient ID as a covariate by using <code>limma</code>.</p>
+<p>Prepare the pseudobulk count matrix:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#taking the proB data </span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">Idents</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span>
+
+<span class="c1">## add the patient id also for paired DGE</span>
+<span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;ETV6_RUNX1&quot;</span><span class="p">,</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">)</span>
+<span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">sapply</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">),</span> <span class="s">&#39;[&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+
+<span class="c1">## Here we do perform pseudo-bulk:</span>
+<span class="c1">##first a mandatory column of sample needs to be added to the meta data that is the grouping factor, should be the samples</span>
+<span class="n">proB</span><span class="o">$</span><span class="n">sample</span> <span class="o">&lt;-</span> <span class="nf">factor</span><span class="p">(</span><span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">)</span>
+
+<span class="c1">##first an sce object is needed</span>
+<span class="n">sce_proB</span> <span class="o">&lt;-</span> <span class="nf">as.SingleCellExperiment</span><span class="p">(</span><span class="n">proB</span><span class="p">)</span>
+
+<span class="c1">#The needed package has to be installed if not already done:</span>
+<span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">require</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">,</span> <span class="n">quietly</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+  <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
+<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;scuttle&quot;</span><span class="p">)</span>
+
+<span class="nf">library</span><span class="p">(</span><span class="n">scuttle</span><span class="p">)</span>
+
+<span class="c1">##aggregateAcrossCells here it is only aggregated by sample, one could imagine</span>
+<span class="c1">##to aggregate by sample and by celltype for instance</span>
+<span class="n">summed</span> <span class="o">&lt;-</span> <span class="nf">aggregateAcrossCells</span><span class="p">(</span><span class="n">sce_proB</span><span class="p">,</span> 
+                               <span class="n">id</span><span class="o">=</span><span class="nf">colData</span><span class="p">(</span><span class="n">sce_proB</span><span class="p">)[,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;sample&quot;</span><span class="p">)])</span>
+
+<span class="c1">##have a look at the counts</span>
+<span class="nf">counts</span><span class="p">(</span><span class="n">summed</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,]</span>
+
+<span class="c1">#have a look at the colData of our new object summed, can you see type and </span>
+<span class="c1">#patient.id are there</span>
+<span class="nf">head</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">summed</span><span class="p">))</span>
 </code></pre></div>
-<p>Generate a <code>DGEList</code> object to use as input for <code>limma</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">DGEList</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">counts</span><span class="p">)</span>
-<span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">calcNormFactors</span><span class="p">(</span><span class="n">dge</span><span class="p">)</span>  
+<p>Generate a <code>DGEList</code> object to use as input for <code>limma</code> and filter the genes to remove lowly expressed genes. How many are left?</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#As in the standard limma analysis generate a DGE object</span>
+
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">DGEList</span><span class="p">(</span><span class="nf">counts</span><span class="p">(</span><span class="n">summed</span><span class="p">),</span> <span class="n">samples</span><span class="o">=</span><span class="nf">colData</span><span class="p">(</span><span class="n">summed</span><span class="p">)</span><span class="o">$</span><span class="n">sample</span><span class="p">)</span>
+
+<span class="c1">##filter lowly expressed (recommanded for limma)</span>
+<span class="n">keep</span> <span class="o">&lt;-</span> <span class="nf">filterByExpr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">summed</span><span class="o">$</span><span class="n">type</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">y</span><span class="p">[</span><span class="n">keep</span><span class="p">,]</span>
+
+<span class="c1">##see how many genes were kept </span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">keep</span><span class="p">)</span>
 </code></pre></div>
 <p>Generate a design matrix, including patient ID to model for a paired analysis. If you need help to generate a design matrix, check out the very nice <a href="https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf">edgeR User Guide</a>, sections 3.3 and 3.4.
 Extract the sample ID from the meta.data, then create the design matrix:</p>
-<div class="highlight"><pre><span></span><code><span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;ETV6_RUNX1&quot;</span><span class="p">,</span> <span class="n">proB</span><span class="o">$</span><span class="n">orig.ident</span><span class="p">)</span>
-<span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="o">&lt;-</span><span class="nf">sapply</span><span class="p">(</span><span class="nf">strsplit</span><span class="p">(</span><span class="n">proB</span><span class="o">$</span><span class="n">patient.id</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">),</span> <span class="s">&#39;[&#39;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">## Create the design matrix and include the technology as a covariate:</span>
+<span class="n">design</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span><span class="m">0</span> <span class="o">+</span> <span class="n">summed</span><span class="o">$</span><span class="n">type</span> <span class="o">+</span> <span class="n">summed</span><span class="o">$</span><span class="n">patient.id</span><span class="p">)</span>
 
-<span class="n">design</span> <span class="o">&lt;-</span> <span class="nf">model.matrix</span><span class="p">(</span><span class="o">~</span> <span class="m">0</span> <span class="o">+</span> <span class="n">type</span> <span class="o">+</span> <span class="n">patient.id</span> <span class="p">,</span> 
-                        <span class="n">data</span> <span class="o">=</span> <span class="n">proB</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
+<span class="c1"># Have a look</span>
+<span class="n">design</span>
 
-<span class="nf">head</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
-
-<span class="c1"># change column names to more simple group names: </span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">design</span><span class="p">)[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">)]</span> <span class="o">&lt;-</span> <span class="nf">make.names</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;PBMMC&quot;</span><span class="p">))</span>
+<span class="c1"># change column/rownames names to more simple group names: </span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">design</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">make.names</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ETV6-RUNX1&quot;</span><span class="p">,</span> <span class="s">&quot;PBMMC&quot;</span><span class="p">,</span><span class="s">&quot;patient2&quot;</span><span class="p">,</span><span class="s">&quot;patient3&quot;</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">design</span><span class="p">)</span><span class="o">&lt;-</span><span class="nf">colData</span><span class="p">(</span><span class="n">summed</span><span class="p">)</span><span class="o">$</span><span class="n">sample</span>
 </code></pre></div>
 <p>Specify which contrast to analyse:</p>
 <div class="highlight"><pre><span></span><code><span class="n">contrast.mat</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">makeContrasts</span><span class="p">(</span><span class="n">ETV6.RUNX1</span> <span class="o">-</span> <span class="n">PBMMC</span><span class="p">,</span>
                                      <span class="n">levels</span> <span class="o">=</span> <span class="n">design</span><span class="p">)</span>
 </code></pre></div>
-<p>Now <code>limma</code> can perform the transformation with <code>voom</code>, fit the model, compute the contrasts and compute test statistics with <code>eBayes</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">vm</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">voom</span><span class="p">(</span><span class="n">dge</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<p>Firt, we perform TMM normalization using edgeR, and then <code>limma</code> can perform the transformation with <code>voom</code>, fit the model, compute the contrasts and compute test statistics with <code>eBayes</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dge</span> <span class="o">&lt;-</span> <span class="n">edgeR</span><span class="o">::</span><span class="nf">calcNormFactors</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  
+
+<span class="c1">#Do limma</span>
+<span class="n">vm</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">voom</span><span class="p">(</span><span class="n">dge</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 <span class="n">fit</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">lmFit</span><span class="p">(</span><span class="n">vm</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">)</span>
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">contrasts.fit</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">contrast.mat</span><span class="p">)</span>
 <span class="n">fit.contrasts</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">eBayes</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">)</span>
 </code></pre></div>
 <p>We can use <code>topTable</code> to get the most significantly differentially expressed genes, and save the full DE results to an object. How many genes are significant? Are you suprised by this number?
-<div class="highlight"><pre><span></span><code><span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
-
+<div class="highlight"><pre><span></span><code><span class="c1"># Show the top differentially expressed genes:</span>
+<span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
 <span class="n">limma_de</span> <span class="o">&lt;-</span> <span class="n">limma</span><span class="o">::</span><span class="nf">topTable</span><span class="p">(</span><span class="n">fit.contrasts</span><span class="p">,</span> <span class="n">number</span> <span class="o">=</span> <span class="kc">Inf</span><span class="p">,</span> <span class="n">sort.by</span> <span class="o">=</span> <span class="s">&quot;P&quot;</span><span class="p">)</span>
 <span class="nf">length</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">))</span>
 </code></pre></div></p>
@@ -887,12 +913,8 @@ Extract the sample ID from the meta.data, then create the design matrix:</p>
 <details class="done"><summary>Answer</summary><p><div class="highlight"><pre><span></span><code><span class="nf">dim</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">)</span> 
 </code></pre></div>
 We find 1893 significant genes. If we merge the <code>FindMarkers</code> and the <code>limma</code> results, keep <code>limma</code>&lsquo;s most significant genes and plot:
-<div class="highlight"><pre><span></span><code><span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> 
-                                 <span class="n">limma_de</span><span class="p">,</span> 
-                                 <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span>
-                                 <span class="n">all.x</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
-<span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="p">,</span>
-                                  <span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="o">&lt;</span><span class="m">0.00001</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">merge_limma_FindMarkers</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> <span class="n">limma_de</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span>
+                           <span class="n">all.x</span><span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 
 <span class="nf">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">avg_log2FC</span><span class="p">,</span>
