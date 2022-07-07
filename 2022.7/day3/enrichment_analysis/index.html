@@ -678,9 +678,9 @@ label types use:</p>
 <span class="n">AnnotationDbi</span><span class="o">::</span><span class="nf">keytypes</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
 </code></pre></div>
 <p>Let&rsquo;s select a set of genes that are downregulated in the tumor cells compared to normal:</p>
-<div class="highlight"><pre><span></span><code><span class="n">tum_down</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span>
-                   <span class="n">tum_vs_norm</span><span class="o">$</span><span class="n">avg_log2FC</span> <span class="o">&lt;</span> <span class="m">-1</span> <span class="o">&amp;</span>
-                     <span class="n">tum_vs_norm</span><span class="o">$</span><span class="n">p_val_adj</span> <span class="o">&lt;</span> <span class="m">0.05</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tum_down</span>  <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">limma_de</span><span class="p">,</span>
+                    <span class="n">limma_de</span><span class="o">$</span><span class="n">logFC</span> <span class="o">&lt;</span> <span class="m">-1</span> 
+                      <span class="o">&amp;</span> <span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span> <span class="o">&lt;</span>  <span class="m">0.05</span><span class="p">)</span>
 <span class="n">tum_down_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">tum_down</span><span class="p">)</span>
 </code></pre></div>
 <p>We can do a Gene Ontology term over-representation analysis based on this set of genes. Make sure you check out the help of this function to understand its arguments:</p>
