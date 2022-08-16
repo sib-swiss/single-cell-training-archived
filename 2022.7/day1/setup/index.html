@@ -675,6 +675,7 @@
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
+
                 
   <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/setup.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
@@ -684,6 +685,10 @@
 
   <h1>Setup</h1>
 
+<div class="admonition info">
+<p class="admonition-title">Questions and answers</p>
+<p>If you have any issues, questions or feedback regarding the contents of this website, use the &ldquo;Questions and Answers&rdquo; section at the bottom of the page 👇. It requires a <a href="https://github.com/">github account</a>. There is one on every page. </p>
+</div>
 <h2 id="material">Material</h2>
 <p><a class="md-button" href="../../assets/pdf/introduction.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M88 304h-8v-48h8c13.3 0 24 10.7 24 24s-10.7 24-24 24zm104-48h8c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-8v-96zM224 0v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V64C0 28.65 28.65 0 64 0h160zM64 224c-8.84 0-16 7.2-16 16v128c0 8.8 7.16 16 16 16s16-7.2 16-16v-32h8c30.9 0 56-25.1 56-56s-25.1-56-56-56H64zm96 144c0 8.8 7.2 16 16 16h24c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-24c-8.8 0-16 7.2-16 16v128zm128-144c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16s16-7.2 16-16v-48h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32v-32h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-48zM256 0l128 128H256V0z"/></svg></span> Download the presentation</a></p>
 <h2 id="exercises">Exercises</h2>
@@ -823,6 +828,57 @@ rm course_data.tar.gz
 
 
               
+
+<!-- Giscus -->
+<!-- <h2 id="__comments">Comments</h2> -->
+<h2>Questions & Answers</h2>
+
+<script src="https://giscus.app/client.js"
+        data-repo="sib-swiss/single-cell-training"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzA1ODY2OTU="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOFha0R84CQ3Gn"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Synchronize Giscus theme with palette -->
+<script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+        var theme = palette.color.scheme === "slate" ? "dark" : "light"
+        giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function () {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+    })
+</script>
+
             </article>
             
           </div>

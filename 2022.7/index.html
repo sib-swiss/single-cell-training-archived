@@ -322,13 +322,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#asking-questions" class="md-nav__link">
-    Asking questions
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -738,13 +731,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#asking-questions" class="md-nav__link">
-    Asking questions
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -761,6 +747,7 @@
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
+
                 
   <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
@@ -769,6 +756,10 @@
 
 
 <h1 id="sib-course-single-cell-transcriptomics">SIB course Single Cell Transcriptomics</h1>
+<div class="admonition info">
+<p class="admonition-title">Questions and answers</p>
+<p>If you have any issues, questions or feedback regarding the contents of this website, use the &ldquo;Questions and Answers&rdquo; section at the bottom of the page 👇. It requires a <a href="https://github.com/">github account</a>. There is one on every page. </p>
+</div>
 <h2 id="teachers">Teachers</h2>
 <ul>
 <li>Tania Wyss <a href="https://orcid.org/0000-0003-2641-0895"><span class="twemoji"><?xml version="1.0" encoding="utf-8"?>
@@ -913,29 +904,6 @@
 <p>To reach the learning outcomes we will use lectures, exercises, polls and group work. During exercises, you are free to discuss with other participants. During lectures, focus on the lecture only.</p>
 <h3 id="exercises">Exercises</h3>
 <p>Each block has practical work involved. Some more than others. The practicals are subdivided into chapters, and we&rsquo;ll have a (short) discussion after each chapter. All answers to the practicals are incorporated, but they are hidden. Do the exercise first by yourself, before checking out the answer. If your answer is different from the answer in the practicals, try to figure out why they are different.</p>
-<h3 id="asking-questions">Asking questions</h3>
-<p>During lectures, you are encouraged to raise your hand if you have questions (if in-person), or use the &ldquo;raise hand&rdquo; Zoom functionality (if online). Find the buttons in the participants list (&lsquo;Participants&rsquo; button):</p>
-<figure>
-  <img src="assets/images/zoom_icons.png" width="300"/>
-</figure>
-
-<p>Alternatively, (depending on your zoom version or OS) use the &lsquo;Reactions&rsquo; button:</p>
-<figure>
-  <img src="assets/images/reactions_zoom.png" width="200"/>
-</figure>
-
-<p>A main source of communication will be our <a href="https://www.slack.com">slack channel</a>. Ask background questions that interest you personally at <strong>#background</strong>. During the exercises, e.g. if you are stuck or don&rsquo;t understand what is going on, use the slack channel <strong>#q-and-a</strong>.  This channel is not only meant for asking questions but also for answering questions of other participants. If you are replying to a question, use the &ldquo;reply in thread&rdquo; option:</p>
-<figure>
-  <img src="assets/images/reply_in_thread.png" width="350"/>
-</figure>
-
-<p>The teacher will review the answers, and add/modify if necessary. If you&rsquo;re really stuck and need specific tutor support, write the teachers or helpers personally.</p>
-<p><strong>To summarise:</strong></p>
-<ul>
-<li>During lectures: raise hand/zoom functionality</li>
-<li>Personal interest questions: <strong>#background</strong></li>
-<li>During exercises: <strong>#q-and-a</strong> on slack</li>
-</ul>
 
 
   
@@ -943,6 +911,57 @@
 
 
               
+
+<!-- Giscus -->
+<!-- <h2 id="__comments">Comments</h2> -->
+<h2>Questions & Answers</h2>
+
+<script src="https://giscus.app/client.js"
+        data-repo="sib-swiss/single-cell-training"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzA1ODY2OTU="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOFha0R84CQ3Gn"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Synchronize Giscus theme with palette -->
+<script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+        var theme = palette.color.scheme === "slate" ? "dark" : "light"
+        giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function () {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+    })
+</script>
+
             </article>
             
           </div>
