@@ -9,7 +9,7 @@
       
       
       <link rel="icon" href="../../assets/images/SIB_logo.svg">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.4.0">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.4.2">
     
     
       
@@ -48,7 +48,7 @@
   
 
 
-  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-1H5B39PY7V"),document.addEventListener("DOMContentLoaded",function(){if(document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document.forms.feedback){var e,a=document.forms.feedback;for(e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}"undefined"!=typeof location$&&location$.subscribe(function(e){n("config","G-1H5B39PY7V",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-1H5B39PY7V",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-1H5B39PY7V"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-1H5B39PY7V",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-1H5B39PY7V",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
 
   
     <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
@@ -722,7 +722,7 @@
 </div>
 <div class="tabbed-block">
 <p>With docker, you can use exactly the same environment as we use in the enrolled course, but than running locally.</p>
-<p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
+<p>In the video below there&rsquo;s a short tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
 <p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
 <p>The command to run the environment required for this course looks like this (in a terminal):</p>
 <div class="admonition warning">
@@ -739,9 +739,17 @@ geertvangeest/single-cell-rstudio:latest
 <p>If this command has run successfully, approach Rstudio server like this:</p>
 <div class="highlight"><pre><span></span><code>http://localhost:8787
 </code></pre></div>
-<p>Copy this URL into your browser, and you will be able to use Rstudio with all required installations.</p>
+<p>Copy this URL into your browser. If you used the snippet above, the credentials will be:</p>
+<ul>
+<li><strong>Username:</strong> <code>rstudio</code></li>
+<li><strong>Password:</strong> <code>test</code></li>
+</ul>
+<p>Great! Now you will be able to use Rstudio with all required installations.</p>
+<div class="admonition note">
+<p class="admonition-title">About the options</p>
 <p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/rstudio</code> in the docker container (&lsquo;rstudio&rsquo; is the default user for Rstudio containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer. Change the first path to a path on your computer that you want to use as a working directory.</p>
 <p>The part <code>geertvangeest/single-cell-rstudio:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+</div>
 </div>
 <div class="tabbed-block">
 <p>To simply run the environment, you can use <a href="https://renkulab.io">renku</a>. You can find the repository (including the image) here: <a href="https://renkulab.io/projects/geert.vangeest/single-cell-training/">https://renkulab.io/projects/geert.vangeest/single-cell-training/</a>. </p>
