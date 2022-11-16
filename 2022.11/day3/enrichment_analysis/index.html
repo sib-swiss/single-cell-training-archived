@@ -726,6 +726,21 @@ label types use:</p>
 <p>The results are stored in the <code>@result</code> slot:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">tum_vs_norm_go</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">The columns <code>GeneRatio</code> and <code>BgRatio</code></p>
+<p>The columns <code>GeneRatio</code> and <code>BgRatio</code> that are in the <code>enrichResult</code> object represent the numbers that are used as input for the Fisher&rsquo;s exact test. </p>
+<p>The two numbers (M/N) in the <code>GeneRatio</code> coumn are:</p>
+<ul>
+<li>M: Number of genes of interest (in our case <code>tum_down_genes</code>) that are in the GO set</li>
+<li>N: Number of genes of interest with any GO annoation.</li>
+</ul>
+<p>The two numbers (k/n) in the <code>BgRatio</code> coumn are:</p>
+<ul>
+<li>k: Number of genes in the universe that are in the GO set</li>
+<li>n: Number of genes in the universe with any GO annoation</li>
+</ul>
+<p>A low p-value resulting from the Fisher&rsquo;s exact means that M/N is signficantly greater than k/n. </p>
+</div>
 <p>Some GO terms seem redundant because they contain many of the same genes, which is a characteristic of Gene Ontology gene sets. We can simplify this list by removing redundant gene sets:</p>
 <div class="highlight"><pre><span></span><code><span class="n">enr_go</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">simplify</span><span class="p">(</span><span class="n">tum_vs_norm_go</span><span class="p">)</span>
 <span class="nf">View</span><span class="p">(</span><span class="n">enr_go</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
