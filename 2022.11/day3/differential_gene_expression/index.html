@@ -939,8 +939,7 @@ Extract the sample ID from the meta.data, then create the design matrix:</p>
                                    <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;type&quot;</span><span class="p">)</span>
 <span class="n">tum_vs_norm</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">,</span> <span class="n">tum_vs_norm</span><span class="o">$</span><span class="n">p_val_adj</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">)</span>
 </code></pre></div>
-<p>How many genes are significant? How does the fold change of these genes compare to the fold change of the top genes found by limma?</p>
-<p>Keep the <code>tum_vs_norm</code> object because we will use this output object for the enrichment analysis in the next section.</p>
+<p><strong>Exercise (extra):</strong> How many genes are significant? How does the fold change of these genes compare to the fold change of the top genes found by limma?</p>
 <details class="done">
 <summary>Answer</summary>
 <p><div class="highlight"><pre><span></span><code><span class="nf">dim</span><span class="p">(</span><span class="n">tum_vs_norm</span><span class="p">)</span> 
@@ -951,9 +950,9 @@ We find 1893 significant genes. If we merge the <code>FindMarkers</code> and the
 
 <span class="nf">par</span><span class="p">(</span><span class="n">mar</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
 <span class="nf">plot</span><span class="p">(</span><span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">avg_log2FC</span><span class="p">,</span>
-<span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">logFC</span><span class="p">,</span>
-<span class="n">xlab</span><span class="o">=</span><span class="s">&quot;log2FC Wilcoxon&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;log2FC limma&quot;</span><span class="p">,</span>
-<span class="n">pch</span><span class="o">=</span><span class="m">15</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+    <span class="n">merge_limma_FindMarkers</span><span class="o">$</span><span class="n">logFC</span><span class="p">,</span>
+    <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;log2FC Wilcoxon&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;log2FC limma&quot;</span><span class="p">,</span>
+    <span class="n">pch</span><span class="o">=</span><span class="m">15</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
 <span class="nf">abline</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">)</span>
 </code></pre></div>
 Returning:</p>
@@ -961,6 +960,10 @@ Returning:</p>
   <img src="../../assets/images/limma_vs_wilcoxon.png" width="600"/>
 </figure></p>
 </details>
+<div class="admonition warning">
+<p class="admonition-title">keep the object</p>
+<p>Keep the <code>tum_vs_norm</code> object because we will use this output object for the enrichment analysis in the next section.</p>
+</div>
 
 
   
