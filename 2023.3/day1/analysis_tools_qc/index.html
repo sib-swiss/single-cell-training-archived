@@ -763,6 +763,13 @@
 <h2 id="exercises">Exercises</h2>
 <h3 id="loading-scrnaseq-data">Loading scRNAseq data</h3>
 <p>The next step after the generation of the count matrices with <code>cellranger count</code>, is the data analysis. The <code>R</code> package <code>Seurat</code> is currently the most popular software to do this. To start working with <code>Seurat</code> you can load it into your environment like this:</p>
+<div class="admonition warning">
+<p class="admonition-title">re-install <code>Matrix</code> first</p>
+<p>The version of the dependency <code>Matrix</code> was not installed correctly. Run:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;Matrix&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Before</strong> loading <code>Seurat</code></p>
+</div>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
