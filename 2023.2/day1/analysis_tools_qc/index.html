@@ -1,0 +1,1218 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>Analysis tools and QC - Single cell transcriptomics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-1H5B39PY7V"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-1H5B39PY7V",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-1H5B39PY7V",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+<meta property="og:url"                content="https://sib-swiss.github.io/single-cell-training/latest/" />
+<meta property="og:title"              content="Single cell transcriptomics" />
+<meta property="og:description"        content="Course on single cell transcriptomics" />
+<meta property="og:image"              content="https://sib-swiss.github.io/single-cell-training/2022.11/assets/images/umap_nonintegrated_dim50.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Single cell transcriptomics" />
+<meta name="twitter:description" content="Course on single cell transcriptomics" />
+<meta name="twitter:image" content="https://sib-swiss.github.io/single-cell-training/2022.11/assets/images/umap_nonintegrated_dim50.png" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+              </button>
+            
+            
+  <b>Issues, questions or feedback? &#128591; &#128640; </b> Use the "Questions and Answers" section at the bottom &#128071; of every page
+
+          </div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Single cell transcriptomics" class="md-header__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Single cell transcriptomics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Analysis tools and QC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/single-cell-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Single cell transcriptomics" class="md-nav__button md-logo" aria-label="Single cell transcriptomics" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    Single cell transcriptomics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/single-cell-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/single-cell-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Day 1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction_cellranger/" class="md-nav__link">
+        Introduction & cellranger
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Analysis tools and QC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Analysis tools and QC
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-scrnaseq-data" class="md-nav__link">
+    Loading scRNAseq data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seurat-object" class="md-nav__link">
+    The Seurat object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-qc-per-cell-and-gene" class="md-nav__link">
+    Visualizing QC per cell and gene
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-filtering" class="md-nav__link">
+    Cell filtering
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../normalization_scaling/" class="md-nav__link">
+        Normalization and scaling
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Day 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/dimensionality_reduction/" class="md-nav__link">
+        Dimensionality reduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/clustering/" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/cell_annotation/" class="md-nav__link">
+        Cell annotation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Day 3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 3" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Day 3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/differential_gene_expression/" class="md-nav__link">
+        Differential gene expression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/enrichment_analysis/" class="md-nav__link">
+        Enrichment analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/advanced_analyses/" class="md-nav__link">
+        Advanced analyses
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day3/trajectory_analysis/" class="md-nav__link">
+        Trajectory analysis (extra)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-scrnaseq-data" class="md-nav__link">
+    Loading scRNAseq data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seurat-object" class="md-nav__link">
+    The Seurat object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-qc-per-cell-and-gene" class="md-nav__link">
+    Visualizing QC per cell and gene
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-filtering" class="md-nav__link">
+    Cell filtering
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+                  
+
+  <a href="https://github.com/sib-swiss/single-cell-training/edit/master/docs/day1/analysis_tools_qc.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Analysis tools and QC</h1>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Load single cell data into R</li>
+<li>Explain the basic structure of a <code>Seurat</code> object and extract count data and metadata</li>
+<li>Calculate and visualize quality measures based on:<ul>
+<li>mitochondrial genes</li>
+<li>ribosomal genes</li>
+<li>hemoglobin genes</li>
+<li>relative gene expression</li>
+</ul>
+</li>
+<li>Interpret the above quality measures per cell.</li>
+<li>Perform cell filtering based on quality thresholds</li>
+</ul>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../../assets/pdf/analysis_tools_qc.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
+<h2 id="exercises">Exercises</h2>
+<h3 id="loading-scrnaseq-data">Loading scRNAseq data</h3>
+<p>The next step after the generation of the count matrices with <code>cellranger count</code>, is the data analysis. The <code>R</code> package <code>Seurat</code> is currently the most popular software to do this. To start working with <code>Seurat</code> you can load it into your environment like this:</p>
+<div class="admonition warning">
+<p class="admonition-title">re-install <code>Matrix</code> first</p>
+<p>The version of the dependency <code>Matrix</code> was not installed correctly. Run:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;Matrix&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Before</strong> loading <code>Seurat</code></p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip: make an R script</p>
+<p>You could type and copy-paste the commands of these exercises directly in the console. However, that makes it hard to track what you have done. In addition, it can be nice to add comments to your code, so you can read back why you have made certain choices. In order to do that, do not write commands in the console, but write them in a script, and send them to the console with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (Windows) or <span class="keys"><kbd class="key-command">Cmd</kbd><span>+</span><kbd class="key-enter">Enter</kbd></span> (MacOS).</p>
+</div>
+<p>First, we will load a file specifying the different samples, and create an object specifying the location of the count data:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sample_info</span> <span class="o">&lt;-</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;course_data/sample_info_course.csv&quot;</span><span class="p">)</span>
+<span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="nf">file.path</span><span class="p">(</span><span class="s">&quot;course_data&quot;</span><span class="p">,</span> <span class="s">&quot;count_matrices&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">,</span>
+                      <span class="s">&quot;outs&quot;</span><span class="p">,</span> <span class="s">&quot;filtered_feature_bc_matrix&quot;</span><span class="p">)</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">datadirs</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">sample_info</span><span class="o">$</span><span class="n">SampleName</span><span class="p">)</span>
+<span class="n">datadirs</span> <span class="o">&lt;-</span> <span class="n">datadirs</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span>
+</code></pre></div>
+<p>The object <code>datadirs</code> is a named vector specifying the paths of the count directories for each sample:</p>
+<div class="highlight"><pre><span></span><code>                                                                  PBMMC-1 
+     &quot;course_data/count_matrices/PBMMC_1/outs/filtered_feature_bc_matrix&quot; 
+                                                                  PBMMC-2 
+     &quot;course_data/count_matrices/PBMMC_2/outs/filtered_feature_bc_matrix&quot; 
+                                                                  PBMMC-3 
+     &quot;course_data/count_matrices/PBMMC_3/outs/filtered_feature_bc_matrix&quot; 
+</code></pre></div>
+<p>To run through a typical <code>Seurat</code> analysis, we will use the files that are in the directory <code>data/filtered_feature_bc_matrix</code>. This directory is part of the output generated by <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger"><code>cellranger</code></a>. To load this data into R and generate a sparse matrix, run the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sparse_matrix</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">Read10X</span><span class="p">(</span><span class="n">data.dir</span> <span class="o">=</span> <span class="n">datadirs</span><span class="p">)</span>
+</code></pre></div>
+<p>This imports a raw count matrix. Have a look at the counts of the first 30 cells of three genes by running:</p>
+<div class="highlight"><pre><span></span><code><span class="n">sparse_matrix</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;PECAM1&quot;</span><span class="p">,</span> <span class="s">&quot;CD8A&quot;</span><span class="p">,</span> <span class="s">&quot;TSPAN1&quot;</span><span class="p">),</span> <span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
+</code></pre></div>
+<p>You will see many dots (zeros) and a few integers representing the counts per gene per cell. </p>
+<p>To generate a <code>Seurat</code> object, we will run <code>CreateSeuratObject</code>. Note that while creating the object, we already do some mild filtering; we only import genes that are expressed in at least 3 cells, and we only import cells that have at least 100 different genes expressed:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">sparse_matrix</span><span class="p">,</span>
+                                  <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;pbmmc&quot;</span><span class="p">,</span>
+                                  <span class="n">min.cells</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+                                  <span class="n">min.features</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Function notation with <code>::</code></p>
+<p>Here, we define the function together with its associated package. We do that by the syntax <code>package::function</code>. Of course, you can also call <code>library(package)</code>, and only type the function name. Since we use many different packages in this course, it can be confusing which function comes from which package. Therefore, we chose to always associate the package with the called function.</p>
+</div>
+<p><strong>Exercise:</strong> check what&rsquo;s in the <code>seu</code> object, by typing <code>seu</code> in the R console. How many features are in there? And how many cells?</p>
+<details class="done">
+<summary>Answer</summary>
+<p>Typing <code>seu</code> should return:</p>
+<div class="highlight"><pre><span></span><code>An object of class Seurat 
+18673 features across 6946 samples within 1 assay 
+Active assay: RNA (18673 features, 0 variable features)
+</code></pre></div>
+<p>This means that we have 18673 genes (features) in there, and 6946 cells (samples)</p>
+</details>
+<h3 id="the-seurat-object">The <code>Seurat</code> object</h3>
+<p>The <code>seu</code> object we have created has the class <code>Seurat</code>. The object contains multi-level slots and lists. Each <code>Seurat</code> object contains exactly the same slots that are specified in the image below (get slot descriptions by typing <code>?SeuratObject::Seurat</code>). You can get the information inside a slot with <code>@</code>, in the same way as you would use the <code>$</code> for lists (e.g. <code>seu@meta.data</code> will return the a data frame with information on each cell). Slots can be filled with other R objects, like lists, vectors, data frames or any other class. Here&rsquo;s an overview of all slots that are in a <code>Seurat</code> object:</p>
+<figure>
+  <img src="../../assets/images/seurat_object.png" width="500"/>
+</figure>
+
+<p>In addition to the original count table, the <code>Seurat</code> object can therefore store a lot of information that is generated during your analysis, like results of a normalization (<code>@assays$RNA@data</code>) a PCA or UMAP (<code>@reductions</code>) and the clustering (<code>@graphs</code>). It also tracks all the commands that have been used to generate the object in its current state (<code>@commands</code>). Therefore, while going through the analysis steps, the same object gets more and more of its slots filled. Because most <code>Seurat</code> functions return the input object + adjusted slots, we can use this syntax:</p>
+<div class="highlight"><pre><span></span><code>seurat_object &lt;- Seurat::function(seurat_object)
+</code></pre></div>
+<p>So, the function takes an object as input and we assign it to an object with the same name. Meaning that we overwrite the object used as input. This is fine in many cases, because <code>Seurat</code> adds information to the input object, and returns is. We will use this syntax for the first time at <a href="../normalization_scaling/">Normalization and scaling</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Getting specific information out of the <code>Seurat</code> object<p>In order to get specific data you can use the <code>@</code> and <code>$</code> symbols to browse through the objects. However, <code>Seurat</code> comes with a lot of convenience functions, that are easier to use. So, e.g. to get the raw count matrix, you could type <code>seurat_object@assays$RNA@counts</code>, however, this is equivalent to <code>GetAssayData(object = seurat_object, slot = "counts")</code>. More information on these convenience functions <a href="https://satijalab.org/seurat/articles/essential_commands.html">here</a>.</p>
+</p>
+</div>
+<p><strong>Exercise:</strong></p>
+<p>A. Have a look at the <code>seu</code> object by running <code>View(seu)</code>. What is in there? What is stored in <code>@active.ident</code>? </p>
+<p>B. Have a look at the <code>data.frame</code> stored at <code>seu@meta.data</code> what kind of information is in there?</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Answer A</label><label for="__tabbed_1_2">Answer B</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>There are many slots as described in the above figure. The slot <code>@active.ident</code> contains data specifying the samples, e.g. <code>table(seu@active.ident)</code> returns:</p>
+<div class="highlight"><pre><span></span><code>PBMMC-1 PBMMC-2 PBMMC-3 
+1612    3105    2229 
+</code></pre></div>
+<p>Which are the number of cells per sample. </p>
+</div>
+<div class="tabbed-block">
+<p>Running <code>head(seu@meta.data)</code> returns:</p>
+<div class="highlight"><pre><span></span><code>                           orig.ident nCount_RNA nFeature_RNA
+PBMMC-1_AAACCTGCAGACGCAA-1    PBMMC-1       2401          909
+PBMMC-1_AAACCTGTCATCACCC-1    PBMMC-1       3532          760
+PBMMC-1_AAAGATGCATAAAGGT-1    PBMMC-1       3972         1215
+PBMMC-1_AAAGCAAAGCAGCGTA-1    PBMMC-1       3569          894
+PBMMC-1_AAAGCAACAATAACGA-1    PBMMC-1       2982          730
+PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108
+</code></pre></div>
+<p>Giving you the names of three columns and a row for each cell:</p>
+<ul>
+<li><code>orig_ident</code>: the original identity (origin) of a cell.</li>
+<li><code>nCount_RNA</code>: the number of reads assigned to a cell.</li>
+<li><code>nFeature_RNA</code>: the number of expressed features (genes) per cell.</li>
+</ul>
+</div>
+</div>
+</div>
+</details>
+<p>Luckily, usually you do not have to dive into this structure to retrieve information. For example, information in the slot <code>@meta.data</code> can be retrieved and set by using <code>$</code> or <code>[[]]</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a subtle difference here between <code>$</code> and <code>[[]]</code>. While <code>$</code> returns a vector of the column in <code>@meta.data</code>, <code>[[]]</code> returns a <code>data.frame</code>.</p>
+</div>
+<p><strong>Exercise:</strong> Generate a histogram of the column <code>nCount_RNA</code> at <code>seu@meta.data</code>, with the base function <code>hist</code>.</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">seu</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="nf">hist</span><span class="p">(</span><span class="n">seu</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">nCount_RNA</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p>There are also built-in functions to plot data from <code>Seurat</code> object, for example <code>FeatureScatter</code>. This function enables you easily draw a scatterplot from a <code>Seurat</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span> <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>You can find a nice overview of such functions <a href="https://satijalab.org/seurat/articles/essential_commands.html">here</a>. </p>
+<h3 id="visualizing-qc-per-cell-and-gene">Visualizing QC per cell and gene</h3>
+<p>While generating the <code>Seurat</code> object, there were already some quality measures calculated for each cell, namely the total UMI counts per cell (<code>nCount_RNA</code>) and the total number of detected features per cell (<code>nFeature_RNA</code>). We can plot those in a violin plot and evaluate their distribution per sample:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nCount_RNA&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;nFeature_RNA&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>You can see that there is quite a wide range for both. A cell with low number of detected features or counts might not give you a lot of information, while a high number of detected features/counts might point to doublets.</p>
+<p>Single cells have often undergone sampling and/or dissociation and/or sorting. Therefore, there are often cells and genes in your dataset that cause variation due to technical reasons. In the following steps, we will visualize those and make decisions on whether or not to remove cells or genes with extreme values.</p>
+<p>We will start with calculating the percentage of counts coming from transcript types:</p>
+<ul>
+<li><strong>Mitochondrial genes</strong>: If a cell membrane is damaged, it looses free RNA quicker compared to mitochondrial RNA, because the latter is part of the mitochondrion. A high relative amount of mitochondrial counts can therefore point to damaged cells (<a href="https://f1000research.com/articles/5-2122">Lun et al. 2016</a>). </li>
+<li><strong>Ribosomal genes</strong>: Are not rRNA (ribosomal RNA) but is mRNA that code for ribosomal proteins. They do not point to specific issues, but it can be good to have a look at their relative abundance. They can have biological relevance (e.g. <a href="https://www.nature.com/articles/s41598-020-64929-x">Caron et al. 2020</a>).</li>
+<li><strong>Hemoglobin genes</strong>: these transcripts are very abundant in erythrocytes. Depending on your application, you can expect &lsquo;contamination&rsquo; of erythrocytes and select against it. </li>
+</ul>
+<p>In order to have an idea about the relative counts of these type of genes in our dataset, we can calculate their expression as relative counts in each cell. We do that by selecting genes based on patterns (e.g. <code>^MT-</code> matches with all gene names starting with <code>MT</code>, i.e. mitochondrial genes):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># mitochondrial genes</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^MT-&quot;</span><span class="p">,</span> 
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.mito&quot;</span><span class="p">)</span>
+
+<span class="c1"># ribosomal genes</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^RP[SL]&quot;</span><span class="p">,</span>
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.ribo&quot;</span><span class="p">)</span>
+
+<span class="c1"># hemoglobin genes (but not HBP)</span>
+<span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">PercentageFeatureSet</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+                                    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;^HB[^(P)]&quot;</span><span class="p">,</span>
+                                    <span class="n">col.name</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Exercise:</strong> Run the commands and check out the metadata data frame at <code>seu@meta.data</code>. What has changed?</p>
+<details class="done">
+<summary>Answer</summary>
+<p>If we type <code>head(seu@meta.data)</code> it returns:</p>
+<p><div class="highlight"><pre><span></span><code>                           orig.ident nCount_RNA nFeature_RNA percent.mito percent.ribo percent.globin
+PBMMC-1_AAACCTGCAGACGCAA-1    PBMMC-1       2401          909     2.540608     28.65473      0.1665973
+PBMMC-1_AAACCTGTCATCACCC-1    PBMMC-1       3532          760     5.181200     55.03964      0.1981880
+PBMMC-1_AAAGATGCATAAAGGT-1    PBMMC-1       3972         1215     4.934542     30.43807      0.3776435
+PBMMC-1_AAAGCAAAGCAGCGTA-1    PBMMC-1       3569          894     3.250210     55.02942      0.3642477
+PBMMC-1_AAAGCAACAATAACGA-1    PBMMC-1       2982          730     3.688799     54.49363      0.1006036
+PBMMC-1_AAAGCAACATCAGTCA-1    PBMMC-1      22284         3108     3.181655     23.40693     36.9682283
+</code></pre></div>
+So, the function <code>PercentageFeatureSet</code> adds a column to <code>meta.data</code>, specifying the percentage of counts for the specified gene sets. </p>
+</details>
+<p>Now we can plot the distribution of these percentages in a violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;percent.mito&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.ribo&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.globin&quot;</span><span class="p">))</span>
+</code></pre></div>
+<figure>
+    <img src="../../assets/images/violin_percent.png" width="500"/>
+</figure>
+
+<p>You can see that <code>PBMMC-2</code> is quite different from the two others, it has a group of cells with very low ribosomal counts and one with very high globin counts. Maybe these two percentages are negatively correlated? Let&rsquo;s have a look, by plotting the two percentages against each other:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeatureScatter</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> 
+                       <span class="n">feature1</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">,</span> 
+                       <span class="n">feature2</span> <span class="o">=</span> <span class="s">&quot;percent.ribo&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Exercise:</strong> Are they correlated? What kind of cells might have a high abundance of hemoglobin transcripts and low ribosomal transcripts? </p>
+<details class="done">
+<summary>Answer</summary>
+<p>Yes there is a negative correlation:</p>
+<p><figure>
+<img src="../../assets/images/globin_vs_ribo.png" width="500"/>
+</figure></p>
+<p>Erythrocytes (red blood cells) have a high abundance of hemoglobin transcripts and low abundance of ribosomal transcripts. These are most likely erythroid cells, i.e. the cells predecessing erythrocytes in the bone marrow. </p>
+</details>
+<p>We can also evaluate the relative expression of other genes in our dataset, for example, the ones that are most highly expressed. Some very highly expressed genes might point to a technical cause, and we might consider to remove them. Below you will find a simple function to generate a boxplot of relative counts per gene per cell. Load it into your environment and run it on our <code>seu</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Matrix</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+
+<span class="n">most_expressed_boxplot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">ngenes</span> <span class="o">=</span> <span class="m">20</span><span class="p">){</span>
+
+  <span class="c1"># matrix of raw counts</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">object</span><span class="p">,</span> <span class="n">assay</span> <span class="o">=</span> <span class="s">&quot;RNA&quot;</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;counts&quot;</span><span class="p">)</span>
+
+  <span class="c1"># get percentage/cell</span>
+  <span class="n">cts</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">/</span><span class="nf">colSums</span><span class="p">(</span><span class="n">cts</span><span class="p">)</span><span class="o">*</span><span class="m">100</span>
+  <span class="n">medians</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">cts</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">median</span><span class="p">)</span>
+
+  <span class="c1"># get top n genes</span>
+  <span class="n">most_expressed</span> <span class="o">&lt;-</span> <span class="nf">order</span><span class="p">(</span><span class="n">medians</span><span class="p">,</span> <span class="n">decreasing</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)[</span><span class="n">ngenes</span><span class="o">:</span><span class="m">1</span><span class="p">]</span>
+  <span class="n">most_exp_matrix</span> <span class="o">&lt;-</span> <span class="nf">as.matrix</span><span class="p">((</span><span class="n">cts</span><span class="p">[,</span><span class="n">most_expressed</span><span class="p">]))</span>
+
+  <span class="c1"># prepare for plotting</span>
+  <span class="n">most_exp_df</span> <span class="o">&lt;-</span> <span class="nf">stack</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">most_exp_matrix</span><span class="p">))</span>
+  <span class="nf">colnames</span><span class="p">(</span><span class="n">most_exp_df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;perc_total&quot;</span><span class="p">,</span> <span class="s">&quot;gene&quot;</span><span class="p">)</span>
+
+  <span class="c1"># boxplot with ggplot2</span>
+  <span class="n">boxplot</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">most_exp_df</span><span class="p">,</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">gene</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">perc_total</span><span class="p">))</span> <span class="o">+</span>
+    <span class="nf">geom_boxplot</span><span class="p">()</span> <span class="o">+</span>
+    <span class="nf">coord_flip</span><span class="p">()</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">boxplot</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">most_expressed_boxplot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="m">20</span><span class="p">)</span>
+</code></pre></div>
+<figure>
+    <img src="../../assets/images/boxplot_mostexp.png" width="500"/>
+</figure>
+
+<p>As for most 10X based poly-A enriched single cell datasets, we find a relatively high expression of MALAT1. Many researchers choose to remove it, but it can have biological relevance (e.g. <a href="https://www.nature.com/articles/s41420-020-00383-y">Shaat et al. 2021</a>). </p>
+<h3 id="cell-filtering">Cell filtering</h3>
+<p>Based on the QC process we went through we can come to the following conclusions:</p>
+<ul>
+<li>There are no cells with very high mitochondrial gene counts.</li>
+<li>There are some cells with a hemoglobin and low ribosomal counts, and these are probably erythrocytes.</li>
+<li>There are some cells with a very low and very high number of features. These might point to non-informative cells and doublets respectively. </li>
+<li>The &lsquo;usual suspect&rsquo; MALAT1 sometimes makes up a large part of the counts per cell. As we do not see any other suggestions of dying/stressed cells, we leave it in. </li>
+</ul>
+<p>In this case, a sensible decision would be to do mild filtering on the number of features per cell and mitochondrial counts. We can leave the possible erythrocytes in for now, and see where they end up later during the dimensionality reduction. </p>
+<p>In the M&amp;M of the <a href="https://www.nature.com/articles/s41598-020-64929-x#Sec7">publication</a>, the authors describe that they have used a threshold of &lt; 8% mitochondrial counts and &gt; 200 features per cell. To filter against possible doublets, here, we also filter out cells with &gt; 5000 detected features/cell. Filtering <code>Seurat</code> objects can be done with the <code>subset</code> method for class <code>SeuratObject</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">nFeature_RNA</span> <span class="o">&gt;</span> <span class="m">200</span> <span class="o">&amp;</span> 
+                <span class="n">nFeature_RNA</span> <span class="o">&lt;</span> <span class="m">5000</span> <span class="o">&amp;</span>
+                <span class="n">percent.mito</span> <span class="o">&lt;</span> <span class="m">8</span><span class="p">)</span>
+</code></pre></div>
+<p>To evaluate this did the trick we can visualize those parameters again in a violin plot:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;nFeature_RNA&quot;</span><span class="p">,</span>
+                                  <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+
+  
+
+
+
+
+                
+
+
+
+<!-- Giscus -->
+<!-- <h2 id="__comments">Comments</h2> -->
+<h2>Questions & Answers</h2>
+
+<script src="https://giscus.app/client.js"
+        data-repo="sib-swiss/single-cell-training"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzNzA1ODY2OTU="
+        data-category="Q&A"
+        data-category-id="DIC_kwDOFha0R84CQ3Gn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<!-- Synchronize Giscus theme with palette -->
+<script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+        var theme = palette.color.scheme === "slate" ? "dark" : "light"
+        giscus.setAttribute("data-theme", theme)
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function () {
+        var ref = document.querySelector("[data-md-component=palette]")
+        ref.addEventListener("change", function () {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
+        })
+    })
+</script>
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../introduction_cellranger/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction &amp; cellranger" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction & cellranger
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../normalization_scaling/" class="md-footer__link md-footer__link--next" aria-label="Next: Normalization and scaling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Normalization and scaling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 - 2022 SIB Swiss Institute of Bioinformatics – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+  
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input type="checkbox" class="md-toggle" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        <label>
+      </li>
+    
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        <label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);console.log(new FormData(form)),__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>
