@@ -830,6 +830,10 @@ RP11-54O7.1   .        . . . . . .        . . .
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">LabelPoints</span><span class="p">(</span><span class="n">plot</span> <span class="o">=</span> <span class="n">vf_plot</span><span class="p">,</span>
             <span class="n">points</span> <span class="o">=</span> <span class="n">top10</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Make sure the plotting window is large enough</p>
+<p>The function <code>LabelPoints</code> will throw an error if the plotting window is to small. If you get an error, increase plotting window size in RStudio and try again. </p>
+</div>
 <p>You can see that most of the highly variables are antibody subunits (starting with IGH, IGL). Not very surprising since we look at bone marrow tissue. We can have a look later in which cells they are expressed. </p>
 <h3 id="scaling">Scaling</h3>
 <p>Next, we apply scaling, a linear transformation that is a standard pre-processing
