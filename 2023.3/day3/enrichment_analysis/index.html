@@ -719,6 +719,10 @@ label types use:</p>
 <span class="nf">library</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
 <span class="n">AnnotationDbi</span><span class="o">::</span><span class="nf">keytypes</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">About OrgDb</p>
+<p>For other organisms, you can find available OrgDbs at <a href="http://bioconductor.org/packages/release/BiocViews.html#___OrgDbfor">bioconductor</a></p>
+</div>
 <p>Let&rsquo;s select a set of genes that are downregulated in the tumor cells compared to normal:</p>
 <div class="highlight"><pre><span></span><code><span class="n">tum_down</span>  <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">limma_de</span><span class="p">,</span>
                     <span class="n">limma_de</span><span class="o">$</span><span class="n">logFC</span> <span class="o">&lt;</span> <span class="m">-1</span> 
