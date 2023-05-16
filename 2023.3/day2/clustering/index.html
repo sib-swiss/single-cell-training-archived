@@ -668,32 +668,32 @@
 </ul>
 <h2 id="exercises">Exercises</h2>
 <p>Load the <code>seu_int</code> dataset you have created earlier today:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>The method implemented in Seurat first constructs a SNN graph based on the euclidean distance in PCA space, and refine the edge weights between any two cells based on the shared overlap in their local neighborhoods (Jaccard similarity). This step is performed using the <code>FindNeighbors()</code> function, and takes as input the previously defined dimensionality of the dataset.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We use the integrated object (<code>seu_int</code>) and the assay <code>integrated</code>. Unsure? Check <code>DefaultAssay(seu_int)</code>, and set it by <code>DefaultAssay(seu_int) &lt;- "integrated"</code>. </p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 <p>To cluster the cells, Seurat next implements modularity optimization techniques such as the Louvain algorithm (default) or SLM [SLM, Blondel et al., Journal of Statistical Mechanics], to iteratively group cells together, with the goal of optimizing the standard modularity function. The <code>FindClusters()</code> function implements this procedure, and contains a resolution parameter that sets the ‘granularity’ of the downstream clustering, with increased values leading to a greater number of clusters.</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">resolution</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span> <span class="m">0.8</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">seq</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="o">=</span><span class="m">0.1</span><span class="p">))</span>
 </code></pre></div>
 <p>Cluster id of each cell is added to the metadata object, as a new column for each resolution tested:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">)</span>
 </code></pre></div>
 <p>To view how clusters sub-divide at increasing resolution:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">clustree</span><span class="p">)</span>
-<span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">[,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;integrated_snn_res&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))],</span>
-                   <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.&quot;</span><span class="p">)</span>
+<span class="n">clustree</span><span class="o">::</span><span class="nf">clustree</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">[,</span><span class="nf">grep</span><span class="p">(</span><span class="s">&quot;integrated_snn_res&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">))],</span>
+<span class="w">                   </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;integrated_snn_res.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/clustree.png" width="400"/>
 </figure>
 
 <p>You can view the UMAP coloring each cell according to a cluster id like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;integrated_snn_res.0.1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/umap_integrated_res.0.1.png" width="500"/>
@@ -703,7 +703,7 @@
 <details class="done">
 <summary>Answer</summary>
 <p>Of course, there is no &lsquo;optimal&rsquo; resolution, but based on resolution of 0.3, the tree stays relatively stable for a few resolution steps, and it seems that clustering fits the UMAP well:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
     <img src="../../assets/images/umap_integrated_res.0.3.png" width="500"/>

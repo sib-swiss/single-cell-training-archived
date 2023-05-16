@@ -715,7 +715,7 @@ analysis of Gene Ontology gene sets (among other functions, including functions 
 <p>Genes can be labeled using different types of labels, eg
 symbol, Ensembl ID, Entrez ID. To list the allowed
 label types use:</p>
-<div class="highlight"><pre><span></span><code><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
 <span class="n">AnnotationDbi</span><span class="o">::</span><span class="nf">keytypes</span><span class="p">(</span><span class="n">org.Hs.eg.db</span><span class="p">)</span>
 </code></pre></div>
@@ -724,18 +724,18 @@ label types use:</p>
 <p>For other organisms, you can find available OrgDbs at <a href="http://bioconductor.org/packages/release/BiocViews.html#___OrgDbfor">bioconductor</a></p>
 </div>
 <p>Let&rsquo;s select a set of genes that are downregulated in the tumor cells compared to normal:</p>
-<div class="highlight"><pre><span></span><code><span class="n">tum_down</span>  <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">limma_de</span><span class="p">,</span>
-                    <span class="n">limma_de</span><span class="o">$</span><span class="n">logFC</span> <span class="o">&lt;</span> <span class="m">-1</span> 
-                      <span class="o">&amp;</span> <span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span> <span class="o">&lt;</span>  <span class="m">0.05</span><span class="p">)</span>
-<span class="n">tum_down_genes</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">tum_down</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tum_down</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">subset</span><span class="p">(</span><span class="n">limma_de</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">limma_de</span><span class="o">$</span><span class="n">logFC</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">-1</span><span class="w"> </span>
+<span class="w">                      </span><span class="o">&amp;</span><span class="w"> </span><span class="n">limma_de</span><span class="o">$</span><span class="n">adj.P.Val</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="m">0.05</span><span class="p">)</span>
+<span class="n">tum_down_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">tum_down</span><span class="p">)</span>
 </code></pre></div>
 <p>We can do a Gene Ontology term over-representation analysis based on this set of genes. Make sure you check out the help of this function to understand its arguments:</p>
 <div class="highlight"><pre><span></span><code><span class="o">?</span><span class="n">enrichGO</span>
-<span class="n">tum_vs_norm_go</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enrichGO</span><span class="p">(</span><span class="n">tum_down_genes</span><span class="p">,</span>
-                                            <span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span>
-                                            <span class="n">keyType</span> <span class="o">=</span> <span class="s">&quot;SYMBOL&quot;</span><span class="p">,</span>
-                                            <span class="n">ont</span> <span class="o">=</span> <span class="s">&quot;BP&quot;</span><span class="p">,</span>
-                                            <span class="n">minGSSize</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
+<span class="n">tum_vs_norm_go</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enrichGO</span><span class="p">(</span><span class="n">tum_down_genes</span><span class="p">,</span>
+<span class="w">                                            </span><span class="s">&quot;org.Hs.eg.db&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="n">keyType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SYMBOL&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="n">ont</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BP&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="n">minGSSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span>
 </code></pre></div>
 <p>The results are stored in the <code>@result</code> slot:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">tum_vs_norm_go</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
@@ -756,34 +756,34 @@ label types use:</p>
 <p>A low p-value resulting from the Fisher&rsquo;s exact means that M/N is signficantly greater than k/n. </p>
 </div>
 <p>Some GO terms seem redundant because they contain many of the same genes, which is a characteristic of Gene Ontology gene sets. We can simplify this list by removing redundant gene sets:</p>
-<div class="highlight"><pre><span></span><code><span class="n">enr_go</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">simplify</span><span class="p">(</span><span class="n">tum_vs_norm_go</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">enr_go</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">simplify</span><span class="p">(</span><span class="n">tum_vs_norm_go</span><span class="p">)</span>
 <span class="nf">View</span><span class="p">(</span><span class="n">enr_go</span><span class="o">@</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 <p>We can quite easily generate a plot called an enrichment map with the <code>enrichplot</code> package:</p>
 <div class="highlight"><pre><span></span><code><span class="n">enrichplot</span><span class="o">::</span><span class="nf">emapplot</span><span class="p">(</span><span class="n">enrichplot</span><span class="o">::</span><span class="nf">pairwise_termsim</span><span class="p">(</span><span class="n">enr_go</span><span class="p">),</span>
-                     <span class="n">showCategory</span> <span class="o">=</span> <span class="m">30</span><span class="p">,</span> <span class="n">cex_label_category</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="w">                     </span><span class="n">showCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="n">cex_label_category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/emapplot_tum_down.png" width="700"/>
 </figure>
 
 <p>Instead of testing for Gene Ontology terms, we can also test for other gene set collections. For example the Hallmark collection from <a href="http://www.gsea-msigdb.org/gsea/msigdb/index.jsp">MSigDB</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gmt</span> <span class="o">&lt;-</span> <span class="n">msigdbr</span><span class="o">::</span><span class="nf">msigdbr</span><span class="p">(</span><span class="n">species</span> <span class="o">=</span> <span class="s">&quot;human&quot;</span><span class="p">,</span> <span class="n">category</span> <span class="o">=</span> <span class="s">&quot;H&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">gmt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">msigdbr</span><span class="o">::</span><span class="nf">msigdbr</span><span class="p">(</span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;human&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;H&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>We can use the function <code>enricher</code> to test for over-representation of any set of genes of the Hallmark collection. We have to include the &ldquo;universe&rdquo;, i.e. the full list of background, non significant genes, against which to test for differences in proportions:</p>
-<div class="highlight"><pre><span></span><code><span class="n">tum_vs_norm_enrich</span> <span class="o">&lt;-</span> <span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enricher</span><span class="p">(</span><span class="n">gene</span> <span class="o">=</span> <span class="n">tum_down_genes</span><span class="p">,</span>
-                                                <span class="n">universe</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">proB</span><span class="p">),</span>
-                                                <span class="n">pAdjustMethod</span> <span class="o">=</span> <span class="s">&quot;BH&quot;</span><span class="p">,</span>
-                                                <span class="n">pvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
-                                                <span class="n">qvalueCutoff</span>  <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span>
-                                                <span class="n">TERM2GENE</span> <span class="o">=</span> <span class="n">gmt</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;gs_name&quot;</span><span class="p">,</span> <span class="s">&quot;gene_symbol&quot;</span><span class="p">)])</span>
+<div class="highlight"><pre><span></span><code><span class="n">tum_vs_norm_enrich</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">clusterProfiler</span><span class="o">::</span><span class="nf">enricher</span><span class="p">(</span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tum_down_genes</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">universe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">proB</span><span class="p">),</span>
+<span class="w">                                                </span><span class="n">pAdjustMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;BH&quot;</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">pvalueCutoff</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">qvalueCutoff</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span>
+<span class="w">                                                </span><span class="n">TERM2GENE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gmt</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;gs_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gene_symbol&quot;</span><span class="p">)])</span>
 </code></pre></div>
 <p>When using the genes down-regulated in tumor, among the over-represented Hallmark gene sets, we have <code>HALLMARK_G2M_CHECKPOINT</code>, which includes genes involved in the G2/M checkpoint in the progression through the cell division cycle.</p>
 <div class="highlight"><pre><span></span><code><span class="nf">View</span><span class="p">(</span><span class="n">tum_vs_norm_enrich</span><span class="o">@</span><span class="n">result</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="n">tum_vs_norm_enrich</span><span class="o">@</span><span class="n">result</span><span class="o">$</span><span class="n">p.adjust</span><span class="o">&lt;</span><span class="m">0.05</span><span class="p">),])</span>
 </code></pre></div>
 <h3 id="clear-environment">Clear environment</h3>
 <p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">gc</span><span class="p">()</span>
 <span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>

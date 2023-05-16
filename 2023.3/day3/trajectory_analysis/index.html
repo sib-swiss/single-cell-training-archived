@@ -725,64 +725,64 @@
 </figure>
 
 <p>Type the following commands within the Terminal tab:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> course_data/
-wget https://github.com/hemberg-lab/nrg-paper-figures/blob/master/deng-reads.rds?raw<span class="o">=</span><span class="nb">true</span>
-mv deng-reads.rds<span class="se">\?</span>raw<span class="se">\=</span><span class="nb">true</span> deng-reads.rds
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>course_data/
+wget<span class="w"> </span>https://github.com/hemberg-lab/nrg-paper-figures/blob/master/deng-reads.rds?raw<span class="o">=</span><span class="nb">true</span>
+mv<span class="w"> </span>deng-reads.rds<span class="se">\?</span>raw<span class="se">\=</span><span class="nb">true</span><span class="w"> </span>deng-reads.rds
 </code></pre></div>
 <p>Then, within R, import the rds file. the &lsquo;Deng&rsquo; dataset is an object of class <code>SingleCellExperiment</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;course_data/deng-reads.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;course_data/deng-reads.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Perform the first steps of the analysis. The deng_SCE object contains cells that were isolated at different stages of mouse embryogenesis, from the zygote stage to the late blastula.</p>
 <p>The levels of the cell type are in alphabetical order. We now change the level order for plotting in developmental order:</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span> <span class="o">&lt;-</span> <span class="nf">factor</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
-                              <span class="n">levels</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;zy&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;early2cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;mid2cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;late2cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;4cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;8cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;16cell&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;earlyblast&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;midblast&quot;</span><span class="p">,</span>
-                                         <span class="s">&quot;lateblast&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;zy&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;early2cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;mid2cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;late2cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;4cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;8cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;16cell&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;earlyblast&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;midblast&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="s">&quot;lateblast&quot;</span><span class="p">))</span>
 </code></pre></div>
 <p>We can run a PCA directly on the object of class <code>SingleCellExperiment</code> with the function <code>runPCA</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span> <span class="o">&lt;-</span> <span class="n">scater</span><span class="o">::</span><span class="nf">runPCA</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="n">ncomponents</span> <span class="o">=</span> <span class="m">50</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">scater</span><span class="o">::</span><span class="nf">runPCA</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span><span class="w"> </span><span class="n">ncomponents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">)</span>
 </code></pre></div>
 <p>Use the <code>reducedDim</code> function to access the PCA and store the results.</p>
-<div class="highlight"><pre><span></span><code><span class="n">pca</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDim</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="s">&quot;PCA&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDim</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PCA&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Describe how the PCA is stored in a matrix. Why does it have this structure?</p>
 <div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">pca</span><span class="p">)</span>
 </code></pre></div>
 <p>Add PCA data to the deng_SCE object.</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span> <span class="o">&lt;-</span> <span class="n">pca</span><span class="p">[,</span> <span class="m">1</span><span class="p">]</span>
-<span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC2</span> <span class="o">&lt;-</span> <span class="n">pca</span><span class="p">[,</span> <span class="m">2</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pca</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
 </code></pre></div>
 <p>Plot PC biplot with cells colored by cell_type2.
 <code>colData(deng_SCE)</code> accesses the cell metadata <code>DataFrame</code> object for <code>deng_SCE</code>.
 Look at Figure 1A of the <a href="https://science.sciencemag.org/content/343/6167/193">paper</a> as a comparison to your PC biplot.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">PC1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">PC2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
-  <span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="m">20</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
-  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;PC2&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;PC biplot&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PC2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="m">20</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;PC2&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;PC biplot&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>PCA is a simple approach and can be good to compare to more complex algorithms
 designed to capture differentiation processes. As a simple measure of pseudotime
 we can use the coordinates of PC1.
 Plot PC1 vs cell_type2.</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">pseudotime_PC1</span> <span class="o">&lt;-</span> <span class="nf">rank</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span><span class="p">)</span>  <span class="c1"># rank cells by their PC1 score</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">pseudotime_PC1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rank</span><span class="p">(</span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">PC1</span><span class="p">)</span><span class="w">  </span><span class="c1"># rank cells by their PC1 score</span>
 </code></pre></div>
 <p>Create a jitter plot</p>
-<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pseudotime_PC1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
-                                             <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
-  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
-  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by first principal component&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pseudotime_PC1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                                             </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;PC1&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by first principal component&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Read the Slingshot documentation (<code>?slingshot::slingshot</code>) and then run Slingshot below.</p>
-<div class="highlight"><pre><span></span><code><span class="n">sce</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span> <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">sce</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span><span class="w"> </span><span class="n">reducedDim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;PCA&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Given your understanding of the algorithm and the documentation, what is one
 major set of parameters we omitted here when running Slingshot?</p>
@@ -791,80 +791,80 @@ major set of parameters we omitted here when running Slingshot?</p>
 <p>We didn&rsquo;t set the parameter <code>clusterLabels</code></p>
 </details>
 <p>Here is a custom function to plot the PCA based on a <code>slingshot</code> object. Run it in the console to add it to your global environment:</p>
-<div class="highlight"><pre><span></span><code><span class="n">PCAplot_slingshot</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span> <span class="n">draw_lines</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="kc">...</span><span class="p">){</span>
-  <span class="c1"># set palette for factorial variables</span>
-  <span class="n">palf</span> <span class="o">&lt;-</span> <span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="s">&quot;Set2&quot;</span><span class="p">))</span>
-  <span class="c1"># set palette for numeric variables</span>
-  <span class="n">paln</span> <span class="o">&lt;-</span> <span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">9</span><span class="p">,</span> <span class="s">&quot;Blues&quot;</span><span class="p">))</span>
-  <span class="c1"># extract pca from SingleCellExperiment object</span>
-  <span class="n">pca</span> <span class="o">&lt;-</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDims</span><span class="p">(</span><span class="n">sce</span><span class="p">)</span><span class="o">$</span><span class="n">PCA</span>
+<div class="highlight"><pre><span></span><code><span class="n">PCAplot_slingshot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span><span class="w"> </span><span class="n">draw_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="p">){</span>
+<span class="w">  </span><span class="c1"># set palette for factorial variables</span>
+<span class="w">  </span><span class="n">palf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Set2&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="c1"># set palette for numeric variables</span>
+<span class="w">  </span><span class="n">paln</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colorRampPalette</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="o">::</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Blues&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="c1"># extract pca from SingleCellExperiment object</span>
+<span class="w">  </span><span class="n">pca</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">reducedDims</span><span class="p">(</span><span class="n">sce</span><span class="p">)</span><span class="o">$</span><span class="n">PCA</span>
 
-  <span class="nf">if</span><span class="p">(</span><span class="nf">is.null</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
-    <span class="n">col</span> <span class="o">&lt;-</span> <span class="s">&quot;black&quot;</span>
-  <span class="p">}</span>
-  <span class="nf">if</span><span class="p">(</span><span class="nf">is.character</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
-    <span class="n">variable</span> <span class="o">&lt;-</span> <span class="nf">as.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
-  <span class="p">}</span>
-  <span class="nf">if</span><span class="p">(</span><span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
-    <span class="n">colpal</span> <span class="o">&lt;-</span> <span class="nf">palf</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">)))</span>
-    <span class="n">colors</span> <span class="o">&lt;-</span> <span class="n">colpal</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span>
-  <span class="p">}</span>
-  <span class="nf">if</span><span class="p">(</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
-    <span class="n">colpal</span> <span class="o">&lt;-</span> <span class="nf">paln</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
-    <span class="n">colors</span> <span class="o">&lt;-</span> <span class="n">colpal</span><span class="p">[</span><span class="nf">cut</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">)]</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="nf">is.null</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+<span class="w">    </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;black&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="nf">is.character</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+<span class="w">    </span><span class="n">variable</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+<span class="w">    </span><span class="n">colpal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">palf</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">)))</span>
+<span class="w">    </span><span class="n">colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colpal</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="nf">is.numeric</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+<span class="w">    </span><span class="n">colpal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paln</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
+<span class="w">    </span><span class="n">colors</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colpal</span><span class="p">[</span><span class="nf">cut</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="n">breaks</span><span class="o">=</span><span class="m">50</span><span class="p">)]</span>
+<span class="w">  </span><span class="p">}</span>
 
-  <span class="c1"># draw the plot</span>
-  <span class="nf">plot</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">bg</span> <span class="o">=</span> <span class="n">colors</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">21</span><span class="p">)</span>
-  <span class="c1"># draw lines</span>
-  <span class="nf">if</span><span class="p">(</span><span class="n">draw_lines</span><span class="p">){</span>
-    <span class="nf">lines</span><span class="p">(</span><span class="n">slingshot</span><span class="o">::</span><span class="nf">SlingshotDataSet</span><span class="p">(</span><span class="n">sce</span><span class="p">),</span> <span class="n">lwd</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="kc">...</span> <span class="p">)</span>
-  <span class="p">}</span>
-  <span class="c1"># add legend</span>
-  <span class="nf">if</span><span class="p">(</span><span class="n">legend</span> <span class="o">&amp;</span> <span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
-    <span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span> <span class="n">pt.bg</span> <span class="o">=</span> <span class="n">colpal</span><span class="p">,</span><span class="n">legend</span> <span class="o">=</span> <span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">),</span><span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># draw the plot</span>
+<span class="w">  </span><span class="nf">plot</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colors</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">21</span><span class="p">)</span>
+<span class="w">  </span><span class="c1"># draw lines</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="n">draw_lines</span><span class="p">){</span>
+<span class="w">    </span><span class="nf">lines</span><span class="p">(</span><span class="n">slingshot</span><span class="o">::</span><span class="nf">SlingshotDataSet</span><span class="p">(</span><span class="n">sce</span><span class="p">),</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="kc">...</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1"># add legend</span>
+<span class="w">  </span><span class="nf">if</span><span class="p">(</span><span class="n">legend</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">is.factor</span><span class="p">(</span><span class="n">variable</span><span class="p">)){</span>
+<span class="w">    </span><span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pt.bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">colpal</span><span class="p">,</span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">levels</span><span class="p">(</span><span class="n">variable</span><span class="p">),</span><span class="n">pch</span><span class="o">=</span><span class="m">21</span><span class="p">)</span>
 
-  <span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>Have a look at the PCA with the slingshot pseudotime line:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span> <span class="n">draw_lines</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span><span class="w"> </span><span class="n">draw_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 <p>Also have a look at pseudotime versus cell type:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span> <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span>
-                                             <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
-                                             <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
-  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
-  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colData</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">)),</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">,</span>
+<span class="w">                                             </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                                             </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>This already looks pretty good. Let&rsquo;s see whether we can improve it. First we generate clusters by using <code>Seurat</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span> <span class="o">=</span> <span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">counts</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">),</span>
-                                     <span class="n">project</span> <span class="o">=</span> <span class="s">&quot;slingshot&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SingleCellExperiment</span><span class="o">::</span><span class="nf">counts</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">),</span>
+<span class="w">                                     </span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;slingshot&quot;</span><span class="p">)</span>
 
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
-                                <span class="n">normalization.method</span> <span class="o">=</span> <span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
-                                <span class="n">scale.factor</span> <span class="o">=</span> <span class="m">10000</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">normalization.method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">scale.factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span>
 
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
-                                       <span class="n">mean.function</span> <span class="o">=</span> <span class="n">ExpMean</span><span class="p">,</span>
-                                       <span class="n">dispersion.function</span> <span class="o">=</span> <span class="n">LogVMR</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                                       </span><span class="n">mean.function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ExpMean</span><span class="p">,</span>
+<span class="w">                                       </span><span class="n">dispersion.function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogVMR</span><span class="p">)</span>
 
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
-                            <span class="n">do.center</span> <span class="o">=</span> <span class="bp">T</span><span class="p">,</span>
-                            <span class="n">do.scale</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">do.center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">do.scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
 
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
-                         <span class="n">pc.genes</span> <span class="o">=</span> <span class="n">gcdata</span><span class="o">@</span><span class="n">var.genes</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">pc.genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="o">@</span><span class="n">var.genes</span><span class="p">)</span>
 
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span>
-                                <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span>
-                                <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindNeighbors</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pca&quot;</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
 
 <span class="c1"># clustering with resolution of 0.6</span>
-<span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">object</span> <span class="o">=</span> <span class="n">gcdata</span><span class="p">,</span>
-                               <span class="n">resolution</span> <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+<span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindClusters</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcdata</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span>
 </code></pre></div>
 <!-- **Exercise:** Have a look at the UMAP and color it according to the clustering (we used a resolution of 0.6). Does it look acceptable to you?
 
@@ -875,7 +875,7 @@ major set of parameters we omitted here when running Slingshot?</p>
 
     First run the UMAP and after that generate the plot:
 
-    <div class="highlight"><pre><span></span><code><span class="n">gcdata</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+    <div class="highlight"><pre><span></span><code><span class="n">gcdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">gcdata</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
 <span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">gcdata</span><span class="p">)</span>
 </code></pre></div>
 
@@ -886,62 +886,62 @@ major set of parameters we omitted here when running Slingshot?</p>
     </figure> -->
 
 <p>Now we can add these clusters to the <code>slingshot</code> function:</p>
-<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span> <span class="o">&lt;-</span> <span class="nf">as.character</span><span class="p">(</span><span class="nf">Idents</span><span class="p">(</span><span class="n">gcdata</span><span class="p">))</span>  <span class="c1"># go from factor to character</span>
+<div class="highlight"><pre><span></span><code><span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="nf">Idents</span><span class="p">(</span><span class="n">gcdata</span><span class="p">))</span><span class="w">  </span><span class="c1"># go from factor to character</span>
 
-<span class="n">sce</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
-                                 <span class="n">clusterLabels</span> <span class="o">=</span> <span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
-                                 <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">,</span>
-                                 <span class="n">start.clus</span> <span class="o">=</span> <span class="s">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">sce</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">clusterLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">reducedDim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;PCA&#39;</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">start.clus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Check how the slingshot object has evolved</p>
 <div class="highlight"><pre><span></span><code><span class="nf">SlingshotDataSet</span><span class="p">(</span><span class="n">sce</span><span class="p">)</span>
 </code></pre></div>
 <p>Plot PC1 versus PC2 colored by slingshot pseudotime:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">)</span>
 </code></pre></div>
 <p>Plot Slingshot pseudotime vs cell stage.</p>
-<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
-                  <span class="n">slingPseudotime_1</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">),</span>
-        <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">slingPseudotime_1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
-        <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
-  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
-  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">slingPseudotime_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_1</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slingPseudotime_1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">        </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
 
-<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
-                  <span class="n">slingPseudotime_2</span> <span class="o">=</span> <span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">),</span>
-        <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">slingPseudotime_2</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">,</span>
-        <span class="n">colour</span> <span class="o">=</span> <span class="n">cell_type2</span><span class="p">))</span> <span class="o">+</span>
-  <span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">theme_classic</span><span class="p">()</span> <span class="o">+</span>
-  <span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span> <span class="o">+</span>
-  <span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
+<span class="nf">ggplot</span><span class="p">(</span><span class="nf">data.frame</span><span class="p">(</span><span class="n">cell_type2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">slingPseudotime_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sce</span><span class="o">$</span><span class="n">slingPseudotime_2</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slingPseudotime_2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">        </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cell_type2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="n">ggbeeswarm</span><span class="o">::</span><span class="nf">geom_quasirandom</span><span class="p">(</span><span class="n">groupOnX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">theme_classic</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">xlab</span><span class="p">(</span><span class="s">&quot;Slingshot pseudotime&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;Timepoint&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Cells ordered by Slingshot pseudotime&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Particularly the later stages, separation seems to improve. Since we have included the Seurat clustering, we can plot the PCA, with colors according to these clusters:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span>
-                  <span class="n">variable</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span><span class="p">,</span>
-                  <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;lineages&#39;</span><span class="p">,</span>
-                  <span class="n">col</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span>
-                  <span class="n">legend</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">                  </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">Seurat_clusters</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;lineages&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 
 <span class="nf">PCAplot_slingshot</span><span class="p">(</span><span class="n">sce</span><span class="p">,</span>
-                  <span class="n">variable</span> <span class="o">=</span> <span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
-                  <span class="n">type</span> <span class="o">=</span> <span class="s">&#39;lineages&#39;</span><span class="p">,</span>
-                  <span class="n">col</span> <span class="o">=</span> <span class="s">&#39;black&#39;</span><span class="p">,</span>
-                  <span class="n">legend</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="w">                  </span><span class="n">variable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deng_SCE</span><span class="o">$</span><span class="n">cell_type2</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;lineages&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;black&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Instead of providing an initial cluster, think of an end cluster that would fit this trajectory analysis and perform the slingshot analysis. Does slingshot find the initial cluster corresponding to the biological correct situation?</p>
 <details class="done">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="n">sce</span> <span class="o">&lt;-</span> <span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
-                             <span class="n">clusterLabels</span> <span class="o">=</span> <span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
-                             <span class="n">reducedDim</span> <span class="o">=</span> <span class="s">&#39;PCA&#39;</span><span class="p">,</span>
-                             <span class="n">end.clus</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="s">&quot;3&quot;</span><span class="p">,</span> <span class="s">&quot;5&quot;</span><span class="p">))</span> <span class="c1">## check which would be the best according to bio</span>
+<div class="highlight"><pre><span></span><code><span class="n">sce</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">slingshot</span><span class="o">::</span><span class="nf">slingshot</span><span class="p">(</span><span class="n">deng_SCE</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">clusterLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;Seurat_clusters&#39;</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">reducedDim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;PCA&#39;</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">end.clus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">## check which would be the best according to bio</span>
 </code></pre></div>
 </details>
 <p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">gc</span><span class="p">()</span>
 <span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>
@@ -951,46 +951,46 @@ major set of parameters we omitted here when running Slingshot?</p>
 <p>Currently it&rsquo;s not possible to use the interactive part of <code>monocole3</code> on the cloud server. Therefore, these exercises can <strong>only be performed locally</strong>. </p>
 </div>
 <p>This part showcases how you can use <code>monocle3</code> to perform a trajectory analysis. First load the <code>seu_int</code> dataset:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Load the required package into your environment:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">monocle3</span><span class="p">)</span>
 </code></pre></div>
 <p>Generate a <code>monocle3</code> object (with class <code>cell_data_set</code>) from our <code>Seurat</code> object:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># get matrix and filter for minimum number of cells and features (the latter is a fix for backward compatibility)</span>
-<span class="n">mat_tmp</span> <span class="o">&lt;-</span> <span class="n">seu_int</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span>
-<span class="n">seu_tmp</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">mat_tmp</span><span class="p">,</span> <span class="n">min.cells</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-                                      <span class="n">min.features</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="n">mat_tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seu_int</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span>
+<span class="n">seu_tmp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">CreateSeuratObject</span><span class="p">(</span><span class="n">mat_tmp</span><span class="p">,</span><span class="w"> </span><span class="n">min.cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span>
+<span class="w">                                      </span><span class="n">min.features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
 
-<span class="n">feature_names</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">))</span>
-<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">)</span>
-<span class="nf">colnames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;gene_short_name&quot;</span>
+<span class="n">feature_names</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu_tmp</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;gene_short_name&quot;</span>
 
-<span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">seu_tmp</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
-                                              <span class="n">cell_metadata</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
-                                              <span class="n">gene_metadata</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+<span class="n">seu_int_monocl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monocle3</span><span class="o">::</span><span class="nf">new_cell_data_set</span><span class="p">(</span><span class="n">seu_tmp</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">,</span>
+<span class="w">                                              </span><span class="n">cell_metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seu_int</span><span class="o">@</span><span class="n">meta.data</span><span class="p">,</span>
+<span class="w">                                              </span><span class="n">gene_metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature_names</span><span class="p">)</span>
 </code></pre></div>
 <p>We pre-process the newly created object. What does it involve? Check:</p>
 <div class="highlight"><pre><span></span><code><span class="o">?</span><span class="n">preprocess_cds</span>
 </code></pre></div>
 <p>Preprocess the dataset:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">preprocess_cds</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monocle3</span><span class="o">::</span><span class="nf">preprocess_cds</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <p>And check out the elbow plot:</p>
 <div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_pc_variance_explained</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <p>Perform UMAP using the implementation in the <code>monocle3</code> package and its default parameters:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">reduce_dimension</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">reduction_method</span> <span class="o">=</span> <span class="s">&quot;UMAP&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monocle3</span><span class="o">::</span><span class="nf">reduce_dimension</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span><span class="n">reduction_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UMAP&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Plot the <code>monocle3</code> UMAP coloring cells according to the cluster ID ran with <code>Seurat</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> 
-                     <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">,</span> 
-                     <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> 
-                     <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">color_cells_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">show_trajectory_graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="s">&quot;CD79A&quot;</span><span class="p">,</span> 
-                     <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
-                     <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span><span class="n">genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CD79A&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">show_trajectory_graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                     </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umap_monocle.png" width="500"/>
@@ -1001,15 +1001,15 @@ major set of parameters we omitted here when running Slingshot?</p>
 </figure>
 
 <p>Cluster cells using <code>monocle3</code>&lsquo;s clustering function:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
-<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">label_cell_groups</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monocle3</span><span class="o">::</span><span class="nf">cluster_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="o">=</span><span class="m">0.00025</span><span class="p">)</span>
+<span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span><span class="n">label_cell_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umap_monocle3_clustered.png" width="500"/>
 </figure>
 
 <p>learn graph (i.e. identify trajectory) using <code>monocle3</code> UMAP and clustering:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span> <span class="o">&lt;-</span> <span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monocle3</span><span class="o">::</span><span class="nf">learn_graph</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 <span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <figure>
@@ -1019,9 +1019,9 @@ major set of parameters we omitted here when running Slingshot?</p>
 <p><strong>Exercise:</strong> Find the CD34+ B-cell cluster in the monocle UMAP. This cluster has a high expressession of CD79A and expresses CD34.</p>
 <details class="done">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD79A&quot;</span><span class="p">,</span> <span class="s">&quot;CD34&quot;</span><span class="p">),</span>
-                 <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
-                 <span class="n">cell_size</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">,</span> <span class="n">group_label_size</span> <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span><span class="w"> </span><span class="n">genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD79A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CD34&quot;</span><span class="p">),</span>
+<span class="w">                 </span><span class="n">show_trajectory_graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                 </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">group_label_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
 </code></pre></div>
 <p>Returns:</p>
 <p><figure>
@@ -1033,51 +1033,51 @@ major set of parameters we omitted here when running Slingshot?</p>
 <div class="highlight"><pre><span></span><code><span class="n">seu_int_monocl</span><span class="o">&lt;-</span><span class="n">monocle3</span><span class="o">::</span><span class="nf">order_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span><span class="c1">#</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="n">monocle3</span><span class="o">::</span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">,</span>
-           <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;pseudotime&quot;</span><span class="p">,</span>
-           <span class="n">label_cell_groups</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
-           <span class="n">label_leaves</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
-           <span class="n">label_branch_points</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
-           <span class="n">graph_label_size</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<span class="w">           </span><span class="n">color_cells_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pseudotime&quot;</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label_cell_groups</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label_leaves</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span>
+<span class="w">           </span><span class="n">label_branch_points</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>
+<span class="w">           </span><span class="n">graph_label_size</span><span class="o">=</span><span class="m">1.5</span><span class="p">,</span><span class="w"> </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umap_monocle_pseudotime.png" width="500"/>
 </figure>
 
 <p>In order to find genes which expression is affected by pseudtime, we first have to isolate the B-cell cluster. Therefore, extract all cells in the B-cell cluster with the interactive <code>choose_cells</code> function:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seuB</span> <span class="o">&lt;-</span> <span class="nf">choose_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seuB</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">choose_cells</span><span class="p">(</span><span class="n">seu_int_monocl</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/choose_cells.gif" width="800"/>
 </figure>
 
 <p>Check whether you have selected the right cells:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> <span class="n">show_trajectory_graph</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span><span class="w"> </span><span class="n">show_trajectory_graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 <p>Now we can use the cells in this trajectory to test which genes are affected by the trajectory:</p>
-<div class="highlight"><pre><span></span><code><span class="n">pr_test</span> <span class="o">&lt;-</span> <span class="nf">graph_test</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> 
-                      <span class="n">cores</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> 
-                      <span class="n">neighbor_graph</span> <span class="o">=</span> <span class="s">&quot;principal_graph&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">pr_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">graph_test</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                      </span><span class="n">cores</span><span class="o">=</span><span class="m">4</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                      </span><span class="n">neighbor_graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;principal_graph&quot;</span><span class="p">)</span>
 <span class="c1"># order by test statistic</span>
-<span class="n">pr_test</span> <span class="o">&lt;-</span> <span class="n">pr_test</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">pr_test</span><span class="o">$</span><span class="n">morans_test_statistic</span><span class="p">,</span> 
-                         <span class="n">decreasing</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),]</span>
+<span class="n">pr_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pr_test</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">pr_test</span><span class="o">$</span><span class="n">morans_test_statistic</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                         </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),]</span>
 <span class="nf">View</span><span class="p">(</span><span class="n">pr_test</span><span class="p">)</span>
 </code></pre></div>
 <p>There are some interesting genes in there, for example related to cell cycling (MKI67, CKS2), related to B-cell development (CD34, MS4A1) and immunoglobulins (IGLL1 and IGLL5). We can plot those in the UMAP:</p>
-<div class="highlight"><pre><span></span><code><span class="n">goi</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD34&quot;</span><span class="p">,</span> <span class="s">&quot;MS4A1&quot;</span><span class="p">,</span> <span class="s">&quot;IGLL1&quot;</span><span class="p">,</span> <span class="s">&quot;IGLL5&quot;</span><span class="p">,</span> 
-         <span class="s">&quot;MKI67&quot;</span><span class="p">,</span> <span class="s">&quot;CKS2&quot;</span><span class="p">)</span>
-<span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> <span class="n">label_cell_groups</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">genes</span> <span class="o">=</span> <span class="n">goi</span><span class="p">,</span>
-           <span class="n">show_trajectory_graph</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">cell_size</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">goi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD34&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;MS4A1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IGLL1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IGLL5&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">         </span><span class="s">&quot;MKI67&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CKS2&quot;</span><span class="p">)</span>
+<span class="nf">plot_cells</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span><span class="w"> </span><span class="n">label_cell_groups</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">goi</span><span class="p">,</span>
+<span class="w">           </span><span class="n">show_trajectory_graph</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">cell_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umaps_bcells_goi.png" width="500"/>
 </figure>
 
 <p>But also against pseudotime:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seuB</span><span class="o">@</span><span class="n">colData</span><span class="o">$</span><span class="n">monocle_cluster</span> <span class="o">&lt;-</span> <span class="nf">clusters</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seuB</span><span class="o">@</span><span class="n">colData</span><span class="o">$</span><span class="n">monocle_cluster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">clusters</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span>
 
-<span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span> 
-                                <span class="nf">rowData</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span> <span class="o">%in%</span> <span class="n">goi</span><span class="p">),</span>
-                         <span class="n">min_expr</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span> <span class="n">color_cells_by</span> <span class="o">=</span> <span class="s">&quot;monocle_cluster&quot;</span><span class="p">)</span>
+<span class="nf">plot_genes_in_pseudotime</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">seuB</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                                </span><span class="nf">rowData</span><span class="p">(</span><span class="n">seuB</span><span class="p">)</span><span class="o">$</span><span class="n">gene_short_name</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">goi</span><span class="p">),</span>
+<span class="w">                         </span><span class="n">min_expr</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">color_cells_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;monocle_cluster&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/exp_pseudotime.png" width="500"/>

@@ -726,28 +726,28 @@
 <span class="nf">library</span><span class="p">(</span><span class="n">SingleR</span><span class="p">)</span>
 </code></pre></div>
 <p>In the last exercise we saw that probably clustering at a resolution of 0.3 gave the most sensible results. Let&rsquo;s therefore set the default identity of each cell based on this clustering:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">seu_int</span><span class="o">$</span><span class="n">integrated_snn_res.0.3</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">SetIdent</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seu_int</span><span class="o">$</span><span class="n">integrated_snn_res.0.3</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>From now on, grouping (e.g. for plotting) is done by the active identity (set at <code>@active.ident</code>) by default.</p>
 </div>
 <p>During cell annotation we will use the original count data (not the integrated data):</p>
-<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu_int</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;RNA&quot;</span>
 </code></pre></div>
 <p>Based on the UMAP we have generated, we can visualize expression for a gene in each cluster:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/umap_integrated_HBA1.png" width="500"/>
 </figure>
 
 <p>Based on expression of sets of genes you can do a manual cell type annotation. If you know the marker genes for some cell types, you can check whether they are up-regulated in one or the other cluster. Here we have some marker genes for two different cell types:</p>
-<div class="highlight"><pre><span></span><code><span class="n">tcell_genes</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;IL7R&quot;</span><span class="p">,</span> <span class="s">&quot;LTB&quot;</span><span class="p">,</span> <span class="s">&quot;TRAC&quot;</span><span class="p">,</span> <span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
-<span class="n">monocyte_genes</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD14&quot;</span><span class="p">,</span> <span class="s">&quot;CST3&quot;</span><span class="p">,</span> <span class="s">&quot;CD68&quot;</span><span class="p">,</span> <span class="s">&quot;CTSS&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">tcell_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;IL7R&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LTB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TRAC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CD3D&quot;</span><span class="p">)</span>
+<span class="n">monocyte_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CD14&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CST3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CD68&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CTSS&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Let&rsquo;s have a look at the expression of the four T cell genes:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">tcell_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">tcell_genes</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/umap_tcell_genes.png" width="700"/>
@@ -755,8 +755,8 @@
 
 <p>These cells are almost all in cluster 0 and 8. Which becomes clearer when looking at the violin plot:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
-                <span class="n">features</span> <span class="o">=</span> <span class="n">tcell_genes</span><span class="p">,</span>
-                <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="w">                </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tcell_genes</span><span class="p">,</span>
+<span class="w">                </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/violinplot_tcell_genes.png" width="700"/>
@@ -766,7 +766,7 @@
 <details class="done">
 <summary>Answer</summary>
 <p>Running</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">monocyte_genes</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">monocyte_genes</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <p>Returns:</p>
 <p><figure>
@@ -774,17 +774,17 @@
 </figure></p>
 <p>Corresponding mainly to cluster 2 and 9:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
-                <span class="n">features</span> <span class="o">=</span> <span class="n">monocyte_genes</span><span class="p">,</span>
-                <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="w">                </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">monocyte_genes</span><span class="p">,</span>
+<span class="w">                </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
   <img src="../../assets/images/violinplot_monocyte_genes.png" width="700"/>
 </figure></p>
 </details>
 <p>We can also automate this with the function <code>AddModuleScore</code>. For each cell, an expression score for a group of genes is calcuated:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
-                              <span class="n">features</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">tcell_genes</span><span class="p">),</span>
-                              <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;tcell_genes&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">AddModuleScore</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+<span class="w">                              </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">tcell_genes</span><span class="p">),</span>
+<span class="w">                              </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;tcell_genes&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> After running <code>AddModuleScore</code>, a column was added to <code>seu_int@meta.data</code>.</p>
 <p><strong>A.</strong> What is the name of that column? What kind of data is in there?</p>
@@ -793,14 +793,14 @@
 <summary>Answer</summary>
 <p><strong>A.</strong> The new column is called <code>tcell_genes1</code>. It contains the module score for each cell (which is basically the average expression of the set of genes).</p>
 <p><strong>B.</strong> You can plot the UMAP with</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Returning:</p>
 <p><figure>
   <img src="../../assets/images/umap_tcell_module.png" width="700"/>
 </figure></p>
 <div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
-                <span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="s">&quot;tcell_genes1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Which indeed shows these genes are mainly expressed in clusters 0 and 8:</p>
 <p><figure>
@@ -810,16 +810,16 @@
 <h3 id="annotating-cells-according-to-cycling-phase">Annotating cells according to cycling phase</h3>
 <p>Based on the same principle, we can also annotate cell cycling state. The function <code>CellCycleScore</code> uses <code>AddModuleScore</code> to get a score for the G2/M and S phase (the mitotic phases in which cell is cycling). In addition, <code>CellCycleScore</code> assigns each cell to either the G2/M, S or G1 phase. </p>
 <p>First  we extract the built-in genes for cell cycling:</p>
-<div class="highlight"><pre><span></span><code><span class="n">s.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">s.genes</span>
-<span class="n">g2m.genes</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">g2m.genes</span>
+<div class="highlight"><pre><span></span><code><span class="n">s.genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">s.genes</span>
+<span class="n">g2m.genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="n">cc.genes.updated.2019</span><span class="o">$</span><span class="n">g2m.genes</span>
 </code></pre></div>
 <p>Now we run the function:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
-                                     <span class="n">s.features</span> <span class="o">=</span> <span class="n">s.genes</span><span class="p">,</span>
-                                     <span class="n">g2m.features</span> <span class="o">=</span> <span class="n">g2m.genes</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">CellCycleScoring</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">s.features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s.genes</span><span class="p">,</span>
+<span class="w">                                     </span><span class="n">g2m.features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g2m.genes</span><span class="p">)</span>
 </code></pre></div>
 <p>And we can visualize the annotations:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;Phase&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Phase&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umap_integrated_phase.png" width="700"/>
@@ -837,7 +837,7 @@
 <p>Here, we choose not to regress out either of them. Because we are looking at developing cells, we might be interested to keep cycling cells seperated. In addition, the G2/M and S phases seem to be in the same clusters. More info on correcting for cell cycling <a href="https://satijalab.org/seurat/articles/cell_cycle_vignette.html">here</a>. </p>
 <h3 id="cell-type-annotation-using-singler">Cell type annotation using <code>SingleR</code></h3>
 <p>To do a fully automated annoation, we need a reference dataset of primary cells. Any reference could be used. The package <code>scRNAseq</code> in Bioconductor includes several scRNAseq datasets that can be used as reference to <code>SingleR</code>. One could also use a reference made of bulk RNA seq data. Here we are using the a hematopoietic reference dataset from <code>celldex</code>. Check out what&rsquo;s in there:</p>
-<div class="highlight"><pre><span></span><code><span class="n">ref</span> <span class="o">&lt;-</span> <span class="n">celldex</span><span class="o">::</span><span class="nf">NovershternHematopoieticData</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">ref</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">celldex</span><span class="o">::</span><span class="nf">NovershternHematopoieticData</span><span class="p">()</span>
 <span class="nf">class</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
 <span class="nf">table</span><span class="p">(</span><span class="n">ref</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
 </code></pre></div>
@@ -850,9 +850,9 @@
 <p>You can find more information on different reference datasets at the <a href="https://bioconductor.org/packages/3.14/data/experiment/vignettes/celldex/inst/doc/userguide.html"><code>celldex</code> documentation</a></p>
 </div>
 <p>Now <code>SingleR</code> compares our normalized count data to a reference set, and finds the most probable annation:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int_SingleR</span> <span class="o">&lt;-</span> <span class="n">SingleR</span><span class="o">::</span><span class="nf">SingleR</span><span class="p">(</span><span class="n">test</span> <span class="o">=</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">slot</span> <span class="o">=</span> <span class="s">&quot;data&quot;</span><span class="p">),</span>
-                                <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="p">,</span>
-                                <span class="n">labels</span> <span class="o">=</span> <span class="n">ref</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int_SingleR</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SingleR</span><span class="o">::</span><span class="nf">SingleR</span><span class="p">(</span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">),</span>
+<span class="w">                                </span><span class="n">ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ref</span><span class="p">,</span>
+<span class="w">                                </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ref</span><span class="o">$</span><span class="n">label.main</span><span class="p">)</span>
 </code></pre></div>
 <p>See what&rsquo;s in there by using <code>head</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">head</span><span class="p">(</span><span class="n">seu_int_SingleR</span><span class="p">)</span>
@@ -871,23 +871,23 @@
 </figure>
 
 <p>There are some annotations that contain only a few cells. They are usually not of interest, and they clogg our plots. Therefore we remove them from the annotation:</p>
-<div class="highlight"><pre><span></span><code><span class="n">singleR_labels</span> <span class="o">&lt;-</span> <span class="n">seu_int_SingleR</span><span class="o">$</span><span class="n">labels</span>
-<span class="n">t</span> <span class="o">&lt;-</span> <span class="nf">table</span><span class="p">(</span><span class="n">singleR_labels</span><span class="p">)</span>
-<span class="n">other</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="n">t</span> <span class="o">&lt;</span> <span class="m">10</span><span class="p">]</span>
-<span class="n">singleR_labels</span><span class="p">[</span><span class="n">singleR_labels</span> <span class="o">%in%</span> <span class="n">other</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;none&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">singleR_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seu_int_SingleR</span><span class="o">$</span><span class="n">labels</span>
+<span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="n">singleR_labels</span><span class="p">)</span>
+<span class="n">other</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span><span class="p">]</span>
+<span class="n">singleR_labels</span><span class="p">[</span><span class="n">singleR_labels</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">other</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;none&quot;</span>
 </code></pre></div>
 <p>In order to visualize it in our UMAP, we have to add the annotation to <code>seu_int@meta.data</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="o">$</span><span class="n">SingleR_annot</span> <span class="o">&lt;-</span> <span class="n">singleR_labels</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu_int</span><span class="o">$</span><span class="n">SingleR_annot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">singleR_labels</span>
 </code></pre></div>
 <p>We can plot the annotations in the UMAP. Here, we use a different package for plotting (<code>dittoSeq</code>) as it has a bit better default coloring, and some other plotting functionality we will use later on.</p>
-<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoDimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">0.7</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoDimPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/umap_singler_annot.png" width="700"/>
 </figure>
 
 <p>We can check out how many cells per sample we have for each annotated cell type:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
   <img src="../../assets/images/barplot_singler_sample.png" width="500"/>
@@ -901,9 +901,9 @@
 <details class="done">
 <summary>Answer</summary>
 <p>We can have a look at the mean module score for each <code>SingleR</code> annotation like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> 
-                   <span class="n">var</span> <span class="o">=</span> <span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span> 
-                   <span class="n">group.by</span> <span class="o">=</span> <span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">dittoSeq</span><span class="o">::</span><span class="nf">dittoBarPlot</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                   </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SingleR_annot&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                   </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;integrated_snn_res.0.3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>This returns:</p>
 <p><figure>
@@ -913,10 +913,10 @@
 </details>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it tomorrow:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span> <span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu_int</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;seu_int_day2_part2.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">gc</span><span class="p">()</span>
 <span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>

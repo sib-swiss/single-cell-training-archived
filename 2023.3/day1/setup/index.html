@@ -743,11 +743,11 @@
 <p class="admonition-title">Modify the script</p>
 <p>The home directory within the container is mounted to your current directory (<code>$PWD</code>), if you want to change this behaviour, modify the path after <code>-v</code> to the working directory on your computer before running it.</p>
 </div>
-<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
---rm <span class="se">\</span>
--p <span class="m">8787</span>:8787 <span class="se">\</span>
--e <span class="nv">PASSWORD</span><span class="o">=</span><span class="nb">test</span> <span class="se">\</span>
--v <span class="nv">$PWD</span>:/home/rstudio <span class="se">\</span>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+--rm<span class="w"> </span><span class="se">\</span>
+-p<span class="w"> </span><span class="m">8787</span>:8787<span class="w"> </span><span class="se">\</span>
+-e<span class="w"> </span><span class="nv">PASSWORD</span><span class="o">=</span><span class="nb">test</span><span class="w"> </span><span class="se">\</span>
+-v<span class="w"> </span><span class="nv">$PWD</span>:/home/rstudio<span class="w"> </span><span class="se">\</span>
 geertvangeest/single-cell-rstudio:latest
 </code></pre></div>
 <p>If this command has run successfully, approach Rstudio server like this:</p>
@@ -798,9 +798,9 @@ geertvangeest/single-cell-rstudio:latest
 
 <h3 id="downloading-the-course-data">Downloading the course data</h3>
 <p>To download and extract the dataset, copy-paste these commands inside the terminal tab:</p>
-<div class="highlight"><pre><span></span><code>wget https://single-cell-transcriptomics.s3.eu-central-1.amazonaws.com/course_data.tar.gz
-tar -xvf course_data.tar.gz
-rm course_data.tar.gz
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://single-cell-transcriptomics.s3.eu-central-1.amazonaws.com/course_data.tar.gz
+tar<span class="w"> </span>-xvf<span class="w"> </span>course_data.tar.gz
+rm<span class="w"> </span>course_data.tar.gz
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">If on Windows</p>

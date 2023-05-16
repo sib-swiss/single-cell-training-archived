@@ -676,20 +676,20 @@
 <p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M224 96c39.5 0 66.8 12.2 81.9 21.5L245.6 184l79.3 87.4 36.3-40c14.7-16.2 22.8-37.3 22.8-59.1v-27c0-15.6-4.1-30.8-12-44.3l-34.3-59C326.4 22.7 307 6.8 282.1 3.5 267.8 1.6 248.4 0 224 0s-43.8 1.6-58 3.5c-25 3.3-44.3 19.2-55.6 38.5L76 101c-7.8 13.4-12 28.7-12 44.3v27c0 21.9 8.1 42.9 22.8 59.1l57.9 63.8 79.3 87.4 110.2 121.5c6.4 7 16.3 9.7 25.4 6.6l72-24c7.7-2.6 13.6-8.8 15.6-16.7s0-16.2-5.4-22.2L303.3 295.2 224 207.8l-81.9-90.3C157.3 108.2 184.5 96 224 96zm-21.6 310.5L123.2 319 6.3 447.9c-5.4 6-7.5 14.4-5.4 22.2s7.9 14.1 15.6 16.7l72 24c9 3 19 .4 25.4-6.6l88.6-97.7z"/></svg></span> This chapter uses the <code>seu</code> dataset</p>
 </blockquote>
 <p>Load the <code>seu</code> dataset you have created yesterday:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_day1.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;seu_day1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>And load the following packages:</p>
 <div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 </code></pre></div>
 <p>Once the data is normalized, scaled and variable features have been identified, we can start to reduce the dimensionality of the data.
 For the PCA, by default, only the previously determined variable features are used as input, but can be defined using features argument if you wish to specify a vector of genes. The PCA will only be run on the variable features, that you can check with <code>VariableFeatures(seu)</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunPCA</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
 </code></pre></div>
 <p>To view the PCA plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pca&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>We can colour the PCA plot according to any factor that is present in <code>@meta.data</code>, or for any gene. For example we can take the column <code>percent.globin</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pca&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;percent.globin&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -703,21 +703,21 @@ For the PCA, by default, only the previously determined variable features are us
 <details class="done">
 <summary>Answer</summary>
 <p>Generating a PCA plot coloured according to gene expression (here <code>HBA1</code>):</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;pca&quot;</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pca&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;HBA1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/pca_HBA1.png" width="500"/>
 </figure></p>
 </details>
 <p>We can generate heatmaps according to their principal component scores calculated in the rotation matrix:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span> <span class="n">cells</span> <span class="o">=</span> <span class="m">500</span><span class="p">,</span> <span class="n">balanced</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimHeatmap</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">balanced</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/pca_heatmap.png" width="700"/>
 </figure>
 
 <p>The elbowplot can help you in determining how many PCs to use for downstream analysis such as UMAP:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">ndims</span> <span class="o">=</span> <span class="m">40</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">ElbowPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">ndims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/elbowplot.png" width="500"/>
@@ -726,10 +726,10 @@ For the PCA, by default, only the previously determined variable features are us
 <p>The elbow plot ranks principle components based on the percentage of variance explained by each one. Where we observe an &ldquo;elbow&rdquo; or flattening curve, the majority of true signal is captured by this number of PCs, eg around 25 PCs for the seu dataset.</p>
 <p>Including too many PCs usually does not affect much the result, while including too few PCs can affect the results very much.</p>
 <p>UMAP: The goal of these algorithms is to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space.</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 <p>To view the UMAP plot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/umap_nonintegrated.png" width="700"/>
@@ -744,29 +744,29 @@ Why does dims = 1:100 not work? When would more precision be needed?</p>
 <details class="done">
 <summary>Answer</summary>
 <p><strong>Answer A</strong> </p>
-<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;HBA1&quot;</span><span class="p">,</span> <span class="s">&quot;percent.globin&quot;</span><span class="p">,</span> <span class="s">&quot;IGKC&quot;</span><span class="p">,</span> <span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;HBA1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;percent.globin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;IGKC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;percent.mito&quot;</span><span class="p">))</span>
 </code></pre></div>
 <p>The erythrocytes are probably in the cluster with a higher percentage of globin expression.</p>
 <p><figure>
     <img src="../../assets/images/umap_nonintegrated_4panel.png" width="700"/>
 </figure></p>
 <p><strong>Answer B</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span> <span class="n">n.neighbors</span> <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="n">n.neighbors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
     <img src="../../assets/images/umap_nonintegrated_neighb5.png" width="700"/>
 </figure></p>
 <p>The default number of neighbours is 30. It can be of interest to change the number of neighbors if one has subset the data (for instance in the situation where you would only consider the t-cells inyour data set), then maybe the number of neighbors in a cluster would anyway be most of the time lower than 30 then 30 is too much. In the other extreme where your dataset is extremely big an increase in the number of neighbors can be considered.</p>
 <p><strong>Answer C</strong> </p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><figure>
     <img src="../../assets/images/umap_nonintegrated_dim5.png" width="700"/>
 </figure></p>
-<p><div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">)</span> 
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">reduction</span> <span class="o">=</span> <span class="s">&quot;umap&quot;</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">)</span><span class="w"> </span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">reduction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;umap&quot;</span><span class="p">)</span>
 </code></pre></div>
 <figure>
     <img src="../../assets/images/umap_nonintegrated_dim50.png" width="700"/>
@@ -776,7 +776,7 @@ Why does dims = 1:100 not work? When would more precision be needed?</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>After having done these exercises, change the UMAP back to a UMAP based on the first 25 PCs, in order to replicate the exercises in the following chapters. Do this by:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="n">dims</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">RunUMAP</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
 </code></pre></div>
 </div>
 

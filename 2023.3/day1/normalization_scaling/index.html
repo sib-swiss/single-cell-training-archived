@@ -766,7 +766,7 @@ Normalized values are stored in the &ldquo;RNA&rdquo; assay (as item of the <cod
 <details class="done">
 <summary>Answer</summary>
 <p>You can check out some assay data with:</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span>  
+<p><div class="highlight"><pre><span></span><code><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">seu</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">]</span><span class="w">  </span>
 </code></pre></div>
 Returning:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Before normalization</label><label for="__tabbed_1_2">After normalization</label></div>
@@ -806,9 +806,9 @@ RP11-54O7.1   .        . . . . . .        . . .
 </div>
 </div>
 </details>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
-                     <span class="n">normalization.method</span> <span class="o">=</span> <span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
-                     <span class="n">scale.factor</span> <span class="o">=</span> <span class="m">10000</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">NormalizeData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">normalization.method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;LogNormalize&quot;</span><span class="p">,</span>
+<span class="w">                     </span><span class="n">scale.factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Updating <code>seu</code></p>
@@ -816,19 +816,19 @@ RP11-54O7.1   .        . . . . . .        . . .
 </div>
 <h3 id="variable-features">Variable features</h3>
 <p>We next calculate a subset of features that exhibit high cell-to-cell variation in the dataset (i.e, they are highly expressed in some cells, and lowly expressed in others). Focusing on these genes in downstream analysis helps to highlight biological signal in single-cell datasets. The procedure in Seurat models the mean-variance relationship inherent in single-cell data, and is implemented in the <code>FindVariableFeatures()</code> function. By default, 2,000 genes (features) per dataset are returned and these will be used in downstream analysis, like PCA.</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
-                            <span class="n">selection.method</span> <span class="o">=</span> <span class="s">&quot;vst&quot;</span><span class="p">,</span>
-                            <span class="n">nfeatures</span> <span class="o">=</span> <span class="m">2000</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">FindVariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">selection.method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;vst&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">nfeatures</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span>
 </code></pre></div>
 <p>Let&rsquo;s have a look at the 10 most variable genes:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Identify the 10 most highly variable genes</span>
-<span class="n">top10</span> <span class="o">&lt;-</span> <span class="nf">head</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">),</span> <span class="m">10</span><span class="p">)</span>
+<span class="n">top10</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeatures</span><span class="p">(</span><span class="n">seu</span><span class="p">),</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
 <span class="n">top10</span>
 </code></pre></div>
 <p>We can plot them in a nicely labeled scatterplot:</p>
-<div class="highlight"><pre><span></span><code><span class="n">vf_plot</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
-<span class="n">Seurat</span><span class="o">::</span><span class="nf">LabelPoints</span><span class="p">(</span><span class="n">plot</span> <span class="o">=</span> <span class="n">vf_plot</span><span class="p">,</span>
-            <span class="n">points</span> <span class="o">=</span> <span class="n">top10</span><span class="p">,</span> <span class="n">repel</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">vf_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">VariableFeaturePlot</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
+<span class="n">Seurat</span><span class="o">::</span><span class="nf">LabelPoints</span><span class="p">(</span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vf_plot</span><span class="p">,</span>
+<span class="w">            </span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">top10</span><span class="p">,</span><span class="w"> </span><span class="n">repel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Make sure the plotting window is large enough</p>
@@ -843,8 +843,8 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
 <li>scales the expression of each gene, so that the variance across cells is 1</li>
 </ol>
 <p>This step gives equal weight in downstream analyses, so that highly-expressed genes do not dominate. The results of this are stored in <code>seu$RNA@scale.data</code></p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
-                 <span class="n">features</span> <span class="o">=</span> <span class="nf">rownames</span><span class="p">(</span><span class="n">seu</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">ScaleData</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span>
+<span class="w">                 </span><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">seu</span><span class="p">))</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">The use of <code>Seurat::SCTransform</code></p>
@@ -854,7 +854,7 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
 <details class="done">
 <summary>Answer</summary>
 <p>You can run it like so:</p>
-<div class="highlight"><pre><span></span><code><span class="n">seu</span> <span class="o">&lt;-</span> <span class="n">Seurat</span><span class="o">::</span><span class="nf">SCTransform</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">seu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Seurat</span><span class="o">::</span><span class="nf">SCTransform</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span>
 </code></pre></div>
 <p>And it will add an extra assay to the object. <code>names(seu@assays)</code> returns:</p>
 <div class="highlight"><pre><span></span><code>[1] &quot;RNA&quot; &quot;SCT&quot;
@@ -864,15 +864,15 @@ step prior to dimensional reduction techniques like PCA. The <code>ScaleData()</
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Running <code>SCTransform</code> will change <code>@active.assay</code> into <code>SCT</code>(in stead of <code>RNA</code>; check it with <code>DefaultAssay(seu)</code>). This assay is used as a default for following function calls. To change the active assay to <code>RNA</code> run:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;RNA&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nf">DefaultAssay</span><span class="p">(</span><span class="n">seu</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;RNA&quot;</span>
 </code></pre></div>
 </div>
 <h3 id="save-the-dataset-and-clear-environment">Save the dataset and clear environment</h3>
 <p>Now, save the dataset so you can use it tomorrow:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span> <span class="s">&quot;seu_day1.rds&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nf">saveRDS</span><span class="p">(</span><span class="n">seu</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;seu_day1.rds&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Clear your environment:</p>
-<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">gc</span><span class="p">()</span>
 <span class="nf">.rs.restartR</span><span class="p">()</span>
 </code></pre></div>
